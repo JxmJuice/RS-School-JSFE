@@ -1,6 +1,7 @@
 html {
   background: black;
 }
+
 li {
   list-style-type: none;
 }
@@ -13,7 +14,7 @@ li {
 }
 
 .hero-background {
-  left:40px;
+  left: 40px;
   width: 1440px;
   height: 780px;
   background: url(assets/Rectangle.png);
@@ -23,13 +24,12 @@ li {
 }
 
 .wildlife {
-  position: fixed;
+  position: absolute;
   width: 155px;
   height: 60px;
   left: 205px;
-  top: 19px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  top: -2px;
+  font-family: roboto, sans-serif;
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -39,17 +39,17 @@ li {
 }
 
 .frame {
-  position: fixed;
+  position: absolute;
   width: 69px;
   height: 60px;
   left: 120px;
-  top: 19px;
+  top: 13px;
   border: none;
   background-image: url(assets/path0.svg);
 }
 
 .menu {
-  font-family: "Open Sans", "Gill Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 23px;
@@ -59,19 +59,19 @@ li {
 }
 
 .blog {
-  position: fixed;
+  position: absolute;
   width: 60px;
   height: 60px;
-  left: 840px;
-  top: 19px;
+  left: 833px;
+  top: 13px;
 }
 
 .contacts {
-  position: fixed;
+  position: absolute;
   width: 96px;
   height: 60px;
   left: 951px;
-  top: 19px;
+  top: 13px;
 }
 
 .menu-button {
@@ -79,37 +79,18 @@ li {
   border: medium none;
   background-image: none;
   background: transparent;
-  transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-  overflow: hidden;
-}
-
-.menu-button::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 0;
-  width: 100%;
-  z-index: -1;
-  background: seagreen;
-  transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .menu-button:hover {
-  background: rgba(255, 255, 255, 0);
-}
-.menu-button:hover:before {
-  bottom: 0%;
-  top: auto;
-  height: 100%;
+  color: #cd6326;
 }
 
 .search {
-  position: fixed;
+  position: absolute;
   width: 32px;
   height: 32px;
-  left: 1107px;
-  top: 33px;
+  left: 1111px;
+  top: 30px;
   outline: none;
   background: transparent;
   border: none;
@@ -121,29 +102,41 @@ li {
   background: url(assets/Vector.png);
 }
 
+.search-image:hover {
+  transform: scale(1.2);
+}
+
 .sign-in {
-  position: fixed;
-  left: 1200px;
-  top: 24px;
+  position: absolute;
+  left: 1202px;
+  top: 17px;
   width: 100px;
-  height: 40px;
+  height: 35px;
   background: transparent;
   border: solid #cd6326;
   padding: 5px;
   border-width: 3px;
   border-radius: 5px;
-  line-height: 40px;
+  line-height: 35px;
   text-decoration: none;
 }
 
+.sign-in:hover {
+  background-color: #cd6326;
+}
+
+.sign-in:active {
+  background: #8f5613;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .survival {
-  position: fixed;
+  position: absolute;
   width: 199px;
   height: 72px;
-  left: 120px;
-  top: 199px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  left: 121px;
+  top: 193px;
+  font-family: "Open sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 48px;
@@ -153,11 +146,9 @@ li {
 }
 
 .regular-text {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-style: normal;
-  font-weight: lighter;
-  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 18px;
   line-height: 27px;
 }
 
@@ -165,8 +156,8 @@ li {
   position: absolute;
   width: 274px;
   height: 108px;
-  left: 120px;
-  top: 322px;
+  left: 121px;
+  top: 315px;
 }
 
 .donate-button {
@@ -174,17 +165,25 @@ li {
   width: 160px;
   height: 60px;
   left: 120px;
-  top: 479px;
+  top: 472px;
   background: #cd6326;
   border-radius: 5px;
   text-align: center;
   line-height: 60px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: roboto, sans-serif;
   text-decoration: none;
   font-weight: 350;
   font-style: normal;
   font-size: 24px;
+}
+
+.donate-button:hover {
+  background-color: #e39128;
+}
+
+.donate-button:active {
+  background-color: #8f5613;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 main {
@@ -199,17 +198,17 @@ main {
 }
 
 .articles {
-  position: relative;
+  position: absolute;
   width: 324px;
   height: 72px;
   left: 558px;
-  top: 120px;
+  top: 75px;
 }
 h2 {
   font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 48px;
+  font-size: 46px;
   line-height: 72px;
   text-align: center;
   letter-spacing: 1px;
@@ -220,19 +219,18 @@ h2 {
 }
 
 .sh-2 {
-  position: relative;
+  position: absolute;
   width: 332px;
   height: 36px;
   left: 554px;
-  top: 140px;
-  font-family: Open Sans, sans-serif;
+  top: 200px;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18pt;
   line-height: 36px;
   text-align: center;
   color: #666666;
-  letter-spacing: 1px;
 }
 
 .deer {
@@ -241,7 +239,7 @@ h2 {
   width: 300px;
   height: 360px;
   left: 210px;
-  top: 368px;
+  top: 360px;
   cursor: pointer;
 }
 .deer-text {
@@ -249,9 +247,8 @@ h2 {
   width: 52px;
   height: 36px;
   left: 334px;
-  top: 585px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  top: 580px;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
 }
@@ -261,10 +258,9 @@ h2 {
   width: 186px;
   height: 27px;
   left: 267px;
-  top: 661px;
+  top: 652px;
 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 17px;
   line-height: 27px;
   text-align: center;
@@ -284,26 +280,24 @@ h4 {
   width: 300px;
   height: 360px;
   left: 570px;
-  top: 368px;
+  top: 360px;
   cursor: pointer;
 }
 
 .squirrel-text {
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
   position: absolute;
   width: 82px;
   height: 36px;
   left: 679px;
-  top: 585px;
+  top: 580px;
 }
 
 .squirrel-text-small {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 17px;
   line-height: 27px;
   text-align: center;
@@ -311,7 +305,7 @@ h4 {
   width: 152px;
   height: 27px;
   left: 644px;
-  top: 661px;
+  top: 652px;
   font-style: normal;
   font-size: 17px;
   line-height: 27px;
@@ -324,7 +318,7 @@ h4 {
   width: 300px;
   height: 360px;
   left: 930px;
-  top: 368px;
+  top: 360px;
   cursor: pointer;
 }
 
@@ -333,7 +327,7 @@ h4 {
   width: 43px;
   height: 36px;
   left: 1059px;
-  top: 585px;
+  top: 580px;
 }
 
 .bird-text-small {
@@ -341,9 +335,8 @@ h4 {
   width: 125px;
   height: 27px;
   left: 1018px;
-  top: 661px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  top: 652px;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 17px;
@@ -351,12 +344,22 @@ h4 {
   text-align: center;
 }
 
+.bird:hover {
+  transform: scale(1.05);
+}
+.squirrel:hover {
+  transform: scale(1.05);
+}
+.deer:hover {
+  transform: scale(1.05);
+}
+
 .left-slide {
   position: absolute;
   height: 38.984527587890625px;
   width: 25.981874465942383px;
   left: 120px;
-  top: 513px;
+  top: 525px;
   background: url(assets/left.png);
   cursor: pointer;
 }
@@ -364,7 +367,7 @@ h4 {
 .right-slide {
   position: absolute;
   left: 1290px;
-  top: 513px;
+  top: 525px;
   height: 38.983436584472656px;
   width: 29.003023147583008px;
   background: url(assets/Vectorright.png);
@@ -372,9 +375,8 @@ h4 {
 }
 
 h3 {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 29px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 27px;
   font-style: normal;
   font-weight: 400;
   line-height: 41px;
@@ -387,26 +389,24 @@ h3 {
   width: 526px;
   height: 41px;
   left: 457px;
-  top: 967px;
+  top: 930px;
 }
 
 .email-send {
   left: 389px;
-  top: 1068px;
+  top: 1055px;
   position: absolute;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 23px;
   line-height: 27px;
-  display: flex;
   align-items: center;
   text-align: center;
   background: transparent;
 }
 .email-send input {
-  width: 540px;
+  width: 530px;
   height: 60px;
   border: 1px solid #666666;
   outline: none;
@@ -414,8 +414,7 @@ h3 {
   color: #666666;
   border-right: none;
   padding-left: 10px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 23px;
   font-style: normal;
   font-weight: 400;
@@ -431,14 +430,21 @@ h3 {
   border: 1px solid #cd6326;
   border-radius: 0px 5px 5px 0px;
   cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 23px;
   font-style: normal;
   font-weight: 400;
   line-height: 27px;
   letter-spacing: 0em;
   text-align: center;
+}
+.email-send button:hover {
+  background-color: #e39128;
+}
+
+.email-send button:active {
+  background-color: #8f5613;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 footer {
@@ -453,9 +459,8 @@ footer {
 .wildlife-bottom {
   position: absolute;
   left: 205px;
-  top: 155px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  top: 160px;
+  font-family: Roboto, sans-serif;
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -473,68 +478,56 @@ footer {
   background: url(assets/path0.svg);
 }
 
-.articles-bottom{
+.articles-bottom {
   position: absolute;
-width: 80px;
-height: 60px;
-left: 480px;
-top: 150px;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-font-style: normal;
-font-weight: normal;
-font-size: 23px;
-line-height: 60px;
-text-decoration: none;
+  width: 80px;
+  height: 60px;
+  left: 480px;
+  top: 150px;
 }
-.about-us{
+
+.about-us {
   position: absolute;
-width: 100px;
-height: 60px;
-left: 646px;
-top: 150px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-font-style: normal;
-font-weight: normal;
-font-size: 23px;
-line-height: 60px;
-text-decoration: none;
+  width: 100px;
+  height: 60px;
+  left: 646px;
+  top: 150px;
 }
 
-.learn-more{
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 23px;
-  line-height: 60px;
-  text-decoration: none;
+.learn-more {
   position: absolute;
-width: 129px;
-height: 60px;
-left: 831px;
-top: 150px;
+  width: 129px;
+  height: 60px;
+  left: 831px;
+  top: 150px;
 }
 
-.facebook{
-background: url(assets/framefb.png);
-position: absolute;
-width: 40px;
-height: 40px;
-left: 1080px;
-top: 160px;
-
+.facebook {
+  background: url(assets/framefb.png);
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 1080px;
+  top: 160px;
+}
+.facebook:hover {
+  transform: scale(1.2);
 }
 
-.instagram{
-background: url(assets/Frameig.png);
-position: absolute;
-width: 40px;
-height: 40px;
-left: 1147px;
-top: 160px;
-
+.instagram {
+  background: url(assets/Frameig.png);
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 1147px;
+  top: 160px;
 }
 
-.pinterest{
+.instagram:hover {
+  transform: scale(1.2);
+}
+
+.pinterest {
   background: url(assets/Framept.png);
   position: absolute;
   width: 40px;
@@ -543,13 +536,19 @@ top: 160px;
   top: 160px;
 }
 
-.telegram{
+.pinterest:hover {
+  transform: scale(1.2);
+}
+
+.telegram {
   background: url(assets/Frametg.png);
   position: absolute;
-width: 40px;
-height: 40px;
-left: 1280px;
-top: 160px;
+  width: 40px;
+  height: 40px;
+  left: 1280px;
+  top: 160px;
+}
 
-
+.telegram:hover {
+  transform: scale(1.2);
 }
