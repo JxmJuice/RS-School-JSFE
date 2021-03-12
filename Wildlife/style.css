@@ -503,7 +503,7 @@ footer {
 }
 
 .facebook {
-  background: url(assets/framefb.png);
+  background: url(assets/framefb.svg);
   position: absolute;
   width: 40px;
   height: 40px;
@@ -515,7 +515,7 @@ footer {
 }
 
 .instagram {
-  background: url(assets/Frameig.png);
+  background: url(assets/Frameig.svg);
   position: absolute;
   width: 40px;
   height: 40px;
@@ -528,7 +528,7 @@ footer {
 }
 
 .pinterest {
-  background: url(assets/Framept.png);
+  background: url(assets/Framept.svg);
   position: absolute;
   width: 40px;
   height: 40px;
@@ -541,7 +541,7 @@ footer {
 }
 
 .telegram {
-  background: url(assets/Frametg.png);
+  background: url(assets/Frametg.svg);
   position: absolute;
   width: 40px;
   height: 40px;
