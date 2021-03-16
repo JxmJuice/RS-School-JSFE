@@ -187,8 +187,7 @@ li {
 }
 
 main {
-  position: absolute;
-  left: 40px;
+  position:relative;
   width: 1440px;
   height: 1368px;
   margin-left: auto;
@@ -448,11 +447,12 @@ h3 {
 }
 
 footer {
-  position: absolute;
+  position:relative;
   width: 1440px;
   height: 359px;
-  left: 40px;
-  top: 2148px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -15px;
   background: url(assets/Rectangle-3.jpg);
 }
 
