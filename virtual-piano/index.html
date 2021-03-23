@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="assets/piano.ico" rel="shortcut icon">
-
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link
     href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Open+Sans:wght@300;400;800&display=swap"
@@ -26,33 +25,44 @@
       <button class="btn btn-letters">Letters</button>
     </div>
     <div class="piano">
-      <div class="piano-key" data-letter="D" data-note="c"></div>
-      <div class="piano-key" data-letter="F" data-note="d"></div>
-      <div class="piano-key" data-letter="G" data-note="e"></div>
-      <div class="piano-key" data-letter="H" data-note="f"></div>
-      <div class="piano-key" data-letter="J" data-note="g"></div>
-      <div class="piano-key" data-letter="K" data-note="a"></div>
-      <div class="piano-key" data-letter="L" data-note="b"></div>
+      <div class="piano-key" data-letter="D" data-code="KeyD" data-note="c"></div>
+      <div class="piano-key" data-letter="F" data-code="KeyF" data-note="d"></div>
+      <div class="piano-key" data-letter="G" data-code="KeyG" data-note="e"></div>
+      <div class="piano-key" data-letter="H" data-code="KeyH" data-note="f"></div>
+      <div class="piano-key" data-letter="J" data-code="KeyJ" data-note="g"></div>
+      <div class="piano-key" data-letter="K" data-code="KeyK" data-note="a"></div>
+      <div class="piano-key" data-letter="L" data-code="KeyL" data-note="b"></div>
       <div class="keys-sharp">
-        <div class="piano-key sharp" data-letter="R" data-note="c♯"></div>
-        <div class="piano-key sharp" data-letter="T" data-note="d♯"></div>
+        <div class="piano-key sharp" data-letter="R" data-code="KeyR" data-note="c♯"></div>
+        <div class="piano-key sharp" data-letter="T" data-code="KeyT" data-note="d♯"></div>
         <div class="piano-key sharp none"></div>
-        <div class="piano-key sharp" data-letter="U" data-note="f♯"></div>
-        <div class="piano-key sharp" data-letter="I" data-note="g♯"></div>
-        <div class="piano-key sharp" data-letter="O" data-note="a♯"></div>
+        <div class="piano-key sharp" data-letter="U" data-code="KeyU" data-note="f♯"></div>
+        <div class="piano-key sharp" data-letter="I" data-code="KeyI" data-note="g♯"></div>
+        <div class="piano-key sharp" data-letter="O" data-code="KeyO" data-note="a♯"></div>
       </div>
     </div>
     <button class="fullscreen openfullscreen"></button>
   </main>
   <footer class="footer">
     <div class="footer-container">
-      <a class="github" href="#" target="_blank" rel="noopener noreferrer">github</a>
+      <a class="github" href="https://github.com/JxmJuice" target="_blank" rel="noopener noreferrer">github</a>
       <a class="rss" href="https://rs.school/js/" target="_blank" rel="noopener noreferrer">
         <span class="rss-year">'21</span>
       </a>
     </div>
   </footer>
+<audio data-code="KeyK" src="assets/audio/a.mp3"></audio>
+<audio data-code="KeyO" src="assets/audio/a♯.mp3"></audio>
+<audio data-code="KeyL" src="assets/audio/b.mp3"></audio>
+<audio data-code="KeyD" src="assets/audio/c.mp3"></audio>
+<audio data-code="KeyR" src="assets/audio/c♯.mp3"></audio>
+<audio data-code="KeyF" src="assets/audio/d.mp3"></audio>
+<audio data-code="KeyT" src="assets/audio/d♯.mp3"></audio>
+<audio data-code="KeyG" src="assets/audio/e.mp3"></audio>
+<audio data-code="KeyH" src="assets/audio/f.mp3"></audio>
+<audio data-code="KeyU" src="assets/audio/f♯.mp3"></audio>
+<audio data-code="KeyJ" src="assets/audio/g.mp3"></audio>
+<audio data-code="KeyI" src="assets/audio/g♯.mp3"></audio>
   <script src="script.js"></script>
 </body>
-
 </html>
