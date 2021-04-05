@@ -162,7 +162,7 @@ input:checked + .slider:before {
   font-size: 89px;
   flex: 0 1 793px;
   line-height: 104px;
-  padding-right: 420px;
+  padding-right: 22%;
   color: #fefefe;
 }
 .watch-button {
