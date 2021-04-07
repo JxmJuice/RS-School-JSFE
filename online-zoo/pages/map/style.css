@@ -64,6 +64,7 @@ body {
 .header {
   width: 100%;
   margin: 0px;
+  box-shadow: 0px 4px 8px rgba(44, 101, 77, 0.08);
 }
 .title_font {
   font-family: Roboto, sans-serif;
@@ -405,6 +406,13 @@ input:checked + .slider:before {
   outline: 0;
   max-width: 383px;
   width: 100%;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #fefefe;
+  margin: 0;
 }
 .text__input::placeholder {
   font-family: Roboto, sans-serif;
@@ -425,8 +433,8 @@ input:checked + .slider:before {
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 12px;
+  line-height: 14px;
   color: #fefefe;
   margin: 0;
 }
