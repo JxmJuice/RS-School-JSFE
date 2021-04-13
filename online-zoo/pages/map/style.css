@@ -304,12 +304,12 @@ input:checked + .slider:before {
   max-width: 94px;
   width: 100%;
   height: 101px;
-  background: url(../../assets/icons/placeholder1active.svg) center;
+  background: url(../../assets/icons/placeholder1active.png) center;
   cursor: pointer;
   transition: 0.15s;
 }
 .map__placeholder_1:hover {
-  background: url(../../assets/icons/placeholder1active.svg) center;
+  background: url(../../assets/icons/placeholder1active.png) center;
 }
 .map__placeholder_2 {
   position: absolute;
@@ -320,12 +320,12 @@ input:checked + .slider:before {
   max-width: 94px;
   width: 100%;
   height: 101px;
-  background: url(../../assets/icons/placeholder2.svg) center;
+  background: url(../../assets/icons/placeholder2.png) center;
   cursor: pointer;
   transition: 0.15s;
 }
 .map__placeholder_2:hover {
-  background: url(../../assets/icons/placeholder2active.svg) center;
+  background: url(../../assets/icons/placeholder2active.png) center;
 }
 
 .map__placeholder_3 {
@@ -337,12 +337,12 @@ input:checked + .slider:before {
   max-width: 94px;
   width: 100%;
   height: 101px;
-  background: url(../../assets/icons/placeholder3.svg) center;
+  background: url(../../assets/icons/placeholder3.png) center;
   cursor: pointer;
   transition: 0.15s;
 }
 .map__placeholder_3:hover {
-  background: url(../../assets/icons/placeholder3active.svg) center;
+  background: url(../../assets/icons/placeholder3active.png) center;
 }
 
 .map__placeholder_4 {
@@ -354,12 +354,12 @@ input:checked + .slider:before {
   max-width: 94px;
   width: 100%;
   height: 101px;
-  background: url(../../assets/icons/placeholder4.svg) center;
+  background: url(../../assets/icons/placeholder4.png) center;
   cursor: pointer;
   transition: 0.15s;
 }
 .map__placeholder_4:hover {
-  background: url(../../assets/icons/placeholder4active.svg) center;
+  background: url(../../assets/icons/placeholder4active.png) center;
 }
 
 .map__button {

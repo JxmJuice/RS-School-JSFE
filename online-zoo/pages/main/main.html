@@ -64,7 +64,10 @@
               ><img src="../../assets/icons/vk.svg"
             /></a>
           </aside>
-            <a class="watch-online__button watch-button" href="../zoos/panda/panda.html"></a>
+          <a
+            class="watch-online__button watch-button"
+            href="../zoos/panda/panda.html"
+          ></a>
           <div class="watch-online__slider">
             <div class="watch-online__slider_pictures">
               <div class="slider__element">
@@ -120,13 +123,24 @@
               </div>
             </div>
             <div class="watch-online__slider_slider">
-              <div class="watch-online__slider_progress">
-                <span class="watch-online__slider_progress-current">02</span
-                ><span class="watch-online__slider_progress-max">/08</span>
-              </div>
-            </div>
-            <div class="watch-online__slider_line">
-              <img src="../../assets/images/topslider.png" />
+              <label
+                for="watch-online__slider-range"
+                class="watch-online__slider-label slider-label"
+              >
+                <span
+                  id="watch-online__slider-value"
+                  class="watch-online__slider-value slider-value"
+                  >02/</span
+                >08</label
+              >
+              <input
+                type="range"
+                id="watch-online__slider-range"
+                class="watch-online__slider-range slider-range"
+                min="1"
+                max="8"
+                value="2"
+              />
             </div>
           </div>
         </div>
@@ -154,14 +168,26 @@
             <img src="../../assets/images/deer2.png" />
           </div>
           <div class="how__slider">
-            <div class="how__slider_text">
-              <span class="how__slider_text-active">01</span>/04
-            </div>
-            <div class="how__slider_slider">
-              <img src="../../assets/images/slider.png" />
-            </div>
+            <label for="how__slider-range" class="how-label slider-label">
+              <span
+                id="how__slider-value"
+                class="how__slider-value slider-value"
+                >01/</span
+              >04</label
+            >
+            <input
+              type="range"
+              id="how__slider-range"
+              class="how__slider-range slider-range"
+              min="1"
+              max="4"
+              value="1"
+            />
           </div>
-          <a href="../zoos/panda/panda.html" class="how__button watch-button"></a>
+          <a
+            href="../zoos/panda/panda.html"
+            class="how__button watch-button"
+          ></a>
         </div>
       </div>
       <div class="mission">
@@ -287,19 +313,25 @@
                 </div>
               </div>
             </div>
-            <div class="pets__slider_progress">
-              <span class="progress__max"
-                ><span class="progress__current">01</span>/08</span
-              >
-              <div>
-                <img
-                  src="../../assets/images/smallslider.svg"
-                  class="progress__slider"
-                />
-              </div>
-            </div>
+            <label for="pets__slider-range" class="pets-label slider-label">
+              <span
+                id="pets__slider-value"
+                class="pets__slider-value slider-value"
+                >01/</span
+              >08</label
+            >
+            <input
+              type="range"
+              id="pets__slider-range"
+              class="pets__slider-range slider-range"
+              min="1"
+              max="8"
+              value="1"
+            />
             <div class="pets__button">
-              <a href="../map/map.html"><img src="../../assets/images/main_btn.svg" /></a>
+              <a href="../map/map.html"
+                ><img src="../../assets/images/main_btn.svg"
+              /></a>
             </div>
           </div>
           <div class="pets__right-button">
@@ -323,13 +355,13 @@
               <img src="../../assets/images/VISA.png" />
             </div>
             <div class="pay__line_element">
-              <img src="../../assets/images/Arrow 2.png" />
+              <img src="../../assets/images/Arrow 2.png" class="arrow" />
             </div>
             <div class="pay__line_element">
               <img src="../../assets/images/payment.png" />
             </div>
             <div class="pay__line_element">
-              <img src="../../assets/images/Arrow 3.png" />
+              <img src="../../assets/images/Arrow 3.png" class="arrow" />
             </div>
             <div class="pay__line_element">
               <img src="../../assets/images/bamboo.png" />
@@ -373,14 +405,24 @@
               <img src="../../assets/icons/right.svg" class="slider__arrow" />
             </div>
           </div>
-          <div class="testimonials__progress">
-            <span class="progress__max"
-              ><span class="progress__current">02</span>/08</span
-            >
-          </div>
-          <div class="testimonials__progress-slider">
-            <img src="../../assets/images/testimonialsslider.png" />
-          </div>
+          <label
+            for="testimonials-slider-range"
+            class="testimonials-label slider-label"
+          >
+            <span
+              id="testimonials-slider-value"
+              class="testimonials__slider-value slider-value"
+              >01/</span
+            >08</label
+          >
+          <input
+            type="range"
+            id="testimonials-slider-range"
+            class="testimonials-slider-range slider-range"
+            min="1"
+            max="8"
+            value="1"
+          />
           <div class="testimonials__button">
             <img src="../../assets/images/feedbackbutton.png" />
           </div>
@@ -390,18 +432,32 @@
         <div class="map-wrapper">
           <div class="map__title"><span class="title_font">Map</span></div>
           <div class="map__map">
-            <div class="map__placeholder_1"data-title="West End Bald Eagle Region: on an island near Los Angeles Population: more than 270 pairs in 2013"></div>
-            <div class="map__placeholder_2"data-title="West End Bald Eagle Region: on an island near Los Angeles Population: more than 270 pairs in 2013"></div>
-            <div class="map__placeholder_3"data-title="West End Bald Eagle Region: on an island near Los Angeles Population: more than 270 pairs in 2013"></div>
-            <div class="map__placeholder_4"data-title="West End Bald Eagle Region: on an island near Los Angeles Population: more than 270 pairs in 2013"></div>
+            <div
+              class="map__placeholder_1"
+              data-title="West End Bald Eagle Region: on an island near Los Angeles Population: more than 270 pairs in 2013"
+            ></div>
+            <div
+              class="map__placeholder_2"
+              data-title="West End Bald Eagle Region: on an island near Los Angeles Population: more than 270 pairs in 2013"
+            ></div>
+            <div
+              class="map__placeholder_3"
+              data-title="West End Bald Eagle Region: on an island near Los Angeles Population: more than 270 pairs in 2013"
+            ></div>
+            <div
+              class="map__placeholder_4"
+              data-title="West End Bald Eagle Region: on an island near Los Angeles Population: more than 270 pairs in 2013"
+            ></div>
           </div>
-          <a href="../zoos/panda/panda.html"><div class="map__button watch-button"></div></a>
+          <a href="../zoos/panda/panda.html"
+            ><div class="map__button watch-button"></div
+          ></a>
         </div>
       </div>
     </main>
     <footer class="footer">
       <div class="footer-wrapper">
-        <div class="footer__column">
+        <div class="footer__column_1">
           <div class="logo">
             <a href="../main/main.html">
               <span class="logo__text">
@@ -443,79 +499,81 @@
             <input type="submit" value="Send" />
           </form>
         </div>
-        <div class="footer__column">
-          <nav class="footer__nav">
-            <ul class="footer__menu">
-              <li>
-                <a class="footer__menu_element" href="../main/main.html"
-                  >About</a
-                >
-              </li>
-              <li>
-                <a class="footer__menu_element" href="../zoos/panda/panda.html"
-                  >Zoos</a
-                >
-              </li>
-              <li>
-                <a class="footer__menu_element" href="../map/map.html"
-                  >Map</a
-                >
-              </li>
-              <li>
-                <a
-                  class="footer__menu_element"
-                  href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp"
-                  >Design</a
-                >
-              </li>
-            </ul>
-            <a class="footer__button"
-              ><img src="../../assets/images/volunteersbtn.png"
-            /></a>
-          </nav>
-          <div class="footer__title">Zoo online center</div>
-          <address class="text_font footer__adress">
-            <span
-              >132, Address District, Street<br />
-              Open Daily 10:00 am - 5:00 pm</span
-            >
-            <div class="contacts">
-              <span>
-                T<a href="tel:(702) 163-3433" class="tel">
-                  (702) 163-3433</a
-                ></span
-              >
+        <div class="footer__column_2">
+          <div class="column">
+            <nav class="footer__nav">
+              <ul class="footer__menu">
+                <li>
+                  <a class="footer__menu_element" href="../main/main.html"
+                    >About</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__menu_element"
+                    href="../zoos/panda/panda.html"
+                    >Zoos</a
+                  >
+                </li>
+                <li>
+                  <a class="footer__menu_element" href="../map/map.html">Map</a>
+                </li>
+                <li>
+                  <a
+                    class="footer__menu_element"
+                    href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp"
+                    >Design</a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <div class="footer__title">Zoo online center</div>
+            <address class="text_font footer__adress">
               <span
-                ><a href="mailto:zoo.online@gmail.com" class="email"
-                  >zoo.online@gmail.com</a
-                ></span
+                >132, Address District, Street<br />
+                Open Daily 10:00 am - 5:00 pm</span
               >
+              <div class="contacts">
+                <span>
+                  T<a href="tel:(702) 163-3433" class="tel">
+                    (702) 163-3433</a
+                  ></span
+                >
+                <span
+                  ><a href="mailto:zoo.online@gmail.com" class="email"
+                    >zoo.online@gmail.com</a
+                  ></span
+                >
+              </div>
+            </address>
+            <div>
+              <ul class="footer__socials">
+                <li class="footer__socials_element">
+                  <a href="https://www.instagram.com/"
+                    ><img src="../../assets/icons/instagram.svg"
+                  /></a>
+                </li>
+                <li class="footer__socials_element">
+                  <a href="https://www.twitter.com"
+                    ><img src="../../assets/icons/twitter.svg"
+                  /></a>
+                </li>
+                <li class="footer__socials_element">
+                  <a href="https://www.youtube.com"
+                    ><img src="../../assets/icons/youtube.svg"
+                  /></a>
+                </li>
+                <li class="footer__socials_element">
+                  <a href="https://www.vk.com"
+                    ><img src="../../assets/icons/vk.svg"
+                  /></a>
+                </li>
+              </ul>
             </div>
-          </address>
-          <div>
-            <ul class="footer__socials">
-              <li class="footer__socials_element">
-                <a href="https://www.instagram.com/"
-                  ><img src="../../assets/icons/instagram.svg"
-                /></a>
-              </li>
-              <li class="footer__socials_element">
-                <a href="https://www.twitter.com"
-                  ><img src="../../assets/icons/twitter.svg"
-                /></a>
-              </li>
-              <li class="footer__socials_element">
-                <a href="https://www.youtube.com"
-                  ><img src="../../assets/icons/youtube.svg"
-                /></a>
-              </li>
-              <li class="footer__socials_element">
-                <a href="https://www.vk.com"
-                  ><img src="../../assets/icons/vk.svg"
-                /></a>
-              </li>
-            </ul>
           </div>
+          <a class="footer__button"
+            ><img src="../../assets/images/volunteersbtn.png"
+          /></a>
         </div>
       </div>
       <div class="copyright">
