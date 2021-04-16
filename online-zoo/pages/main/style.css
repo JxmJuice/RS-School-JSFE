@@ -1888,7 +1888,6 @@ input[type="submit"]:hover {
     background-size: contain;
   }
   .footer {
-    max-width: 320px;
     height: 1100px;
   }
   .footer-wrapper {
