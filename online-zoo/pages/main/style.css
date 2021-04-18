@@ -803,20 +803,16 @@ li {
   background: url(../../assets/icons/placeholder1active.png) center;
 }
 .map__placeholder_1:hover::after {
-  content: attr(data-title);
+  content: "";
   font-family: Roboto, sans-serif;
   position: absolute;
-  left: 100%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  background: url(../../assets/images/eagletitle.png) no-repeat #fefefe;
-  background-position: 10% 47%;
+  left: 0%;
+  bottom: 100%;
+  background: url(../../assets/images/tooltip.png) no-repeat #fefefe center;
   box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
-  padding: 45% 65% 15% 135%;
   border-radius: 8px;
   width: 436px;
-  height: 149px;
+  height: 141px;
   box-sizing: border-box;
 }
 .map__placeholder_2 {
@@ -836,20 +832,16 @@ li {
   background: url(../../assets/icons/placeholder2active.png) center;
 }
 .map__placeholder_2:hover::after {
-  content: attr(data-title);
-  position: absolute;
+  content: "";
   font-family: Roboto, sans-serif;
+  position: absolute;
   left: 0%;
-  right: 0%;
-  top: -165%;
-  bottom: 0%;
-  background: url(../../assets/images/eagletitle.png) no-repeat #fefefe;
-  background-position: 10% 47%;
+  bottom: 100%;
+  background: url(../../assets/images/tooltip.png) no-repeat #fefefe center;
   box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
   border-radius: 8px;
   width: 436px;
-  height: 149px;
-  padding: 45% 65% 15% 135%;
+  height: 141px;
   box-sizing: border-box;
 }
 .map__placeholder_3 {
@@ -869,20 +861,16 @@ li {
   background: url(../../assets/icons/placeholder3active.png) center;
 }
 .map__placeholder_3:hover::after {
-  content: attr(data-title);
+  content: "";
   font-family: Roboto, sans-serif;
   position: absolute;
-  left: 100%;
-  right: 0%;
-  top: -120%;
-  bottom: 0%;
+  left: 0%;
+  bottom: 100%;
+  background: url(../../assets/images/tooltip.png) no-repeat #fefefe center;
   box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
   border-radius: 8px;
   width: 436px;
-  height: 149px;
-  background: url(../../assets/images/eagletitle.png) no-repeat #fefefe;
-  background-position: 10% 47%;
-  padding: 45% 65% 15% 135%;
+  height: 141px;
   box-sizing: border-box;
 }
 .map__placeholder_4 {
@@ -902,20 +890,16 @@ li {
   background: url(../../assets/icons/placeholder4active.png) center;
 }
 .map__placeholder_4:hover::after {
-  content: attr(data-title);
+  content: "";
   font-family: Roboto, sans-serif;
   position: absolute;
-  left: 100%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  background: url(../../assets/images/eagletitle.png) no-repeat #fefefe;
-  background-position: 10% 47%;
+  left: 0%;
+  bottom: 100%;
+  background: url(../../assets/images/tooltip.png) no-repeat #fefefe center;
   box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
   border-radius: 8px;
   width: 436px;
-  height: 149px;
-  padding: 45% 65% 15% 135%;
+  height: 141px;
   box-sizing: border-box;
 }
 .map__button {
@@ -1178,8 +1162,6 @@ input[type="submit"]:hover {
   }
   .watch-online {
     height: 920px;
-    max-width: 1200px;
-    width: 100%;
   }
   .watch-online__wrapper {
     max-width: 1200px;
@@ -1307,6 +1289,9 @@ input[type="submit"]:hover {
   }
   .map__button {
     margin-bottom: 50px;
+  }
+  .map__placeholder_1:hover::after {
+    left: -50%;
   }
   .footer-wrapper {
     padding: 110px 150px;
@@ -1501,6 +1486,9 @@ input[type="submit"]:hover {
     top: 1%;
     left: 69%;
   }
+  .map__placeholder_1:hover::after {
+    left: -300%;
+  }
   .map__placeholder_2 {
     left: 6.67%;
     right: 77.77%;
@@ -1518,6 +1506,9 @@ input[type="submit"]:hover {
     right: 41.94%;
     top: 23.79%;
     bottom: 44.01%;
+  }
+  .map__placeholder_4:hover::after {
+    left: -200%;
   }
   .map__button {
     margin: 0;
@@ -1601,21 +1592,27 @@ input[type="submit"]:hover {
     line-height: 56px;
     padding: 0;
   }
-  .mission {
-    height: 720px;
+  .map__placeholder_1:hover::after {
+    background-image: url(../../assets/images/tooltipmobile.png);
+    width: 238px;
+    height: 113px;
+    left: -150%;
   }
-  .mission-wrapper {
-    height: 720px;
-    padding: 50px 10px 25px 10px;
+  .map__placeholder_2:hover::after {
+    background-image: url(../../assets/images/tooltipmobile.png);
+    width: 238px;
+    height: 113px;
   }
-  .mission__element1 {
-    height: 197px;
+  .map__placeholder_3:hover::after {
+    background-image: url(../../assets/images/tooltipmobile.png);
+    width: 238px;
+    height: 113px;
   }
-  .mission__element2 {
-    height: 165px;
-  }
-  .mission__element3 {
-    height: 197px;
+  .map__placeholder_4:hover::after {
+    background-image: url(../../assets/images/tooltipmobile.png);
+    width: 238px;
+    height: 113px;
+    left: -100%;
   }
 }
 @media screen and (max-device-width: 330px) {
