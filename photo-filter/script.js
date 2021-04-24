@@ -71,10 +71,8 @@ const date = new Date();
 const nextBtn = document.querySelector(".btn-next");
 let base;
 let counter = 0;
-image = document.querySelector("img");
-nextBtn.addEventListener("click", nextPicture);
-nextBtn.onload = nextPicture;
-function nextPicture() {
+const image = document.querySelector("img");
+function updateLink() {
   counter++;
   if (counter > 19) {
     counter = 0;
@@ -91,6 +89,11 @@ function nextPicture() {
   }
   image.src = base + images[counter];
 }
+nextBtn.addEventListener("click", nextPicture);
+nextBtn.onload = nextPicture;
+function nextPicture() {
+  updateLink();
+}
 const loadBtn = document.querySelector(".btn-load--input");
 loadBtn.addEventListener("change", loadImg);
 function loadImg() {
@@ -105,34 +108,47 @@ function loadImg() {
 
 const saveBtn = document.querySelector(".btn-save");
 const canvas = document.querySelector("canvas");
-function drawImage() {
+
+saveBtn.addEventListener("click", function (e) {
   const img = new Image();
   img.setAttribute("crossOrigin", "anonymous");
-  if (date.getHours() >= 0 && date.getHours() < 6) {
-    base = night;
-  } else if (date.getHours() >= 6 && date.getHours() < 12) {
-    base = morning;
-  } else if (date.getHours() >= 12 && date.getHours() < 18) {
-    base = day;
-  } else if (date.getHours() >= 18 && date.getHours() < 24) {
-    base = evening;
-  }
   img.src = image.src;
-  console.log(img);
   img.onload = function () {
     canvas.width = img.width;
     canvas.height = img.height;
     const ctx = canvas.getContext("2d");
+    let temp = "";
+    let sizing;
+    inputs.forEach((element) => {
+      sizing = element.dataset.sizing || "";
+      if(element.name==="hue"){
+        temp += `hue-rotate(${element.value + sizing})`;
+      } else if(element.name==="blur"){
+        temp += `${element.name}(${element.value * 2.85 + sizing})`;
+      }else{
+      temp += `${element.name}(${element.value/100})`;
+      }
+      console.log(temp);
+    });
+    ctx.filter=temp;
+    console.log(ctx.filter);
+    console.log(img.src);
     ctx.drawImage(img, 0, 0);
+    console.log(canvas);
+    console.log(canvas.toDataURL());
+    let link = document.createElement("a");
+    link.download = "image.png";
+    link.href = canvas.toDataURL();
+    link.click();
+    link.delete;
   };
-}
-saveBtn.addEventListener("click", function (e) {
-  drawImage();
-  console.log(canvas);
-  console.log(canvas.toDataURL());
-  let link = document.createElement("a");
-  link.download = "image.png";
-  link.href = canvas.toDataURL();
-  link.click();
-  link.delete;
 });
+
+const fullscreen = document.querySelector(".fullscreen");
+
+function fullscr() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+  else if (document.exitFullscreen) document.exitFullscreen();
+}
+
+fullscreen.addEventListener("click", fullscr);
