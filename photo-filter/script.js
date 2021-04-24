@@ -124,7 +124,11 @@ saveBtn.addEventListener("click", function (e) {
       if(element.name==="hue"){
         temp += `hue-rotate(${element.value + sizing})`;
       } else if(element.name==="blur"){
-        temp += `${element.name}(${element.value * 2.85 + sizing})`;
+        if(img.width>img.height){
+        temp += `${element.name}(${element.value * img.width/672 + sizing})`;
+      }else{
+        temp += `${element.name}(${element.value * img.height/672 + sizing})`;
+      }
       }else{
       temp += `${element.name}(${element.value/100})`;
       }
