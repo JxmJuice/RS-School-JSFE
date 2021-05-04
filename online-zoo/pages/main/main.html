@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="burger">
-      <input class="burger_checkbox" type="checkbox">
+      <input class="burger_checkbox" type="checkbox" />
       <span class="burger_line"></span>
       <span class="burger_line"></span>
       <span class="burger_line__short"></span>
@@ -42,10 +42,18 @@
             >Design</a
           >
         </nav>
-        <label class="switch">
-          <input type="checkbox" />
-          <span class="slider round"></span>
-        </label>
+        <div class="header__toggle">
+          <input
+            type="checkbox"
+            class="header__toggle-checkbox"
+            id="theme-toggler"
+          />
+          <label for="theme-toggler" class="header__toggle-label">
+            <span class="header__toggle-day"></span>
+            <span class="header__toggle-night"></span>
+            <span class="header__toggle-ball"></span>
+          </label>
+        </div>
       </div>
     </header>
     <main>
@@ -76,14 +84,33 @@
           ></a>
           <div class="watch-online__slider">
             <div class="watch-online__slider_pictures">
-              <div class="slider__element">
+              <div data-position="1" class="slider__element">
                 <a
                   ><img
                     src="../../assets/images/eagle.png"
                     class="watch-online__slider_picture"
                 /></a>
+                <div class="watch-online__slider_picture-text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="slider__element slider__element_active">
+              <div
+                data-position="2"
+                class="slider__element slider__element_active"
+              >
                 <a
                   ><img
                     src="../../assets/images/panda.png"
@@ -106,26 +133,143 @@
                   </div>
                 </div>
               </div>
-              <div class="slider__element">
+              <div class="slider__element" data-position="3">
                 <a
                   ><img
                     src="../../assets/images/gorilla.png"
                     class="watch-online__slider_picture"
                 /></a>
+                <div class="watch-online__slider_picture-text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="slider__element">
+              <div class="slider__element" data-position="4">
                 <a
                   ><img
                     src="../../assets/images/fox.png"
                     class="watch-online__slider_picture"
                 /></a>
+                <div class="watch-online__slider_picture-text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="slider__element">
+              <div class="slider__element" data-position="5">
                 <a
                   ><img
                     src="../../assets/images/sloth.png"
                     class="watch-online__slider_picture"
                 /></a>
+                <div class="watch-online__slider_picture-text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slider__element" data-position="6">
+                <a
+                  ><img
+                    src="../../assets/images/eagle.png"
+                    class="watch-online__slider_picture"
+                /></a>
+                <div class="watch-online__slider_picture-text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slider__element" data-position="7">
+                <a
+                  ><img
+                    src="../../assets/images/eagle.png"
+                    class="watch-online__slider_picture"
+                /></a>
+                <div class="watch-online__slider_picture-text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slider__element" data-position="8">
+                <a
+                  ><img
+                    src="../../assets/images/eagle.png"
+                    class="watch-online__slider_picture"
+                /></a>
+                <div class="watch-online__slider_picture-text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="watch-online__slider_slider">
@@ -239,8 +383,9 @@
           </div>
           <div class="pets-wrapper">
             <div class="pets__title title_font">Pets in Zoo</div>
+
             <div class="pets__slider">
-              <div class="pets__slider_element">
+              <div class="pets__slider_element pet_1 active">
                 <a><img src="../../assets/images/panda.png" class="image" /></a>
                 <div class="pets__slider_text">
                   <div class="picture__text">
@@ -259,7 +404,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pets__slider_element">
+              <div class="pets__slider_element pet_2">
                 <a><img src="../../assets/images/eagle.png" class="image" /></a>
                 <div class="pets__slider_text">
                   <div class="picture__text">
@@ -278,7 +423,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pets__slider_element">
+              <div class="pets__slider_element pet_3">
                 <a><img src="../../assets/images/fox.png" class="image" /></a>
                 <div class="pets__slider_text">
                   <div class="picture__text">
@@ -297,7 +442,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pets__slider_element element__4">
+              <div class="pets__slider_element pet_4">
                 <a
                   ><img src="../../assets/images/gorilla.png" class="image"
                 /></a>
@@ -318,7 +463,90 @@
                   </div>
                 </div>
               </div>
+              <div class="pets__slider_element pet_5">
+                <a
+                  ><img src="../../assets/images/crocodile.png" class="image"
+                /></a>
+                <div class="pets__slider_text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pets__slider_element pet_6">
+                <a
+                  ><img src="../../assets/images/cheetah.png" class="image"
+                /></a>
+                <div class="pets__slider_text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pets__slider_element pet_7">
+                <a
+                  ><img src="../../assets/images/elephant.png" class="image"
+                /></a>
+                <div class="pets__slider_text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pets__slider_element pet_8">
+                <a><img src="../../assets/images/sloth.png" class="image" /></a>
+                <div class="pets__slider_text">
+                  <div class="picture__text">
+                    Panda’s name is Bei Bei. He is 2 years old. Bei Bei is from
+                    China. He loves bamboos.
+                  </div>
+                  <div class="picture__buttons">
+                    <div class="picture__buttons_watch">
+                      <a
+                        ><img src="../../assets/images/watchonlinesmall.svg"
+                      /></a>
+                    </div>
+                    <div class="picture__buttons_donate">
+                      <a><img src="../../assets/images/donatesmall.svg" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
             <label for="pets__slider-range" class="pets-label slider-label">
               <span
                 id="pets__slider-value"
@@ -467,7 +695,7 @@
           <div class="logo">
             <a href="../main/main.html">
               <span class="logo__text">
-                <span class="logo-light">
+                <span class="logo-light footer__logo">
                   <span class="logo__text_zoo">zoo</span> online</span
                 >
               </span></a
@@ -588,5 +816,7 @@
         <span title="Yem Digital"> ©Yem Digital </span>- 2021
       </div>
     </footer>
+    <script src="../basic.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

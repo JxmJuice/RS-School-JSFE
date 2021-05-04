@@ -42,10 +42,14 @@
             >Design</a
           >
         </nav>
-        <label class="switch">
-          <input type="checkbox" />
-          <span class="slider round"></span>
-        </label>
+        <div class="header__toggle">
+          <input type="checkbox" class="header__toggle-checkbox" id="theme-toggler">
+          <label for="theme-toggler" class="header__toggle-label">
+            <span class="header__toggle-day"></span>
+            <span class="header__toggle-night"></span>
+            <span class="header__toggle-ball"></span>
+          </label>
+        </div>
       </div>
     </header>
     <main>
@@ -70,7 +74,7 @@
           </div>
           <div class="map__slider">
             <div class="map__slider_slider">
-              <div class="slider__arrow">
+              <div class="slider__arrow" id="arrow_left">
                 <img src="../../assets/icons/left.svg" />
               </div>
               <div class="slider__element el_1">
@@ -97,21 +101,31 @@
               <div class="slider__element el_8">
                 <img src="../../assets/images/elephant.png" />
               </div>
-              <div class="slider__arrow">
+              <div class="slider__arrow" id="arrow_right">
                 <img src="../../assets/icons/right.svg" />
               </div>
             </div>
-            <div class="map__slider_progress">
-              <span class="progress__max"
-                ><span class="progress__current">02</span>/08</span
-              >
-            </div>
-            <div class="map__slider_line">
-              <img src="../../assets/images/testimonialsslider.png" />
-            </div>
+            <label
+            for="map-slider-range"
+            class="map-label slider-label"
+          >
+            <span
+              id="map-slider-value"
+              class="map__slider-value slider-value"
+              >02/</span
+            >08</label
+          >
+          <input
+            type="range"
+            id="map-slider-range"
+            class="map-slider-range slider-range"
+            min="1"
+            max="8"
+            value="2"
+          />
           </div>
           <div class="map__map">
-            <div class="map__placeholder_1" title="Panda"></div>
+            <div class="map__placeholder_1 active" title="Panda"></div>
             <div class="map__placeholder_2" title="Eagle"></div>
             <div class="map__placeholder_3" title="Crocodile"></div>
             <div class="map__placeholder_4" title="Gorilla"></div>
@@ -126,7 +140,7 @@
           <div class="logo">
             <a href="../main/main.html">
               <span class="logo__text">
-                <span class="logo-light">
+                <span class="logo-light footer__logo">
                   <span class="logo__text_zoo">zoo</span> online</span
                 >
               </span></a
@@ -247,5 +261,7 @@
         <span title="Yem Digital"> ©Yem Digital </span>- 2021
       </div>
     </footer>
+    <script src="../basic.js"></script>
+    <script src="map.js"></script>
   </body>
 </html>
