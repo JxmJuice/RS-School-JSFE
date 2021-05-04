@@ -42,10 +42,14 @@
             >Design</a
           >
         </nav>
-        <label class="switch">
-          <input type="checkbox" />
-          <span class="slider round"></span>
-        </label>
+        <div class="header__toggle">
+          <input type="checkbox" class="header__toggle-checkbox" id="theme-toggler">
+          <label for="theme-toggler" class="header__toggle-label">
+            <span class="header__toggle-day"></span>
+            <span class="header__toggle-night"></span>
+            <span class="header__toggle-ball"></span>
+          </label>
+        </div>
       </div>
     </header>
     <main>
@@ -271,5 +275,6 @@
         <span title="Yem Digital"> ©Yem Digital </span>- 2021
       </div>
     </footer>
+    <script src="../../basic.js"></script>
   </body>
 </html>
