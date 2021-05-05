@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="burger">
-      <input class="burger_checkbox" type="checkbox">
+      <input class="burger_checkbox" type="checkbox" />
       <span class="burger_line"></span>
       <span class="burger_line"></span>
       <span class="burger_line__short"></span>
@@ -43,7 +43,11 @@
           >
         </nav>
         <div class="header__toggle">
-          <input type="checkbox" class="header__toggle-checkbox" id="theme-toggler">
+          <input
+            type="checkbox"
+            class="header__toggle-checkbox"
+            id="theme-toggler"
+          />
           <label for="theme-toggler" class="header__toggle-label">
             <span class="header__toggle-day"></span>
             <span class="header__toggle-night"></span>
@@ -59,8 +63,8 @@
             <span class="title_font">Choose your favourite</span>
           </div>
           <div class="map__text">
-            <div class="text_font map__text_font"
-              >As a voice for wildlife, we are devastated by the impact of the
+            <div class="text_font map__text_font">
+              As a voice for wildlife, we are devastated by the impact of the
               2020 Australian bushfires on precious species and their habitat,
               and we are determined to assist in all aspects, including
               providing veterinary support and raising much-needed emergency
@@ -69,60 +73,62 @@
               a pain-free and happy life. They have equal claim to the resources
               of this planet, and deserve a life of dignity and compassion.As a
               voice for wildlife, we are devastated by the impact of the 2020
-              Australian bushfires on precious species and their habitat.</div
-            >
+              Australian bushfires on precious species and their habitat.
+            </div>
           </div>
           <div class="map__slider">
-            <div class="map__slider_slider">
+            <div class="slider-wrapper">
               <div class="slider__arrow" id="arrow_left">
                 <img src="../../assets/icons/left.svg" />
               </div>
-              <div class="slider__element el_1">
-                <img src="../../assets/images/gorilla.png" />
-              </div>
-              <div class="slider__element slider__element_active el_2">
-                <img src="../../assets/images/panda.png" />
-              </div>
-              <div class="slider__element el_3">
-                <img src="../../assets/images/fox.png" />
-              </div>
-              <div class="slider__element el_4">
-                <img src="../../assets/images/sloth.png" />
-              </div>
-              <div class="slider__element el_5">
-                <img src="../../assets/images/cheetah.png" />
-              </div>
-              <div class="slider__element el_6">
-                <img src="../../assets/images/crocodile.png" />
-              </div>
-              <div class="slider__element el_7">
-                <img src="../../assets/images/eagle.png" />
-              </div>
-              <div class="slider__element el_8">
-                <img src="../../assets/images/elephant.png" />
+              <div class="map__slider_slider">
+                <div class="slider_pictures">
+                  <div data-pos="1" class="slider__element el_1">
+                    <img src="../../assets/images/gorilla.png" />
+                  </div>
+                  <div
+                    data-pos="2"
+                    class="slider__element slider__element_active el_2"
+                  >
+                    <img src="../../assets/images/panda.png" />
+                  </div>
+                  <div data-pos="3" class="slider__element el_3">
+                    <img src="../../assets/images/fox.png" />
+                  </div>
+                  <div data-pos="4" class="slider__element el_4">
+                    <img src="../../assets/images/sloth.png" />
+                  </div>
+                  <div data-pos="5" class="slider__element el_5">
+                    <img src="../../assets/images/cheetah.png" />
+                  </div>
+                  <div data-pos="6" class="slider__element el_6">
+                    <img src="../../assets/images/crocodile.png" />
+                  </div>
+                  <div data-pos="7" class="slider__element el_7">
+                    <img src="../../assets/images/eagle.png" />
+                  </div>
+                  <div data-pos="8" class="slider__element el_8">
+                    <img src="../../assets/images/elephant.png" />
+                  </div>
+                </div>
               </div>
               <div class="slider__arrow" id="arrow_right">
                 <img src="../../assets/icons/right.svg" />
               </div>
             </div>
-            <label
-            for="map-slider-range"
-            class="map-label slider-label"
-          >
-            <span
-              id="map-slider-value"
-              class="map__slider-value slider-value"
-              >02/</span
-            >08</label
-          >
-          <input
-            type="range"
-            id="map-slider-range"
-            class="map-slider-range slider-range"
-            min="1"
-            max="8"
-            value="2"
-          />
+            <label for="map-slider-range" class="map-label slider-label">
+              <span id="map-slider-value" class="map__slider-value slider-value"
+                >02/</span
+              >08</label
+            >
+            <input
+              type="range"
+              id="map-slider-range"
+              class="map-slider-range slider-range"
+              min="1"
+              max="8"
+              value="2"
+            />
           </div>
           <div class="map__map">
             <div class="map__placeholder_1 active" title="Panda"></div>
@@ -130,7 +136,9 @@
             <div class="map__placeholder_3" title="Crocodile"></div>
             <div class="map__placeholder_4" title="Gorilla"></div>
           </div>
-          <a href="../zoos/panda/panda.html"><div class="map__button watch-button"></div></a>
+          <a href="../zoos/panda/panda.html"
+            ><div class="map__button watch-button"></div
+          ></a>
         </div>
       </div>
     </main>
