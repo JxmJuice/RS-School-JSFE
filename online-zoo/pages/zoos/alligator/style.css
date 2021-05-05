@@ -297,6 +297,18 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+.plug{
+  width: 246px;
+  height: 141px;
+  background: url(../../../assets/images/transparent.jpg);
+  z-index: 9999;
+}
+.transparent_img{
+  position: absolute;
+  width: 246px;
+  height: 141px;
+  opacity: 0;
+}
 .column_2 {
   max-width: 380px;
   width: 100%;
@@ -440,6 +452,9 @@ body {
   align-items: flex-start;
   justify-content: space-between;
   height: 420px;
+}
+.footer__logo {
+  color: #fefefe;
 }
 .footer__form_title {
   font-family: Roboto, sans-serif;
@@ -662,6 +677,18 @@ input[type="submit"]:hover {
     padding: 60px 50px 105px 50px;
     max-width: 1200px;
     height: 715px;
+  }
+  .plug{
+    width: 164px;
+    height: 94px;
+    background: url(../../../assets/images/transparent.jpg);
+    z-index: 9999;
+  }
+  .transparent_img{
+    position: absolute;
+    width: 164px;
+    height: 94px;
+    opacity: 0;
   }
   .column_1 {
     height: 450px;

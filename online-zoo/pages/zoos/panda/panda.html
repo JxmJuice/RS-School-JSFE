@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="burger">
-      <input class="burger_checkbox" type="checkbox">
+      <input class="burger_checkbox" type="checkbox" />
       <span class="burger_line"></span>
       <span class="burger_line"></span>
       <span class="burger_line__short"></span>
@@ -43,7 +43,11 @@
           >
         </nav>
         <div class="header__toggle">
-          <input type="checkbox" class="header__toggle-checkbox" id="theme-toggler">
+          <input
+            type="checkbox"
+            class="header__toggle-checkbox"
+            id="theme-toggler"
+          />
           <label for="theme-toggler" class="header__toggle-label">
             <span class="header__toggle-day"></span>
             <span class="header__toggle-night"></span>
@@ -59,10 +63,14 @@
             <img src="../../../assets/icons/up.svg" />
           </div>
           <div class="side_slider_element_active" title="Panda">
-            <a href="panda.html"><img src="../../../assets/images/panda.png" /></a>
+            <a href="panda.html"
+              ><img src="../../../assets/images/panda.png"
+            /></a>
           </div>
           <div class="side_slider_element" title="Alligator">
-            <a href="../alligator/alligator.html"><img src="../../../assets/images/crocodile.png" /></a>
+            <a href="../alligator/alligator.html"
+              ><img src="../../../assets/images/crocodile.png"
+            /></a>
           </div>
           <div class="side_slider_element" title="Eagle">
             <a href="../eagle/eagle.html"
@@ -70,7 +78,9 @@
             /></a>
           </div>
           <div class="side_slider_element" title="Gorilla">
-            <a href="../gorilla/gorilla.html"><img src="../../../assets/images/gorilla.png" /></a>
+            <a href="../gorilla/gorilla.html"
+              ><img src="../../../assets/images/gorilla.png"
+            /></a>
           </div>
           <div class="side_slider_arrow">
             <img src="../../../assets/icons/down.svg" />
@@ -89,30 +99,48 @@
                 class="zoo__video_big"
               ></iframe>
               <div class="small_video">
-                <iframe
-                  src="https://www.youtube.com/embed/OObOQ2GElhA"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="zoo__video"
-                ></iframe>
-                <iframe
-                  src="https://www.youtube.com/embed/OObOQ2GElhA"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="zoo__video"
-                ></iframe>
-                <iframe
-                  src="https://www.youtube.com/embed/OObOQ2GElhA"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="zoo__video video_3"
-                ></iframe>
+                <div class="plug">
+                  <img
+                    class="transparent_img"
+                    src="../../../assets/images/transparent.jpg"
+                  />
+                  <iframe
+                    src="https://www.youtube.com/embed/D0eqnda8dOk"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="zoo__video"
+                  ></iframe>
+                </div>
+                <div class="plug">
+                  <img
+                    class="transparent_img"
+                    src="../../../assets/images/transparent.jpg"
+                  />
+                  <iframe
+                    src="https://www.youtube.com/embed/r3eaGCk2Acs"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="zoo__video"
+                  ></iframe>
+                </div>
+                <div class="plug">
+                  <img
+                    class="transparent_img"
+                    src="../../../assets/images/transparent.jpg"
+                  />
+                  <iframe
+                    src="https://www.youtube.com/embed/P1Ge4PFhlP8"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="zoo__video video_3"
+                  ></iframe>
+                </div>
               </div>
               <div class="dots">
                 <img src="../../../assets/icons/dots.svg" />
@@ -146,7 +174,7 @@
           <div class="logo">
             <a href="../main/main.html">
               <span class="logo__text">
-                <span class="logo-light">
+                <span class="logo-light footer__logo">
                   <span class="logo__text_zoo">zoo</span> online</span
                 >
               </span></a
@@ -201,7 +229,9 @@
                   >
                 </li>
                 <li>
-                  <a class="footer__menu_element" href="../../map/map.html">Map</a>
+                  <a class="footer__menu_element" href="../../map/map.html"
+                    >Map</a
+                  >
                 </li>
                 <li>
                   <a
@@ -267,6 +297,7 @@
         <span title="Yem Digital"> ©Yem Digital </span>- 2021
       </div>
     </footer>
+    <script src="../../zoos.js"></script>
     <script src="../../basic.js"></script>
   </body>
 </html>

@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="burger">
-      <input class="burger_checkbox" type="checkbox">
+      <input class="burger_checkbox" type="checkbox" />
       <span class="burger_line"></span>
       <span class="burger_line"></span>
       <span class="burger_line__short"></span>
@@ -43,7 +43,11 @@
           >
         </nav>
         <div class="header__toggle">
-          <input type="checkbox" class="header__toggle-checkbox" id="theme-toggler">
+          <input
+            type="checkbox"
+            class="header__toggle-checkbox"
+            id="theme-toggler"
+          />
           <label for="theme-toggler" class="header__toggle-label">
             <span class="header__toggle-day"></span>
             <span class="header__toggle-night"></span>
@@ -95,30 +99,48 @@
                 class="zoo__video_big"
               ></iframe>
               <div class="small_video">
-                <iframe
-                  src="https://www.youtube.com/embed/RmmAzrAkKqI"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="zoo__video"
-                ></iframe>
-                <iframe
-                  src="https://www.youtube.com/embed/RmmAzrAkKqI"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="zoo__video"
-                ></iframe>
-                <iframe
-                  src="https://www.youtube.com/embed/RmmAzrAkKqI"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="zoo__video video_3"
-                ></iframe>
+                <div class="plug">
+                  <img
+                    class="transparent_img"
+                    src="../../../assets/images/transparent.jpg"
+                  />
+                  <iframe
+                    src="https://www.youtube.com/embed/RB4RCOe-ZEw"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="zoo__video"
+                  ></iframe>
+                </div>
+                <div class="plug">
+                  <img
+                    class="transparent_img"
+                    src="../../../assets/images/transparent.jpg"
+                  />
+                  <iframe
+                    src="https://www.youtube.com/embed/2P0VCMYZenw"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="zoo__video"
+                  ></iframe>
+                </div>
+                <div class="plug">
+                  <img
+                    class="transparent_img"
+                    src="../../../assets/images/transparent.jpg"
+                  />
+                  <iframe
+                    src="https://www.youtube.com/embed/dUE_AMCliSU"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="zoo__video video_3"
+                  ></iframe>
+                </div>
               </div>
               <div class="dots">
                 <img src="../../../assets/icons/dots.svg" />
@@ -152,7 +174,7 @@
           <div class="logo">
             <a href="../main/main.html">
               <span class="logo__text">
-                <span class="logo-light">
+                <span class="logo-light footer__logo">
                   <span class="logo__text_zoo">zoo</span> online</span
                 >
               </span></a
@@ -275,6 +297,7 @@
         <span title="Yem Digital"> ©Yem Digital </span>- 2021
       </div>
     </footer>
+    <script src="../../zoos.js"></script>
     <script src="../../basic.js"></script>
   </body>
 </html>

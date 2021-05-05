@@ -254,7 +254,18 @@ body {
 .menu__element:hover {
   border-bottom: 1px solid var(--light-title-color);
 }
-
+.plug{
+  width: 246px;
+  height: 141px;
+  background: url(../../../assets/images/transparent.jpg);
+  z-index: 9999;
+}
+.transparent_img{
+  position: absolute;
+  width: 246px;
+  height: 141px;
+  opacity: 0;
+}
 .zoo {
   display: flex;
   flex-direction: row;
@@ -415,6 +426,9 @@ body {
   display: flex;
   flex-direction: row;
   border-bottom: 0.5px solid #fefefe;
+}
+.footer__logo {
+  color: #fefefe;
 }
 .footer__column_1 {
   display: flex;
@@ -671,6 +685,18 @@ input[type="submit"]:hover {
     height: 330px;
     width: 280px;
     margin-left: 15px;
+  }
+  .plug{
+    width: 164px;
+    height: 94px;
+    background: url(../../../assets/images/transparent.jpg);
+    z-index: 9999;
+  }
+  .transparent_img{
+    position: absolute;
+    width: 164px;
+    height: 94px;
+    opacity: 0;
   }
   .zoo__video_big {
     width: 527px;
