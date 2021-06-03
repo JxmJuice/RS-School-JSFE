@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background-color: #2196f3;
+  &__wrapper {
+    height: 100%;
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__logo {
+    width: 80px;
+    height: 40px;
+    background-image: url(../../../public/header-images/header_logo.svg);
+  }
+  &__nav {
+    width: 600px;
+    height: 64px;
+    ul {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__state {
+    display: flex;
+    justify-content: space-between;
+    width: 210px;
+    height: 40px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 40px;
+    color: #2196f3;
+  }
+  &__state_logIn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+  }
+  &__state_start {
+    width: 130px;
+    height: 36px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 1px 18px rgba(0, 0, 0, 0.12),
+      0px 6px 10px rgba(0, 0, 0, 0.14);
+    background: #f2f9fe;
+    border-radius: 4px;
+    a {
+      color: #2196f3;
+      letter-spacing: 1.25px;
+    }
+  }
+  &__state_avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 1px 18px rgba(0, 0, 0, 0.12),
+      0px 6px 10px rgba(0, 0, 0, 0.14);
+    background-image: url(../../../public/avatar-register.png);
+    background-color: #fff;
+    background-position: center;
+    background-size: contain;
+  }
+  &__state_logOut {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 1px 18px rgba(0, 0, 0, 0.12),
+      0px 6px 10px rgba(0, 0, 0, 0.14);
+  }
+  &__link {
+    margin-top: 5px;
+    background-position: 37px 7px;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 64px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    line-height: 85px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #fff;
+    &_active {
+      background-color: #1e83d6;
+    }
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: #ffffff;
+    }
+  }
+}
+
+#aboutGame {
+  background-image: url(../../../public/header-images/About_game.svg);
+}
+#bestScore {
+  background-image: url(../../../public/header-images/Best_score.svg);
+}
+#GameSettings {
+  background-image: url(../../../public/header-images/Game_setting.svg);
+}

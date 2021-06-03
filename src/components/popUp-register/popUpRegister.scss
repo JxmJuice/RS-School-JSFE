@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.form-register {
+  display: flex;
+  flex-wrap: wrap;
+}
+.form-register__title {
+  width: 100%;
+  height: 65px;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  padding: 20px 15px;
+  grid-area: header;
+}
+
+.form-register__input_wrapper {
+  width: 328px;
+  height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 50px;
+  input {
+    outline: none;
+    width: 330px;
+    height: 56px;
+    background-color: rgba(#212121, 0.08);
+    border: none;
+    border-bottom: 1px black solid;
+    border-radius: 5px;
+    padding-left: 50px;
+    font-size: 15px;
+  }
+  .label {
+    position: relative;
+    &::after {
+      position: absolute;
+      content: "\2713";
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      background-color: rgba(6, 205, 240, 0.267);
+      box-shadow: 0px 0px 7px rgba(6, 205, 240, 0.567);
+      color: rgb(6, 205, 240);
+      font-size: 25px;
+      font-weight: 800;
+      text-align: center;
+      line-height: 35px;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      visibility: 0;
+      visibility: hidden;
+    }
+
+    &_invalid {
+      background-color: rgba(220, 20, 20, 0.2);
+      box-shadow: 1px 1px 5px rgba(220, 20, 20, 0.5);
+      &::after {
+        visibility: 0;
+        visibility: hidden;
+      }
+    }
+    &_valid {
+      background-color: rgba(30, 220, 30, 0.2);
+      box-shadow: 1px 1px 5px rgba(30, 220, 30, 0.5);
+      &::after {
+        visibility: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+.form-register__btnWrapper {
+  width: 220px;
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 70px;
+  margin-left: 350px;
+  #buttonAdd {
+    border: none;
+    background-color: #2196f3;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+    color: #fff;
+    letter-spacing: 2px;
+    font-size: 14px;
+    width: 108px;
+    height: 100%;
+    cursor: pointer;
+    user-select: none;
+  }
+  #buttonCancel {
+    background-color: #e3f2fd;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+    color: #2196f3;
+    letter-spacing: 2px;
+    text-align: center;
+    line-height: 35px;
+    width: 93px;
+    height: 100%;
+    cursor: pointer;
+    user-select: none;
+  }
+}
+#inputAvatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-image: url(../../../public/avatar-register.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  text-indent: -1000px;
+}

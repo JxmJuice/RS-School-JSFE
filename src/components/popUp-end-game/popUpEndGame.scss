@@ -1,0 +1,27 @@
+.popUp__body {
+  .end-game__popUp__wrapper {
+    width: 400px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  p {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .popUp__ok {
+    width: 56px;
+    height: 36px;
+    background: #2196f3;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    line-height: 35px;
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 13px;
+  }
+}

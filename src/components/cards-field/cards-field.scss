@@ -1,0 +1,13 @@
+.cards-field {
+  display: grid;
+  grid-template-columns: 168px 168px 168px 168px;
+  grid-template-rows: 168px 168px 168px 168px;
+  row-gap: 14px;
+  column-gap: 24px;
+  z-index: 10;
+  position: relative;
+}
+.flipped > div {
+  transform: rotateY(180deg) translateX(-100%);
+  transform-origin: left;
+}
