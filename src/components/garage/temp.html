@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Async</title>
+  <link href="garage.css" rel="stylesheet" />
+</head>
+<body>
+  <main class="main">
+    <nav class="nav">
+      <button class="nav_btn">
+        to garage
+      </button>
+      <button class="nav_btn">
+        to winners
+      </button>
+    </nav>
+      <div class="garage">
+    <h1 class="garage_title">Garage</h1>
+    <div class="garage_forms">
+    <form id="create-car">
+        <input type="text"  class="car-name-input">
+        <input type="color" class="car-color-input">
+        <input type="submit" value="Create" class="submit-btn">
+    </form>
+    <form id="edit-car" class="disabled">
+      <input type="text" class="car-name-input">
+      <input type="color" class="car-color-input">
+      <input type="submit" value="Update" class="submit-btn">
+  </form> 
+</div>
+<nav class="garage_nav">
+  <button class="garage_nav__btn" id="race">race</button>
+  <button class="garage_nav__btn" id="reset">reset</button>
+  <button class="garage_nav__btn" id="generate">generate cars</button>
+</nav>
+  </main>
+</body>
