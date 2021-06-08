@@ -1,27 +1,13 @@
-import { createCar } from "../../api";
-import { BaseComponent } from "../baseComponent";
-import { CarModel } from "../models/carModel";
-import "./lane.scss";
-
-export class Car extends BaseComponent {
-  public car: CarModel;
-
-  constructor(name: string, color: string) {
-    super("div", ["lane"]);
-    this.car = this.CreateCarObj(name, color);
-    this.RenderCar(this.car);
-  }
-
-  public CreateCarObj(carName: string, carColor: string): CarModel {
-    return {
-      name: carName,
-      color: carColor,
-    };
-  }
-
-  public RenderCar(body: CarModel) {
-    this.element.innerHTML = `
-    <div class='lane-wrapper'>
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Async</title>
+  <link href="lane.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="lane">
     <div class="controls">
       <div class="controls_visual">
         <button class="select_button">select</button>
@@ -188,7 +174,5 @@ export class Car extends BaseComponent {
         </svg>
       </div>
     </div>
-    </div>
-        `;
-  }
-}
+  </div>
+</body>

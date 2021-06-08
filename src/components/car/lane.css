@@ -1,0 +1,94 @@
+.lane {
+  position: relative;
+  height: 75px;
+}
+
+.lane-wrapper {
+  width: 95%;
+  height: 75px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background-image: url(./../../../public/dotted-line.svg), url(./../../../public/red-flag-svgrepo-com.svg);
+  background-position: 0 100px, 98% 0;
+  background-size: cover,contain;
+  background-repeat: no-repeat,no-repeat;
+}
+
+.controls {
+  max-width: 160px;
+  width: 100%;
+  height: 55px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.controls_visual {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 95%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.controls_engine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 35%;
+}
+
+.select_button,
+.remove_button {
+  background-color: lightblue;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-weight: 600;
+}
+
+.start_button {
+  background-color: green;
+  border-radius: 5px;
+}
+
+.reset_button {
+  background-color: orangered;
+  border-radius: 5px;
+}
+
+.car_model {
+  margin-left: -95%;
+  margin-top: 18%;
+}
+
+.car_name {
+  font-family: sans-serif;
+  font-weight: 600;
+}
+/*# sourceMappingURL=lane.css.map */

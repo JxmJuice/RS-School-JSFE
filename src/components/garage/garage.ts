@@ -45,8 +45,13 @@ export class Garage extends BaseComponent {
     const carAmount = await getCarAmount(store.page,store.carsLimit);
     const carList:CarModel[] = await getCars(store.page,store.carsLimit);
     carList.forEach(element => {
-      new Car(element.name, element.color);
+      const car = new Car(element.name, element.color);
+      this.element.appendChild(car.element);
     });
+    const title = document.querySelector('.garage_title');
+    if(title!=undefined){
+    title.innerHTML = `Garage (${carAmount})`;
+    }
   }
 
   private GetPromiseResult(req:any) {
