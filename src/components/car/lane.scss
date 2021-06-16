@@ -1,65 +1,125 @@
-.lane{
-    position: relative;
-    height: 75px;
+:root {
+  --time: 5s;
 }
 
-.lane-wrapper{
-    width: 95%;
-    height: 75px;
+.lane {
+  position: relative;
+  height: 75px;
+  margin-bottom: 5px;
+}
+
+.lane-wrapper {
+  width: 95%;
+  height: 75px;
+  display: flex;
+  flex-direction: row;
+  background-image: url(./../../../public/red-flag-svgrepo-com.svg);
+  background-position: 98% 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.controls {
+  max-width: 160px;
+  width: 100%;
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &_visual {
     display: flex;
     flex-direction: row;
-    background-image: url(./../../../public/dotted-line.svg),url(./../../../public/red-flag-svgrepo-com.svg);
-    background-position: 0 100px, 98% 0;
-    background-size: cover,contain;
-    background-repeat: no-repeat,no-repeat;
-}
-
-.controls{
-    max-width: 160px;
-    width: 100%;
-    height: 55px;
-    display: flex;
-    flex-direction: column;
+    width: 95%;
     justify-content: space-between;
-    &_visual{
-        display: flex;
-        flex-direction: row;
-        width: 95%;
-        justify-content: space-between;
-    }
-    &_engine{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width:35%;
-    }
+  }
+  &_engine {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 35%;
+  }
 }
 
 .select_button,
-.remove_button{
-    background-color: lightblue;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-family: sans-serif;
-    font-weight: 600;
+.remove_button {
+  background-color: lightblue;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-weight: 600;
 }
 
-.start_button{
-    background-color: green;
-    border-radius: 5px;
+.start_button {
+  background-color: green;
+  border-radius: 5px;
 }
 .reset_button {
-    background-color: orangered;
-    border-radius: 5px;
+  background-color: orangered;
+  border-radius: 5px;
 }
 
-.car{
-    &_model{
-        margin-left: -95%;
-        margin-top: 18%;
+.car {
+  width: 200px;
+  &_model {
+    position: absolute;
+    width: 83px;
+    left: 90px;
+    top: 30px;
+  }
+  &_name {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-weight: 600;
+  }
+}
+
+.race {
+  animation: race var(--time);
+}
+
+.stop {
+    animation-play-state: paused;
+}
+
+.road {
+  width: 95%;
+  height: 10px;
+  top: 69px;
+  position: absolute;
+  background-image: url(./../../../public/dotted-line.svg);
+  background-size: contain;
+}
+
+@keyframes race {
+  from {
+    left: 90px;
+  }
+  to {
+    animation-play-state: paused;
+    left: 90%;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  @keyframes race {
+    from {
+      left: 90px;
     }
-    &_name{
-        font-family: sans-serif;
-        font-weight: 600;
+    to {
+      animation-play-state: paused;
+      left: 91%;
     }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  @keyframes race {
+    from {
+      left: 90px;
+    }
+    to {
+      animation-play-state: paused;
+      left: 85%;
+    }
+  }
 }

@@ -1,3 +1,6 @@
+import { CarModel } from "./components/models/carModel";
+import { WinnerModel } from "./components/models/winnerModel";
+
 const base = "http://localhost:3000";
 
 const garage = `${base}/garage`;
@@ -6,15 +9,15 @@ const winners = `${base}/winners`;
 
 export const getCars = async (page: number, limit: number) => {
   const response = await fetch(`${garage}?_page=${page}&_limit=${limit}`);
-  return await response.json()
+  return await response.json();
 };
 
 export const getCarAmount = async (page: number, limit: number) => {
   const response = await fetch(`${garage}?_page=${page}&_limit=${limit}`);
   return response.headers.get("X-Total-Count");
-}
+};
 
-export const getCar = async (id: number) => {
+export const getCar = async (id: string) => {
   return (await fetch(`${garage}/${id}`)).json();
 };
 
@@ -28,7 +31,7 @@ export const createCar = async (body: Object) => {
   });
 };
 
-export const deleteCar = async (id: number) => {
+export const deleteCar = async (id: string) => {
   return (
     await fetch(`${garage}/${id}`, {
       method: "DELETE",
@@ -36,7 +39,7 @@ export const deleteCar = async (id: number) => {
   ).json();
 };
 
-export const updateCar = async (id: number, body: Object) => {
+export const updateCar = async (id: string, body: Object) => {
   return await fetch(`${garage}/${id}`, {
     method: "PUT",
     body: JSON.stringify(body),
@@ -46,15 +49,15 @@ export const updateCar = async (id: number, body: Object) => {
   });
 };
 
-export const startEngine = async (id: number) => {
+export const startEngine = async (id: string) => {
   return (await fetch(`${engine}?id=${id}&status=started`)).json();
 };
 
-export const stopEngine = async (id: number) => {
+export const stopEngine = async (id: string) => {
   return (await fetch(`${engine}?id=${id}&status=stopped`)).json();
 };
 
-export const engineDriveMode = async (id: number) => {
+export const engineDriveMode = async (id: string) => {
   const result = await fetch(`${engine}?id=${id}&status=drive`).catch();
   if (result.status !== 200) {
     return {
@@ -81,13 +84,21 @@ export const getWinners = async (
   const response = await fetch(
     `${winners}?_page=${page}&_limit=${limit}&${sortOrder}`
   );
-  return {
-    items: await response.json(),
-    number: response.headers.get("X-Total-Count"),
-  };
+  return await response.json();
 };
 
-export const getWinner = async (id: number) => {
+export const getWinnersAmount = async (
+  page: number,
+  limit: number,
+  sortOrder: string
+) => {
+  const response = await fetch(
+    `${winners}?_page=${page}&_limit=${limit}&${sortOrder}`
+  );
+  return response.headers.get("X-Total-Count");
+};
+
+export const getWinner = async (id: string) => {
   return (await fetch(`${winners}/${id}`)).json();
 };
 
@@ -101,7 +112,7 @@ export const createWinner = async (body: Object) => {
   });
 };
 
-export const deleteWinner = async (id: number) => {
+export const deleteWinner = async (id: string) => {
   return (
     await fetch(`${winners}/${id}`, {
       method: "DELETE",
@@ -109,7 +120,7 @@ export const deleteWinner = async (id: number) => {
   ).json();
 };
 
-export const updateWinner = async (id: number, body: Object) => {
+export const updateWinner = async (id: string, body: Object) => {
   return await fetch(`${winners}/${id}`, {
     method: "PUT",
     body: JSON.stringify(body),
@@ -146,20 +157,34 @@ export const GetRandomName = (): string => {
     "Chevrolet",
   ];
   const model = [
-      'Model S',
-      'C63',
-      'M5',
-      'Supra',
-      'GTR',
-      'F40',
-      'Veyron',
-      'Vesta Sport',
-      'RX-7',
-      'A8',
-      'Golf',
-      'Focus RS',
-      'Challenger',
-      'Corvette'
-  ]
-  return `${mark[Math.floor(Math.random()*mark.length)]} ${model[Math.floor(Math.random()*model.length)]}`
+    "Model S",
+    "C63",
+    "M5",
+    "Supra",
+    "GTR",
+    "F40",
+    "Veyron",
+    "Vesta Sport",
+    "RX-7",
+    "A8",
+    "Golf",
+    "Focus RS",
+    "Challenger",
+    "Corvette",
+  ];
+  return `${mark[Math.floor(Math.random() * mark.length)]} ${
+    model[Math.floor(Math.random() * model.length)]
+  }`;
+};
+
+export const CreateCarObj = (
+  carName: string,
+  carColor: string,
+  carId: string
+): CarModel => {
+  return {
+    name: carName,
+    color: carColor,
+    id: carId,
+  };
 };

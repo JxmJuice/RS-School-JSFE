@@ -1,0 +1,22 @@
+.nav {
+    max-width: 250px;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &_btn {
+      max-width: 120px;
+      width: 100%;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-family: sans-serif;
+      border-radius: 5px;
+      outline: none;
+      background-color: beige;
+    }
+  }
+
+  .hidden{
+      visibility: hidden;
+  }

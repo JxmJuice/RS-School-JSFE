@@ -55,7 +55,7 @@ module.exports = ({ development }) => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "match-match Game",
+      title: "Async Race",
       // template: './src/index.html',
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),

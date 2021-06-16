@@ -1,5 +1,8 @@
 export const store = {
-    page: 1,
+    garagePage: 1,
     carsLimit: 7,
     totalCars: 4,
+    winnersPage: 1,
+    winnersLimit: 10,
+    sortOrder: '&_sort=time&_order=ASC'
 }
