@@ -1,2 +1,3 @@
-# jxmjuice-JSFE2021Q1
-Private repository for @jxmjuice
+https://jxmjuice.github.io/presentations/index.html
+
+https://youtu.be/kbcztVtf990
