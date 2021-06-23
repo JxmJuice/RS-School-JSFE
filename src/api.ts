@@ -1,3 +1,4 @@
+import { mark, model } from "./components/constants";
 import { CarModel } from "./components/models/carModel";
 import { WinnerModel } from "./components/models/winnerModel";
 
@@ -140,38 +141,6 @@ export const GetRandomColor = (): string => {
 };
 
 export const GetRandomName = (): string => {
-  const mark = [
-    "Tesla",
-    "Mercedes",
-    "BMW",
-    "Toyota",
-    "Nissan",
-    "Ferrari",
-    "Bugatti",
-    "Lada",
-    "Mazda",
-    "Audi",
-    "Volkswagen",
-    "Ford",
-    "Dodge",
-    "Chevrolet",
-  ];
-  const model = [
-    "Model S",
-    "C63",
-    "M5",
-    "Supra",
-    "GTR",
-    "F40",
-    "Veyron",
-    "Vesta Sport",
-    "RX-7",
-    "A8",
-    "Golf",
-    "Focus RS",
-    "Challenger",
-    "Corvette",
-  ];
   return `${mark[Math.floor(Math.random() * mark.length)]} ${
     model[Math.floor(Math.random() * model.length)]
   }`;
