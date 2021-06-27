@@ -1,0 +1,103 @@
+body {
+  background-color: #85c5e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chessboard {
+  width: 600px;
+  height: 600px;
+  border: burlywood 30px solid;
+  transition: transform 1s ease-in-out 0.5s;
+  & > .rank > .rank_number {
+    transition: transform 1s ease-in-out 0.5s;
+  }
+  & > .file > .file_name {
+    transition: transform 1s ease-in-out 0.5s;
+  }
+  & > .row > .square > .chess-piece {
+    transition: transform 0s ease-in-out 0.5s;
+  }
+  &.turned {
+    transform: rotateZ(180deg);
+    transition: transform 1s ease-in-out 0.5s;
+    & > .rank > .rank_number {
+      transform: rotateZ(-180deg);
+    }
+    & > .file > .file_name {
+      transform: rotateZ(-180deg);
+    }
+    & > .row > .square > .chess-piece {
+      transform: rotateZ(-180deg);
+    }
+  }
+}
+
+.rank {
+  position: absolute;
+  height: 550px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  font: 25px sans-serif;
+  margin-left: -20px;
+  margin-top: 25px;
+  user-select: none;
+}
+
+.file {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 550px;
+  font: 25px sans-serif;
+  margin-left: 25px;
+  user-select: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.square {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+}
+
+.valid {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url(./../../../public/images/dot.png);
+}
+
+.white {
+  background-color: cornsilk;
+}
+
+.black {
+  background-color: darkcyan;
+}
+
+.checked {
+  background-color: #e7516f;
+}
+
+.highlight {
+  background-color: darkkhaki;
+}
+
+.valid[data-piece="white"] {
+  border: 3px black dotted;
+}
+
+.valid[data-piece="black"] {
+  border: 3px black dotted;
+}
