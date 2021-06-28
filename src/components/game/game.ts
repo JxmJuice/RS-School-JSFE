@@ -19,6 +19,11 @@ export class Game {
 
   isCheck: boolean;
 
+  whiteKSideCastlingEnabled: boolean;
+  whiteQSideCastlingEnabled: boolean;
+  blackKSideCastlingEnabled: boolean;
+  blackQSideCastlingEnabled: boolean;
+
   constructor() {
     this.chessBoard = new ChessBoard();
     document.body.appendChild(this.chessBoard.element);
@@ -45,18 +50,24 @@ export class Game {
     }
     this.whitePieces[15] = new King("white", "e1");
     this.blackPieces[15] = new King("black", "e8");
+
     this.isWhiteTurn = true;
     this.isCheck = false;
+    this.whiteKSideCastlingEnabled = true;
+    this.whiteQSideCastlingEnabled = true;
+    this.blackKSideCastlingEnabled = true;
+    this.blackQSideCastlingEnabled = true;
+
     this.handleTurn();
   }
 
   handleTurn() {
     if (this.isWhiteTurn == true) {
-      // this.chessBoard.element.classList.remove("turned");
+      this.chessBoard.element.classList.remove("turned");
       this.validateWhiteTurn();
     }
     if (this.isWhiteTurn != true) {
-      //this.chessBoard.element.classList.add("turned");
+      this.chessBoard.element.classList.add("turned");
       this.validateBlackTurn();
     }
   }
@@ -119,22 +130,25 @@ export class Game {
           currentState = (el as HTMLElement).dataset.piece;
           console.log(currentState);
         }
-        if ((el as HTMLElement).dataset.piece == "black" && (el as HTMLElement).classList.contains('checked')) {
-          console.log(el.classList)
+        if (
+          (el as HTMLElement).dataset.piece == "black" &&
+          (el as HTMLElement).classList.contains("checked")
+        ) {
+          console.log(el.classList);
           return;
         }
-        if( piece.element.parentElement){
-        (el as HTMLElement).dataset.piece = "white";
-        piece.element.parentElement.dataset.piece = '';
-        this.blackPieces.forEach((piece) => {
-          if(piece.element.parentElement == el){
-            return;
-          }
-          piece.checkLegalMoves();
-        });
-        (el as HTMLElement).dataset.piece = currentState;
-        piece.element.parentElement.dataset.piece = 'white';
-      }
+        if (piece.element.parentElement) {
+          (el as HTMLElement).dataset.piece = "white";
+          piece.element.parentElement.dataset.piece = "";
+          this.blackPieces.forEach((piece) => {
+            if (piece.element.parentElement == el) {
+              return;
+            }
+            piece.checkLegalMoves();
+          });
+          (el as HTMLElement).dataset.piece = currentState;
+          piece.element.parentElement.dataset.piece = "white";
+        }
         if (
           this.whitePieces[15].element.parentElement?.classList.contains(
             "attacked"
@@ -143,7 +157,57 @@ export class Game {
           el.classList.remove("valid");
           console.log(el);
         }
+        if (piece.element.classList.contains("king_white")) {
+          if (this.whiteKSideCastlingEnabled == true)
+            this.handleKingSideCastling(piece);
+          if (this.whiteQSideCastlingEnabled == true)
+            this.handleQueenSideCastling(piece);
+        }
       } else {
+        document
+          .querySelectorAll(".attacked")
+          .forEach((elem) => elem.classList.remove("attacked"));
+        let currentState;
+        if (
+          (el as HTMLElement).dataset.piece == "" ||
+          (el as HTMLElement).dataset.piece == "white"
+        ) {
+          currentState = (el as HTMLElement).dataset.piece;
+          console.log(currentState);
+        }
+        if (
+          (el as HTMLElement).dataset.piece == "white" &&
+          (el as HTMLElement).classList.contains("checked")
+        ) {
+          console.log(el.classList);
+          return;
+        }
+        if (piece.element.parentElement) {
+          (el as HTMLElement).dataset.piece = "black";
+          piece.element.parentElement.dataset.piece = "";
+          this.whitePieces.forEach((piece) => {
+            if (piece.element.parentElement == el) {
+              return;
+            }
+            piece.checkLegalMoves();
+          });
+          (el as HTMLElement).dataset.piece = currentState;
+          piece.element.parentElement.dataset.piece = "black";
+        }
+        if (
+          this.blackPieces[15].element.parentElement?.classList.contains(
+            "attacked"
+          )
+        ) {
+          el.classList.remove("valid");
+          console.log(el);
+        }
+        if (piece.element.classList.contains("king_black")) {
+          if (this.blackKSideCastlingEnabled == true)
+            this.handleKingSideCastling(piece);
+          if (this.blackQSideCastlingEnabled == true)
+            this.handleQueenSideCastling(piece);
+        }
       }
     });
     piece.handleMove(event as MouseEvent);
@@ -164,13 +228,59 @@ export class Game {
       }
       if (piece.currentSquare != initialPlace) {
         if (this.isWhiteTurn == true) {
-          this.createCheck(piece);
+          if (piece.element.classList.contains("king_white")) {
+            console.log(piece);
+            if (piece.currentSquare == document.querySelector("#g1")) {
+              console.log(piece.currentSquare);
+              document.querySelector("#h1")?.firstElementChild?.remove();
+              this.whitePieces[0] = new Rook("white", "f1");
+            }
+            if (piece.currentSquare == document.querySelector("#c1")) {
+              console.log(piece.currentSquare);
+              document.querySelector("#a1")?.firstElementChild?.remove();
+              this.whitePieces[1] = new Rook("white", "d1");
+            }
+            this.whiteQSideCastlingEnabled = false;
+            this.whiteKSideCastlingEnabled = false;
+          }
+          if (piece.element.classList.contains("rook_white")) {
+            if (initialPlace?.id == "h1") {
+              this.whiteKSideCastlingEnabled = false;
+            }
+            if (initialPlace?.id == "a1") {
+              this.whiteQSideCastlingEnabled = false;
+            }
+          }
+          this.createCheck();
           this.isWhiteTurn = false;
           this.handleTurn();
           return;
         }
         if (this.isWhiteTurn == false) {
-          this.createCheck(piece);
+          if (piece.element.classList.contains("king_black")) {
+            console.log(piece);
+            if (piece.currentSquare == document.querySelector("#g8")) {
+              console.log(piece.currentSquare);
+              document.querySelector("#h8")?.firstElementChild?.remove();
+              this.blackPieces[0] = new Rook("black", "f8");
+            }
+            if (piece.currentSquare == document.querySelector("#c8")) {
+              console.log(piece.currentSquare);
+              document.querySelector("#a8")?.firstElementChild?.remove();
+              this.blackPieces[1] = new Rook("black", "d8");
+            }
+            this.blackQSideCastlingEnabled = false;
+            this.blackKSideCastlingEnabled = false;
+          }
+          if (piece.element.classList.contains("rook_black")) {
+            if (initialPlace?.id == "h8") {
+              this.blackKSideCastlingEnabled = false;
+            }
+            if (initialPlace?.id == "a8") {
+              this.blackQSideCastlingEnabled = false;
+            }
+          }
+          this.createCheck();
           this.isWhiteTurn = true;
           this.handleTurn();
           return;
@@ -180,37 +290,40 @@ export class Game {
     }, 1);
   }
 
-  createCheck(piece: Rook | Pawn | Bishop | Knight | King | Queen) {
-    document
-      .querySelectorAll(".attacked")
-      .forEach((square) => square.classList.remove("attacked"));
+  createCheck() {
     if (this.isWhiteTurn != true) {
-      this.blackPieces.forEach((blackPiece) => {
+      for(let blackPiece of this.blackPieces) {
+        document
+        .querySelectorAll(".attacked")
+        .forEach((square) => square.classList.remove("attacked"));
         blackPiece.checkLegalMoves();
-      });
-      if (
-        this.whitePieces[15].element.parentElement?.classList.contains(
-          "attacked"
-        )
-      ) {
-        this.whitePieces[15].element.parentElement?.classList.add("checked");
-        piece.element.parentElement?.classList.add("checked");
-        this.isCheck = true;
+        if (
+          this.whitePieces[15].element.parentElement?.classList.contains(
+            "attacked"
+          )
+        ) {
+          this.whitePieces[15].element.parentElement?.classList.add("checked");
+          blackPiece.element.parentElement?.classList.add("checked");
+          this.isCheck = true;
+        }
       }
     }
 
     if (this.isWhiteTurn == true) {
-      this.whitePieces.forEach((whitePiece) => {
+      for(let whitePiece of this.whitePieces) {
+        document
+        .querySelectorAll(".attacked")
+        .forEach((square) => square.classList.remove("attacked"));
         whitePiece.checkLegalMoves();
-      });
-      if (
-        this.blackPieces[15].element.parentElement?.classList.contains(
-          "attacked"
-        )
-      ) {
-        this.blackPieces[15].element.parentElement?.classList.add("checked");
-        piece.element.parentElement?.classList.add("checked");
-        this.isCheck = true;
+        if (
+          this.blackPieces[15].element.parentElement?.classList.contains(
+            "attacked"
+          )
+        ) {
+          this.blackPieces[15].element.parentElement?.classList.add("checked");
+          whitePiece.element.parentElement?.classList.add("checked");
+          this.isCheck = true;
+        }
       }
     }
   }
@@ -222,14 +335,14 @@ export class Game {
         el.element.onmouseup = null;
       });
       this.whitePieces.forEach((piece) => {
-          const initialPlace = piece.currentSquare;
-          console.log(1)
-          piece.element.onmousedown = () => {
-            this.handleCheckMouseDown(piece, event);
-          };
-          piece.element.onmouseup = () => {
-            this.handleCheckMouseUp(piece, initialPlace);
-          };
+        const initialPlace = piece.currentSquare;
+        console.log(1);
+        piece.element.onmousedown = () => {
+          this.handleCheckMouseDown(piece, event);
+        };
+        piece.element.onmouseup = () => {
+          this.handleCheckMouseUp(piece, initialPlace);
+        };
       });
     } else if (this.isWhiteTurn == false) {
       this.whitePieces.forEach((el) => {
@@ -237,13 +350,13 @@ export class Game {
         el.element.onmouseup = null;
       });
       this.blackPieces.forEach((piece) => {
-          const initialPlace = piece.currentSquare;
-          piece.element.onmousedown = () => {
-            this.handleCheckMouseDown(piece, event);
-          };
-          piece.element.onmouseup = () => {
-            this.handleCheckMouseUp(piece, initialPlace);
-          };
+        const initialPlace = piece.currentSquare;
+        piece.element.onmousedown = () => {
+          this.handleCheckMouseDown(piece, event);
+        };
+        piece.element.onmouseup = () => {
+          this.handleCheckMouseUp(piece, initialPlace);
+        };
       });
     }
   }
@@ -252,12 +365,22 @@ export class Game {
     piece: Rook | Pawn | Bishop | Knight | King | Queen,
     event: Event | undefined
   ) {
+    if(this.isWhiteTurn == true ) {
+      this.blackPieces.forEach(el=>{
+        el.checkLegalMoves()
+      })
+    }
+    if(this.isWhiteTurn == false) {
+      this.whitePieces.forEach(el=>{
+        el.checkLegalMoves()
+      })
+    }
     piece.validateMove();
-    if(piece.element.classList.contains('king_white')){
+    if (piece.element.classList.contains("king_white")) {
       piece.handleMove(event as MouseEvent);
       return;
     }
-    if(piece.element.classList.contains('king_black')){
+    if (piece.element.classList.contains("king_black")) {
       piece.handleMove(event as MouseEvent);
       return;
     }
@@ -274,7 +397,11 @@ export class Game {
           currentState = (el as HTMLElement).dataset.piece;
           console.log(currentState);
         }
-        if ((el as HTMLElement).dataset.piece == "black" && (el as HTMLElement).classList.contains('checked')) {
+        if (
+          (el as HTMLElement).dataset.piece == "black" &&
+          (el as HTMLElement).classList.contains("checked") &&
+          document.querySelectorAll('.checked').length < 3
+        ) {
           return;
         }
         (el as HTMLElement).dataset.piece = "white";
@@ -291,6 +418,37 @@ export class Game {
           console.log(el);
         }
       } else {
+        document
+          .querySelectorAll(".attacked")
+          .forEach((elem) => elem.classList.remove("attacked"));
+        let currentState;
+        if (
+          (el as HTMLElement).dataset.piece == "" ||
+          (el as HTMLElement).dataset.piece == "white"
+        ) {
+          currentState = (el as HTMLElement).dataset.piece;
+          console.log(currentState);
+        }
+        if (
+          (el as HTMLElement).dataset.piece == "white" &&
+          (el as HTMLElement).classList.contains("checked") &&
+          document.querySelectorAll('.checked').length < 3
+        ) {
+          return;
+        }
+        (el as HTMLElement).dataset.piece = "black";
+        this.whitePieces.forEach((piece) => {
+          piece.checkLegalMoves();
+        });
+        (el as HTMLElement).dataset.piece = currentState;
+        if (
+          this.blackPieces[15].element.parentElement?.classList.contains(
+            "attacked"
+          )
+        ) {
+          el.classList.remove("valid");
+          console.log(el);
+        }
       }
     });
     piece.handleMove(event as MouseEvent);
@@ -315,7 +473,7 @@ export class Game {
             .querySelectorAll(".checked")
             .forEach((el) => el.classList.remove("checked"));
           this.isCheck = false;
-          this.createCheck(piece);
+          this.createCheck();
           this.isWhiteTurn = false;
           this.handleTurn();
           return;
@@ -325,7 +483,7 @@ export class Game {
             .querySelectorAll(".checked")
             .forEach((el) => el.classList.remove("checked"));
           this.isCheck = false;
-          this.createCheck(piece);
+          this.createCheck();
           this.isWhiteTurn = true;
           this.handleTurn();
           return;
@@ -335,5 +493,99 @@ export class Game {
     }, 1);
   }
 
-  handleKing(piece: King) {}
+  handleKingSideCastling(piece: King) {
+    if (this.isWhiteTurn == true) {
+      const f1 = document.querySelector("#f1");
+      const g1 = document.querySelector("#g1");
+      if (
+        (g1 as HTMLElement).dataset.piece == "" &&
+        (f1 as HTMLElement).dataset.piece == "" &&
+        this.whiteKSideCastlingEnabled == true
+      ) {
+        document.querySelectorAll(".attacked").forEach((el) => {
+          el.classList.remove("attacked");
+        });
+        this.blackPieces.forEach((el) => el.checkLegalMoves());
+        if (
+          g1?.classList.contains("attacked") ||
+          f1?.classList.contains("attacked")
+        ) {
+          return;
+        }
+        g1?.classList.add("valid");
+      }
+    }
+    if (this.isWhiteTurn != true) {
+      const f8 = document.querySelector("#f8");
+      const g8 = document.querySelector("#g8");
+      if (
+        (g8 as HTMLElement).dataset.piece == "" &&
+        (f8 as HTMLElement).dataset.piece == "" &&
+        this.blackKSideCastlingEnabled == true
+      ) {
+        document.querySelectorAll(".attacked").forEach((el) => {
+          el.classList.remove("attacked");
+        });
+        this.whitePieces.forEach((el) => el.checkLegalMoves());
+        if (
+          g8?.classList.contains("attacked") ||
+          f8?.classList.contains("attacked")
+        ) {
+          return;
+        }
+        g8?.classList.add("valid");
+      }
+    }
+  }
+
+  handleQueenSideCastling(piece: King) {
+    if (this.isWhiteTurn == true) {
+      const c1 = document.querySelector("#c1");
+      const d1 = document.querySelector("#d1");
+      const b1 = document.querySelector("#b1");
+      if (
+        (c1 as HTMLElement).dataset.piece == "" &&
+        (d1 as HTMLElement).dataset.piece == "" &&
+        (b1 as HTMLElement).dataset.piece == "" &&
+        this.whiteQSideCastlingEnabled == true
+      ) {
+        document.querySelectorAll(".attacked").forEach((el) => {
+          el.classList.remove("attacked");
+        });
+        this.blackPieces.forEach((el) => el.checkLegalMoves());
+        if (
+          c1?.classList.contains("attacked") ||
+          d1?.classList.contains("attacked") ||
+          b1?.classList.contains("attacked")
+        ) {
+          return;
+        }
+        c1?.classList.add("valid");
+      }
+    }
+    if (this.isWhiteTurn != true) {
+      const c8 = document.querySelector("#c8");
+      const d8 = document.querySelector("#d8");
+      const b8 = document.querySelector("#b8");
+      if (
+        (c8 as HTMLElement).dataset.piece == "" &&
+        (d8 as HTMLElement).dataset.piece == "" &&
+        (b8 as HTMLElement).dataset.piece == "" &&
+        this.blackQSideCastlingEnabled == true
+      ) {
+        document.querySelectorAll(".attacked").forEach((el) => {
+          el.classList.remove("attacked");
+        });
+        this.whitePieces.forEach((el) => el.checkLegalMoves());
+        if (
+          c8?.classList.contains("attacked") ||
+          d8?.classList.contains("attacked") ||
+          b8?.classList.contains("attacked")
+        ) {
+          return;
+        }
+        c8?.classList.add("valid");
+      }
+    }
+  }
 }
