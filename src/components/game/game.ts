@@ -19,6 +19,8 @@ export class Game {
 
   isCheck: boolean;
 
+  isMate: boolean;
+
   whiteKSideCastlingEnabled: boolean;
   whiteQSideCastlingEnabled: boolean;
   blackKSideCastlingEnabled: boolean;
@@ -53,6 +55,7 @@ export class Game {
 
     this.isWhiteTurn = true;
     this.isCheck = false;
+    this.isMate = false;
     this.whiteKSideCastlingEnabled = true;
     this.whiteQSideCastlingEnabled = true;
     this.blackKSideCastlingEnabled = true;
@@ -63,18 +66,21 @@ export class Game {
 
   handleTurn() {
     if (this.isWhiteTurn == true) {
-      this.chessBoard.element.classList.remove("turned");
+      // this.chessBoard.element.classList.remove("turned");
       this.validateWhiteTurn();
     }
     if (this.isWhiteTurn != true) {
-      this.chessBoard.element.classList.add("turned");
+      // this.chessBoard.element.classList.add("turned");
       this.validateBlackTurn();
     }
   }
 
   validateWhiteTurn() {
     if (this.isCheck == true) {
-      this.handleCheck();
+      this.handleMate();
+      if (this.isMate == false) {
+        this.handleCheck();
+      }
     } else {
       this.blackPieces.forEach((el) => {
         el.element.onmousedown = null;
@@ -88,12 +94,17 @@ export class Game {
         piece.element.onmouseup = () => {
           this.handleMouseUp(piece, initialPlace);
         };
+        piece.element.onclick = () => {
+          piece.validateMove();
+          piece.handleClick(initialPlace);
+        };
       });
     }
   }
 
   validateBlackTurn() {
     if (this.isCheck == true) {
+      this.handleMate();
       this.handleCheck();
     } else {
       this.whitePieces.forEach((el) => {
@@ -108,6 +119,9 @@ export class Game {
         piece.element.onmouseup = () => {
           this.handleMouseUp(piece, initialPlace);
         };
+        piece.element.onclick = () => {
+          piece.handleClick(initialPlace);
+        };
       });
     }
   }
@@ -116,6 +130,26 @@ export class Game {
     piece: Rook | Pawn | Bishop | Knight | King | Queen,
     event: Event | undefined
   ) {
+    if (piece.element.classList.contains("king_white")) {
+      this.blackPieces.forEach((el) => el.checkLegalMoves());
+      piece.validateMove();
+      if (this.whiteKSideCastlingEnabled == true)
+        this.handleKingSideCastling(piece);
+      if (this.whiteQSideCastlingEnabled == true)
+        this.handleQueenSideCastling(piece);
+      piece.handleMove(event as MouseEvent);
+      return;
+    }
+    if (piece.element.classList.contains("king_black")) {
+      this.whitePieces.forEach((el) => el.checkLegalMoves());
+      piece.validateMove();
+      if (this.blackKSideCastlingEnabled == true)
+        this.handleKingSideCastling(piece);
+      if (this.blackQSideCastlingEnabled == true)
+        this.handleQueenSideCastling(piece);
+      piece.handleMove(event as MouseEvent);
+      return;
+    }
     piece.validateMove();
     document.querySelectorAll(".valid").forEach((el) => {
       if (this.isWhiteTurn == true) {
@@ -128,23 +162,15 @@ export class Game {
           (el as HTMLElement).dataset.piece == "black"
         ) {
           currentState = (el as HTMLElement).dataset.piece;
-          console.log(currentState);
-        }
-        if (
-          (el as HTMLElement).dataset.piece == "black" &&
-          (el as HTMLElement).classList.contains("checked")
-        ) {
-          console.log(el.classList);
-          return;
         }
         if (piece.element.parentElement) {
           (el as HTMLElement).dataset.piece = "white";
           piece.element.parentElement.dataset.piece = "";
-          this.blackPieces.forEach((piece) => {
-            if (piece.element.parentElement == el) {
+          this.blackPieces.forEach((blackPiece) => {
+            if (blackPiece.element.parentElement == el) {
               return;
             }
-            piece.checkLegalMoves();
+            blackPiece.checkLegalMoves();
           });
           (el as HTMLElement).dataset.piece = currentState;
           piece.element.parentElement.dataset.piece = "white";
@@ -155,13 +181,6 @@ export class Game {
           )
         ) {
           el.classList.remove("valid");
-          console.log(el);
-        }
-        if (piece.element.classList.contains("king_white")) {
-          if (this.whiteKSideCastlingEnabled == true)
-            this.handleKingSideCastling(piece);
-          if (this.whiteQSideCastlingEnabled == true)
-            this.handleQueenSideCastling(piece);
         }
       } else {
         document
@@ -173,14 +192,6 @@ export class Game {
           (el as HTMLElement).dataset.piece == "white"
         ) {
           currentState = (el as HTMLElement).dataset.piece;
-          console.log(currentState);
-        }
-        if (
-          (el as HTMLElement).dataset.piece == "white" &&
-          (el as HTMLElement).classList.contains("checked")
-        ) {
-          console.log(el.classList);
-          return;
         }
         if (piece.element.parentElement) {
           (el as HTMLElement).dataset.piece = "black";
@@ -200,13 +211,6 @@ export class Game {
           )
         ) {
           el.classList.remove("valid");
-          console.log(el);
-        }
-        if (piece.element.classList.contains("king_black")) {
-          if (this.blackKSideCastlingEnabled == true)
-            this.handleKingSideCastling(piece);
-          if (this.blackQSideCastlingEnabled == true)
-            this.handleQueenSideCastling(piece);
         }
       }
     });
@@ -229,14 +233,11 @@ export class Game {
       if (piece.currentSquare != initialPlace) {
         if (this.isWhiteTurn == true) {
           if (piece.element.classList.contains("king_white")) {
-            console.log(piece);
             if (piece.currentSquare == document.querySelector("#g1")) {
-              console.log(piece.currentSquare);
               document.querySelector("#h1")?.firstElementChild?.remove();
               this.whitePieces[0] = new Rook("white", "f1");
             }
             if (piece.currentSquare == document.querySelector("#c1")) {
-              console.log(piece.currentSquare);
               document.querySelector("#a1")?.firstElementChild?.remove();
               this.whitePieces[1] = new Rook("white", "d1");
             }
@@ -258,14 +259,11 @@ export class Game {
         }
         if (this.isWhiteTurn == false) {
           if (piece.element.classList.contains("king_black")) {
-            console.log(piece);
             if (piece.currentSquare == document.querySelector("#g8")) {
-              console.log(piece.currentSquare);
               document.querySelector("#h8")?.firstElementChild?.remove();
               this.blackPieces[0] = new Rook("black", "f8");
             }
             if (piece.currentSquare == document.querySelector("#c8")) {
-              console.log(piece.currentSquare);
               document.querySelector("#a8")?.firstElementChild?.remove();
               this.blackPieces[1] = new Rook("black", "d8");
             }
@@ -292,10 +290,10 @@ export class Game {
 
   createCheck() {
     if (this.isWhiteTurn != true) {
-      for(let blackPiece of this.blackPieces) {
+      for (let blackPiece of this.blackPieces) {
         document
-        .querySelectorAll(".attacked")
-        .forEach((square) => square.classList.remove("attacked"));
+          .querySelectorAll(".attacked")
+          .forEach((square) => square.classList.remove("attacked"));
         blackPiece.checkLegalMoves();
         if (
           this.whitePieces[15].element.parentElement?.classList.contains(
@@ -310,10 +308,10 @@ export class Game {
     }
 
     if (this.isWhiteTurn == true) {
-      for(let whitePiece of this.whitePieces) {
+      for (let whitePiece of this.whitePieces) {
         document
-        .querySelectorAll(".attacked")
-        .forEach((square) => square.classList.remove("attacked"));
+          .querySelectorAll(".attacked")
+          .forEach((square) => square.classList.remove("attacked"));
         whitePiece.checkLegalMoves();
         if (
           this.blackPieces[15].element.parentElement?.classList.contains(
@@ -329,6 +327,9 @@ export class Game {
   }
 
   handleCheck() {
+    document
+      .querySelectorAll(".valid")
+      .forEach((el) => el.classList.remove("valid"));
     if (this.isWhiteTurn == true) {
       this.blackPieces.forEach((el) => {
         el.element.onmousedown = null;
@@ -336,7 +337,6 @@ export class Game {
       });
       this.whitePieces.forEach((piece) => {
         const initialPlace = piece.currentSquare;
-        console.log(1);
         piece.element.onmousedown = () => {
           this.handleCheckMouseDown(piece, event);
         };
@@ -365,15 +365,15 @@ export class Game {
     piece: Rook | Pawn | Bishop | Knight | King | Queen,
     event: Event | undefined
   ) {
-    if(this.isWhiteTurn == true ) {
-      this.blackPieces.forEach(el=>{
-        el.checkLegalMoves()
-      })
+    if (this.isWhiteTurn == true) {
+      this.blackPieces.forEach((el) => {
+        el.checkLegalMoves();
+      });
     }
-    if(this.isWhiteTurn == false) {
-      this.whitePieces.forEach(el=>{
-        el.checkLegalMoves()
-      })
+    if (this.isWhiteTurn == false) {
+      this.whitePieces.forEach((el) => {
+        el.checkLegalMoves();
+      });
     }
     piece.validateMove();
     if (piece.element.classList.contains("king_white")) {
@@ -395,12 +395,11 @@ export class Game {
           (el as HTMLElement).dataset.piece == "black"
         ) {
           currentState = (el as HTMLElement).dataset.piece;
-          console.log(currentState);
         }
         if (
           (el as HTMLElement).dataset.piece == "black" &&
           (el as HTMLElement).classList.contains("checked") &&
-          document.querySelectorAll('.checked').length < 3
+          document.querySelectorAll(".checked").length < 3
         ) {
           return;
         }
@@ -415,7 +414,6 @@ export class Game {
           )
         ) {
           el.classList.remove("valid");
-          console.log(el);
         }
       } else {
         document
@@ -427,12 +425,11 @@ export class Game {
           (el as HTMLElement).dataset.piece == "white"
         ) {
           currentState = (el as HTMLElement).dataset.piece;
-          console.log(currentState);
         }
         if (
           (el as HTMLElement).dataset.piece == "white" &&
           (el as HTMLElement).classList.contains("checked") &&
-          document.querySelectorAll('.checked').length < 3
+          document.querySelectorAll(".checked").length < 3
         ) {
           return;
         }
@@ -447,7 +444,6 @@ export class Game {
           )
         ) {
           el.classList.remove("valid");
-          console.log(el);
         }
       }
     });
@@ -585,6 +581,105 @@ export class Game {
           return;
         }
         c8?.classList.add("valid");
+      }
+    }
+  }
+
+  handleMate() {
+    if (this.isWhiteTurn == true) {
+      this.whitePieces.forEach((el) => {
+        el.validateMove();
+        console.log(document.querySelectorAll(".valid"));
+        document.querySelectorAll(".valid").forEach((el) => {
+          document
+            .querySelectorAll(".attacked")
+            .forEach((elem) => elem.classList.remove("attacked"));
+          let currentState;
+          if (
+            (el as HTMLElement).dataset.piece == "" ||
+            (el as HTMLElement).dataset.piece == "black"
+          ) {
+            currentState = (el as HTMLElement).dataset.piece;
+          }
+          if (
+            (el as HTMLElement).dataset.piece == "black" &&
+            (el as HTMLElement).classList.contains("checked") &&
+            document.querySelectorAll(".checked").length < 3
+          ) {
+            return;
+          }
+          (el as HTMLElement).dataset.piece = "white";
+          this.blackPieces.forEach((piece) => {
+            piece.checkLegalMoves();
+          });
+          (el as HTMLElement).dataset.piece = currentState;
+          if (
+            this.whitePieces[15].element.parentElement?.classList.contains(
+              "attacked"
+            )
+          ) {
+            el.classList.remove("valid");
+          }
+        });
+      });
+      console.log(document.querySelectorAll(".valid"));
+      document
+        .querySelectorAll(".attacked")
+        .forEach((el) => el.classList.remove(".attacked"));
+      this.blackPieces.forEach((el) => el.checkLegalMoves());
+      this.whitePieces[15].validateMove();
+      console.log(document.querySelectorAll(".valid"));
+      if (document.querySelectorAll(".valid").length == 0) {
+        console.log("mate");
+        this.isMate = true;
+      }
+    }
+    if (this.isWhiteTurn == false) {
+      this.blackPieces.forEach((el) => {
+        el.validateMove();
+        console.log(document.querySelectorAll(".valid"));
+        document.querySelectorAll(".valid").forEach((el) => {
+          document
+            .querySelectorAll(".attacked")
+            .forEach((elem) => elem.classList.remove("attacked"));
+          let currentState;
+          if (
+            (el as HTMLElement).dataset.piece == "" ||
+            (el as HTMLElement).dataset.piece == "white"
+          ) {
+            currentState = (el as HTMLElement).dataset.piece;
+          }
+          if (
+            (el as HTMLElement).dataset.piece == "white" &&
+            (el as HTMLElement).classList.contains("checked") &&
+            document.querySelectorAll(".checked").length < 3
+          ) {
+            return;
+          }
+          (el as HTMLElement).dataset.piece = "black";
+          this.whitePieces.forEach((piece) => {
+            piece.checkLegalMoves();
+          });
+          (el as HTMLElement).dataset.piece = currentState;
+          if (
+            this.blackPieces[15].element.parentElement?.classList.contains(
+              "attacked"
+            )
+          ) {
+            el.classList.remove("valid");
+          }
+        });
+      });
+      console.log(document.querySelectorAll(".valid"));
+      document
+        .querySelectorAll(".attacked")
+        .forEach((el) => el.classList.remove(".attacked"));
+      this.whitePieces.forEach((el) => el.checkLegalMoves());
+      this.blackPieces[15].validateMove();
+      console.log(document.querySelectorAll(".valid"));
+      if (document.querySelectorAll(".valid").length == 0) {
+        console.log("mate");
+        this.isMate = true;
       }
     }
   }

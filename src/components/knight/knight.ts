@@ -2,8 +2,7 @@ import { Piece } from "../chessPiece/chessPiece";
 import { xToLetter } from "../constants";
 
 export class Knight extends Piece {
-
-    currentSquare: HTMLElement|null;
+  currentSquare: HTMLElement | null;
 
   constructor(color: string, square: string) {
     super("knight", color);
@@ -97,70 +96,37 @@ export class Knight extends Piece {
     const x = square?.dataset.x;
     const y = square?.dataset.y;
     if (x && y) {
-      if (
-        document.getElementById(`${xToLetter(+x + 1 + "")}${+y + 2}`)?.dataset
-          .piece != this.pieceColor
-      ) {
-        document
-          .getElementById(`${xToLetter(+x + 1 + "")}${+y + 2}`)
-          ?.classList.add("attacked");
-      }
-      if (
-        document.getElementById(`${xToLetter(+x + 1 + "")}${+y - 2}`)?.dataset
-          .piece != this.pieceColor
-      ) {
-        document
-          .getElementById(`${xToLetter(+x + 1 + "")}${+y - 2}`)
-          ?.classList.add("attacked");
-      }
-      if (
-        document.getElementById(`${xToLetter(+x - 1 + "")}${+y - 2}`)?.dataset
-          .piece != this.pieceColor
-      ) {
-        document
-          .getElementById(`${xToLetter(+x - 1 + "")}${+y - 2}`)
-          ?.classList.add("attacked");
-      }
-      if (
-        document.getElementById(`${xToLetter(+x - 1 + "")}${+y + 2}`)?.dataset
-          .piece != this.pieceColor
-      ) {
-        document
-          .getElementById(`${xToLetter(+x - 1 + "")}${+y + 2}`)
-          ?.classList.add("attacked");
-      }
-      if (
-        document.getElementById(`${xToLetter(+x - 2 + "")}${+y - 1}`)?.dataset
-          .piece != this.pieceColor
-      ) {
-        document
-          .getElementById(`${xToLetter(+x - 2 + "")}${+y - 1}`)
-          ?.classList.add("attacked");
-      }
-      if (
-        document.getElementById(`${xToLetter(+x - 2 + "")}${+y + 1}`)?.dataset
-          .piece != this.pieceColor
-      ) {
-        document
-          .getElementById(`${xToLetter(+x - 2 + "")}${+y + 1}`)
-          ?.classList.add("attacked");
-      }
-      if (
-        document.getElementById(`${xToLetter(+x + 2 + "")}${+y - 1}`)?.dataset
-          .piece != this.pieceColor
-      ) {
-        document
-          .getElementById(`${xToLetter(+x + 2 + "")}${+y - 1}`)
-          ?.classList.add("attacked");
-      }
-      if (
-        document.getElementById(`${xToLetter(+x + 2 + "")}${+y + 1}`)?.dataset
-          .piece != this.pieceColor
-      ) {
-        document
-          .getElementById(`${xToLetter(+x + 2 + "")}${+y + 1}`)
-          ?.classList.add("attacked");
-      }
+      document
+        .getElementById(`${xToLetter(+x + 1 + "")}${+y + 2}`)
+        ?.classList.add("attacked");
+
+      document
+        .getElementById(`${xToLetter(+x + 1 + "")}${+y - 2}`)
+        ?.classList.add("attacked");
+
+      document
+        .getElementById(`${xToLetter(+x - 1 + "")}${+y - 2}`)
+        ?.classList.add("attacked");
+
+      document
+        .getElementById(`${xToLetter(+x - 1 + "")}${+y + 2}`)
+        ?.classList.add("attacked");
+
+      document
+        .getElementById(`${xToLetter(+x - 2 + "")}${+y - 1}`)
+        ?.classList.add("attacked");
+
+      document
+        .getElementById(`${xToLetter(+x - 2 + "")}${+y + 1}`)
+        ?.classList.add("attacked");
+
+      document
+        .getElementById(`${xToLetter(+x + 2 + "")}${+y - 1}`)
+        ?.classList.add("attacked");
+
+      document
+        .getElementById(`${xToLetter(+x + 2 + "")}${+y + 1}`)
+        ?.classList.add("attacked");
     }
   }
 }

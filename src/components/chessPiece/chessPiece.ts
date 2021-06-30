@@ -93,4 +93,22 @@ export class Piece extends BaseComponent {
       return false;
     };
   }
+
+  handleClick(initialPlace: HTMLElement | null) {
+    const piece = this.element;
+    console.log(piece);
+    document.querySelectorAll(".valid").forEach((el) =>
+      el.addEventListener(
+        "click",
+        () => {
+          el.appendChild(piece);
+          if (initialPlace) initialPlace.firstElementChild?.remove();
+          document
+            .querySelectorAll(".valid")
+            .forEach((el) => el.classList.remove("valid"));
+        },
+        { once: true }
+      )
+    );
+  }
 }

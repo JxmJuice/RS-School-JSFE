@@ -23,7 +23,6 @@ export class Rook extends Piece {
     const square = this.element.parentElement;
     const x = square?.dataset.x;
     const y = square?.dataset.y;
-    console.log(y);
     if (x) {
       for (let i = +x + 1; i < 9; i++) {
         const letter = xToLetter(i + "");
