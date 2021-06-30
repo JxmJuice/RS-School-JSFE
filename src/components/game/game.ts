@@ -94,10 +94,6 @@ export class Game {
         piece.element.onmouseup = () => {
           this.handleMouseUp(piece, initialPlace);
         };
-        piece.element.onclick = () => {
-          piece.validateMove();
-          piece.handleClick(initialPlace);
-        };
       });
     }
   }
@@ -118,9 +114,6 @@ export class Game {
         };
         piece.element.onmouseup = () => {
           this.handleMouseUp(piece, initialPlace);
-        };
-        piece.element.onclick = () => {
-          piece.handleClick(initialPlace);
         };
       });
     }
@@ -232,7 +225,10 @@ export class Game {
       }
       if (piece.currentSquare != initialPlace) {
         if (this.isWhiteTurn == true) {
-          if (piece.element.classList.contains("king_white")) {
+          if (
+            piece.element.classList.contains("king_white") &&
+            (this.whiteQSideCastlingEnabled || this.whiteKSideCastlingEnabled)
+          ) {
             if (piece.currentSquare == document.querySelector("#g1")) {
               document.querySelector("#h1")?.firstElementChild?.remove();
               this.whitePieces[0] = new Rook("white", "f1");
@@ -258,7 +254,10 @@ export class Game {
           return;
         }
         if (this.isWhiteTurn == false) {
-          if (piece.element.classList.contains("king_black")) {
+          if (
+            piece.element.classList.contains("king_black") &&
+            (this.blackKSideCastlingEnabled || this.blackQSideCastlingEnabled)
+          ) {
             if (piece.currentSquare == document.querySelector("#g8")) {
               document.querySelector("#h8")?.firstElementChild?.remove();
               this.blackPieces[0] = new Rook("black", "f8");
