@@ -25,6 +25,8 @@ export class Game {
 
   isStaleMate: boolean;
 
+  isEnPassant: boolean;
+
   whiteKSideCastlingEnabled: boolean;
   whiteQSideCastlingEnabled: boolean;
   blackKSideCastlingEnabled: boolean;
@@ -58,6 +60,7 @@ export class Game {
     this.blackPieces[15] = new King("black", "e8");
     this.lastMovedPiece = null;
 
+    this.isEnPassant = false;
     this.isWhiteTurn = true;
     this.isCheck = false;
     this.isMate = false;
@@ -158,11 +161,11 @@ export class Game {
       return;
     }
     piece.validateMove();
-    if(piece.element.classList.contains('pawn_white')) {
-      this.handleEnPassant(piece)
+    if (piece.element.classList.contains("pawn_white")) {
+      this.handleEnPassant(piece);
     }
-    if(piece.element.classList.contains('pawn_black')) {
-      this.handleEnPassant(piece)
+    if (piece.element.classList.contains("pawn_black")) {
+      this.handleEnPassant(piece);
     }
     document.querySelectorAll(".valid").forEach((el) => {
       if (this.isWhiteTurn == true) {
@@ -268,6 +271,19 @@ export class Game {
               this.whiteQSideCastlingEnabled = false;
             }
           }
+          if (this.isEnPassant == true) {
+            const x = piece.currentSquare?.dataset.x;
+            const y = piece.currentSquare?.dataset.y;
+            let pawnSquare;
+            if (x && y)
+              pawnSquare = document.querySelector(
+                `#${xToLetter(x)}${+y - 1}`
+              ) as HTMLElement;
+            if (pawnSquare) {
+              pawnSquare.innerHTML = "";
+              pawnSquare.dataset.piece = "";
+            }
+          }
           this.lastMovedPiece = piece;
           this.createCheck();
           this.isWhiteTurn = false;
@@ -296,6 +312,19 @@ export class Game {
             }
             if (initialPlace?.id == "a8") {
               this.blackQSideCastlingEnabled = false;
+            }
+          }
+          if (this.isEnPassant == true) {
+            const x = piece.currentSquare?.dataset.x;
+            const y = piece.currentSquare?.dataset.y;
+            let pawnSquare;
+            if (x && y)
+              pawnSquare = document.querySelector(
+                `#${xToLetter(x)}${+y + 1}`
+              ) as HTMLElement;
+            if (pawnSquare) {
+              pawnSquare.innerHTML = "";
+              pawnSquare.dataset.piece = "";
             }
           }
           this.lastMovedPiece = piece;
@@ -786,56 +815,42 @@ export class Game {
     }
   }
 
-  handleEnPassant(piece: Rook | Pawn | Bishop | Knight | King | Queen) {
+  handleEnPassant(piece: Pawn) {
     if (this.isWhiteTurn == true) {
-      const x = this.lastMovedPiece?.element.dataset.x;
-      const y = this.lastMovedPiece?.element.dataset.y;
+      const x = this.lastMovedPiece?.element.parentElement?.dataset.x;
+      const y = this.lastMovedPiece?.element.parentElement?.dataset.y;
       if (
-        x && y &&
-        piece.element.dataset.x &&
-        +x == +piece.element.dataset.x - 1 &&
-        y == piece.element.dataset.y &&
+        x &&
+        y &&
+        piece.element.parentElement?.dataset.x &&
+        (+x == +piece.element.parentElement.dataset.x - 1 ||
+          +x == +piece.element.parentElement.dataset.x + 1) &&
+        y == piece.element.parentElement.dataset.y &&
         this.lastMovedPiece?.element.classList.contains("pawn_black")
       ) {
         document
-          .querySelector(`#${xToLetter(+x - 1 + "")}${+y + 1}`)
+          .querySelector(`#${xToLetter(x)}${+y + 1}`)
           ?.classList.add("valid");
+        this.isEnPassant = true;
       }
+    }
+
+    if (this.isWhiteTurn == false) {
+      const x = this.lastMovedPiece?.element.parentElement?.dataset.x;
+      const y = this.lastMovedPiece?.element.parentElement?.dataset.y;
       if (
-        x && y &&
-        piece.element.dataset.x &&
-        +x == +piece.element.dataset.x + 1 &&
-        y == piece.element.dataset.y && 
-        this.lastMovedPiece?.element.classList.contains("pawn_black")
-      ) {
-        document
-          .querySelector(`#${xToLetter(+x + 1 + "")}${+y + 1}`)
-          ?.classList.add("valid");
-      }
-    } else {
-      const x = this.lastMovedPiece?.element.dataset.x;
-      const y = this.lastMovedPiece?.element.dataset.y;
-      if (
-        x && y &&
-        piece.element.dataset.x &&
-        +x == +piece.element.dataset.x - 1 &&
-        y == piece.element.dataset.y &&
+        x &&
+        y &&
+        piece.element.parentElement?.dataset.x &&
+        (+x == +piece.element.parentElement.dataset.x - 1 ||
+          +x == +piece.element.parentElement.dataset.x + 1) &&
+        y == piece.element.parentElement.dataset.y &&
         this.lastMovedPiece?.element.classList.contains("pawn_white")
       ) {
         document
-          .querySelector(`#${xToLetter(+x - 1 + "")}${+y - 1}`)
+          .querySelector(`#${xToLetter(x)}${+y - 1}`)
           ?.classList.add("valid");
-      }
-      if (
-        x && y &&
-        piece.element.dataset.x &&
-        +x == +piece.element.dataset.x + 1 &&
-        y == piece.element.dataset.y &&
-        this.lastMovedPiece?.element.classList.contains("pawn_white")
-      ) {
-        document
-          .querySelector(`#${xToLetter(+x + 1 + "")}${+y - 1}`)
-          ?.classList.add("valid");
+        this.isEnPassant = true;
       }
     }
   }
