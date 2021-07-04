@@ -1,0 +1,88 @@
+.promote_queen {
+  &__black {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    background-image: url(./../../../public/images/black-queen.png);
+    background-size: contain;
+    &:hover {
+      background-color: blanchedalmond;
+    }
+  }
+  &__white {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    background-image: url(./../../../public/images/white-queen.png);
+    background-size: contain;
+    &:hover {
+      background-color: blanchedalmond;
+    }
+  }
+}
+.promote_rook {
+  &__black {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    background-image: url(./../../../public/images/black-rook.png);
+    background-size: contain;
+    &:hover {
+      background-color: blanchedalmond;
+    }
+  }
+  &__white {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    background-image: url(./../../../public/images/white-rook.png);
+    background-size: contain;
+    &:hover {
+      background-color: blanchedalmond;
+    }
+  }
+}
+.promote_knight {
+  &__black {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    &:hover {
+      background-color: blanchedalmond;
+    }
+    background-image: url(./../../../public/images/black-knight.png);
+    background-size: contain;
+  }
+  &__white {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    &:hover {
+      background-color: blanchedalmond;
+    }
+    background-image: url(./../../../public/images/white-knight.png);
+    background-size: contain;
+  }
+}
+.promote_bishop {
+  &__black {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    background-image: url(./../../../public/images/black-bishop.png);
+    background-size: contain;
+    &:hover {
+      background-color: blanchedalmond;
+    }
+  }
+  &__white {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    background-image: url(./../../../public/images/white-bishop.png);
+    background-size: contain;
+    &:hover {
+      background-color: blanchedalmond;
+    }
+  }
+}

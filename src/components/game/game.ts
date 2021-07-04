@@ -5,6 +5,7 @@ import { xToLetter } from "../constants";
 import { King } from "../king/king";
 import { Knight } from "../knight/knight";
 import { Pawn } from "../pawn/pawn";
+import { PromotionPopUp } from "../promotion-popUp/promotion-popUp";
 import { Queen } from "../queen/queen";
 import { Rook } from "../rook/rook";
 
@@ -283,8 +284,10 @@ export class Game {
               pawnSquare.innerHTML = "";
               pawnSquare.dataset.piece = "";
             }
+            this.isEnPassant = false;
           }
           this.lastMovedPiece = piece;
+          this.handlePromotion(piece);
           this.createCheck();
           this.isWhiteTurn = false;
           this.handleTurn();
@@ -326,8 +329,10 @@ export class Game {
               pawnSquare.innerHTML = "";
               pawnSquare.dataset.piece = "";
             }
+            this.isEnPassant = false;
           }
           this.lastMovedPiece = piece;
+          this.handlePromotion(piece);
           this.createCheck();
           this.isWhiteTurn = true;
           this.handleTurn();
@@ -518,7 +523,22 @@ export class Game {
           document
             .querySelectorAll(".checked")
             .forEach((el) => el.classList.remove("checked"));
+          if (this.isEnPassant == true) {
+            const x = piece.currentSquare?.dataset.x;
+            const y = piece.currentSquare?.dataset.y;
+            let pawnSquare;
+            if (x && y)
+              pawnSquare = document.querySelector(
+                `#${xToLetter(x)}${+y - 1}`
+              ) as HTMLElement;
+            if (pawnSquare) {
+              pawnSquare.innerHTML = "";
+              pawnSquare.dataset.piece = "";
+            }
+            this.isEnPassant = false;
+          }
           this.lastMovedPiece = piece;
+          this.handlePromotion(piece);
           this.isCheck = false;
           this.createCheck();
           this.isWhiteTurn = false;
@@ -529,7 +549,22 @@ export class Game {
           document
             .querySelectorAll(".checked")
             .forEach((el) => el.classList.remove("checked"));
+          if (this.isEnPassant == true) {
+            const x = piece.currentSquare?.dataset.x;
+            const y = piece.currentSquare?.dataset.y;
+            let pawnSquare;
+            if (x && y)
+              pawnSquare = document.querySelector(
+                `#${xToLetter(x)}${+y + 1}`
+              ) as HTMLElement;
+            if (pawnSquare) {
+              pawnSquare.innerHTML = "";
+              pawnSquare.dataset.piece = "";
+            }
+            this.isEnPassant = false;
+          }
           this.lastMovedPiece = piece;
+          this.handlePromotion(piece);
           this.isCheck = false;
           this.createCheck();
           this.isWhiteTurn = true;
@@ -852,6 +887,89 @@ export class Game {
           ?.classList.add("valid");
         this.isEnPassant = true;
       }
+    }
+  }
+
+  handlePromotion(piece: Pawn) {
+    if (
+      this.isWhiteTurn == true &&
+      piece.currentSquare?.dataset.y == "8" &&
+      piece.element.classList.contains("pawn_white")
+    ) {
+      const promotionSquare = piece.currentSquare;
+      promotionSquare.innerHTML = ``;
+      const popUp = new PromotionPopUp("white");
+      document.body.appendChild(popUp.element);
+      document
+        .querySelector(".pop-up")
+        ?.querySelectorAll("button")
+        .forEach((button) => {
+          button.addEventListener("click", (event) => {
+            const square = piece.currentSquare;
+            if (square) {
+              square.innerHTML = ``;
+              if (
+                (event.target as HTMLButtonElement).dataset.piece == "queen"
+              ) {
+                this.whitePieces.push(new Queen("white", square.id));
+              }
+              if ((event.target as HTMLButtonElement).dataset.piece == "rook") {
+                this.whitePieces.push(new Rook("white", square.id));
+              }
+              if (
+                (event.target as HTMLButtonElement).dataset.piece == "knight"
+              ) {
+                this.whitePieces.push(new Knight("white", square.id));
+              }
+              if (
+                (event.target as HTMLButtonElement).dataset.piece == "bishop"
+              ) {
+                this.whitePieces.push(new Bishop("white", square.id));
+              }
+            }
+            popUp.removePopUp();
+          });
+        });
+    }
+    if (
+      this.isWhiteTurn == false &&
+      piece.currentSquare?.dataset.y == "1" &&
+      piece.element.classList.contains("pawn_black")
+    ) {
+      const promotionSquare = piece.currentSquare;
+      promotionSquare.innerHTML = ``;
+      const popUp = new PromotionPopUp("black");
+      document.body.appendChild(popUp.element);
+      document
+        .querySelector(".pop-up")
+        ?.querySelectorAll("button")
+        .forEach((button) => {
+          button.addEventListener("click", (event) => {
+            const square = piece.currentSquare;
+            if (square) {
+              square.innerHTML = ``;
+              if (
+                (event.target as HTMLButtonElement).dataset.piece == "queen"
+              ) {
+                this.blackPieces.push(new Queen("black", square.id));
+              }
+              if ((event.target as HTMLButtonElement).dataset.piece == "rook") {
+                this.blackPieces.push(new Rook("black", square.id));
+              }
+              if (
+                (event.target as HTMLButtonElement).dataset.piece == "knight"
+              ) {
+                this.blackPieces.push(new Knight("black", square.id));
+              }
+              if (
+                (event.target as HTMLButtonElement).dataset.piece == "bishop"
+              ) {
+                this.blackPieces.push(new Bishop("black", square.id));
+              }
+            }
+            popUp.removePopUp();
+          });
+        });
     }
   }
 }
