@@ -1,3 +1,4 @@
+import { App } from "./app";
 import { Bishop } from "./components/bishop/bishop";
 import { ChessBoard } from "./components/chessboard/chessboard";
 import { Game } from "./components/game/game";
@@ -6,7 +7,9 @@ import { Queen } from "./components/queen/queen";
 import { Rook } from "./components/rook/rook";
 import "./styles.scss";
 
-new Game()
+//new Game()
+
+new App()
 
 // const board = new ChessBoard();
 

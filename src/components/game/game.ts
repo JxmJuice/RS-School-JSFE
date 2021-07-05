@@ -912,21 +912,24 @@ export class Game {
                 (event.target as HTMLButtonElement).dataset.piece == "queen"
               ) {
                 this.whitePieces.push(new Queen("white", square.id));
-              }
-              if ((event.target as HTMLButtonElement).dataset.piece == "rook") {
+              } else if (
+                (event.target as HTMLButtonElement).dataset.piece == "rook"
+              ) {
                 this.whitePieces.push(new Rook("white", square.id));
-              }
-              if (
+              } else if (
                 (event.target as HTMLButtonElement).dataset.piece == "knight"
               ) {
                 this.whitePieces.push(new Knight("white", square.id));
-              }
-              if (
+              } else if (
                 (event.target as HTMLButtonElement).dataset.piece == "bishop"
               ) {
                 this.whitePieces.push(new Bishop("white", square.id));
               }
             }
+            this.isWhiteTurn = true;
+            this.createCheck();
+            this.isWhiteTurn = false;
+            this.handleMate();
             popUp.removePopUp();
           });
         });
@@ -952,21 +955,24 @@ export class Game {
                 (event.target as HTMLButtonElement).dataset.piece == "queen"
               ) {
                 this.blackPieces.push(new Queen("black", square.id));
-              }
-              if ((event.target as HTMLButtonElement).dataset.piece == "rook") {
+              } else if (
+                (event.target as HTMLButtonElement).dataset.piece == "rook"
+              ) {
                 this.blackPieces.push(new Rook("black", square.id));
-              }
-              if (
+              } else if (
                 (event.target as HTMLButtonElement).dataset.piece == "knight"
               ) {
                 this.blackPieces.push(new Knight("black", square.id));
-              }
-              if (
+              } else if (
                 (event.target as HTMLButtonElement).dataset.piece == "bishop"
               ) {
                 this.blackPieces.push(new Bishop("black", square.id));
               }
             }
+            this.isWhiteTurn = false;
+            this.createCheck();
+            this.isWhiteTurn = true;
+            this.handleMate();
             popUp.removePopUp();
           });
         });
