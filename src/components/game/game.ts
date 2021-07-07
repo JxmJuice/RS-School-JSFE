@@ -5,16 +5,24 @@ import { xToLetter } from "../constants";
 import { King } from "../king/king";
 import { Knight } from "../knight/knight";
 import { Pawn } from "../pawn/pawn";
+import { Player } from "../player/player";
 import { PromotionPopUp } from "../promotion-popUp/promotion-popUp";
 import { Queen } from "../queen/queen";
 import { Rook } from "../rook/rook";
+import { Timer } from "../timer/timer";
 
 export class Game {
   whitePieces: Array<Rook | Knight | Bishop | King | Queen | Pawn>;
 
   blackPieces: Array<Rook | Knight | Bishop | King | Queen | Pawn>;
 
+  player1: Player;
+
+  player2: Player;
+
   lastMovedPiece: Rook | Pawn | Bishop | Knight | King | Queen | null;
+
+  timer: Timer;
 
   chessBoard: ChessBoard;
 
@@ -34,8 +42,12 @@ export class Game {
   blackQSideCastlingEnabled: boolean;
 
   constructor() {
+    this.player1 = new Player("Player 1");
+    document.querySelector("main")?.appendChild(this.player1.element);
     this.chessBoard = new ChessBoard();
-    document.body.appendChild(this.chessBoard.element);
+    document.querySelector("main")?.appendChild(this.chessBoard.element);
+    this.player2 = new Player("Player 2");
+    document.querySelector("main")?.appendChild(this.player2.element);
     this.whitePieces = [];
     this.blackPieces = [];
     this.whitePieces[0] = new Rook("white", "h1");
@@ -59,6 +71,11 @@ export class Game {
     }
     this.whitePieces[15] = new King("white", "e1");
     this.blackPieces[15] = new King("black", "e8");
+    this.timer = new Timer(
+      document.querySelector(".header_wrapper") as HTMLElement
+    );
+    this.timer.startTimer();
+
     this.lastMovedPiece = null;
 
     this.isEnPassant = false;
@@ -90,6 +107,8 @@ export class Game {
       this.handleMate();
       if (this.isMate == false) {
         this.handleCheck();
+      } else {
+        this.timer.stopTimer()
       }
     } else {
       this.blackPieces.forEach((el) => {
@@ -255,10 +274,12 @@ export class Game {
           ) {
             if (piece.currentSquare == document.querySelector("#g1")) {
               document.querySelector("#h1")?.firstElementChild?.remove();
+              (document.querySelector("#h1") as HTMLElement).dataset.piece = "";
               this.whitePieces[0] = new Rook("white", "f1");
             }
             if (piece.currentSquare == document.querySelector("#c1")) {
               document.querySelector("#a1")?.firstElementChild?.remove();
+              (document.querySelector("#a1") as HTMLElement).dataset.piece = "";
               this.whitePieces[1] = new Rook("white", "d1");
             }
             this.whiteQSideCastlingEnabled = false;
@@ -286,6 +307,7 @@ export class Game {
             }
             this.isEnPassant = false;
           }
+          this.renderMove(piece, initialPlace as HTMLElement);
           this.lastMovedPiece = piece;
           this.handlePromotion(piece);
           this.createCheck();
@@ -300,10 +322,12 @@ export class Game {
           ) {
             if (piece.currentSquare == document.querySelector("#g8")) {
               document.querySelector("#h8")?.firstElementChild?.remove();
+              (document.querySelector("#h8") as HTMLElement).dataset.piece = "";
               this.blackPieces[0] = new Rook("black", "f8");
             }
             if (piece.currentSquare == document.querySelector("#c8")) {
               document.querySelector("#a8")?.firstElementChild?.remove();
+              (document.querySelector("#a8") as HTMLElement).dataset.piece = "";
               this.blackPieces[1] = new Rook("black", "d8");
             }
             this.blackQSideCastlingEnabled = false;
@@ -331,6 +355,7 @@ export class Game {
             }
             this.isEnPassant = false;
           }
+          this.renderMove(piece, initialPlace as HTMLElement);
           this.lastMovedPiece = piece;
           this.handlePromotion(piece);
           this.createCheck();
@@ -976,6 +1001,111 @@ export class Game {
             popUp.removePopUp();
           });
         });
+    }
+  }
+
+  renderMove(
+    piece: Rook | Pawn | Bishop | Knight | King | Queen,
+    initialPlace: HTMLElement
+  ) {
+    if (this.isWhiteTurn == true) {
+      if (piece.element.classList.contains("rook")) {
+        this.player1.createMove(
+          "R",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("queen")) {
+        this.player1.createMove(
+          "Q",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("pawn")) {
+        this.player1.createMove(
+          "",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("king")) {
+        this.player1.createMove(
+          "K",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("knight")) {
+        this.player1.createMove(
+          "N",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("bishop")) {
+        this.player1.createMove(
+          "B",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+    } else {
+      if (piece.element.classList.contains("rook")) {
+        this.player2.createMove(
+          "R",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("queen")) {
+        this.player2.createMove(
+          "Q",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("pawn")) {
+        this.player2.createMove(
+          "",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("king")) {
+        this.player2.createMove(
+          "K",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("knight")) {
+        this.player2.createMove(
+          "N",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
+      if (piece.element.classList.contains("bishop")) {
+        this.player2.createMove(
+          "B",
+          initialPlace.id,
+          (piece.currentSquare as HTMLElement).id,
+          this.timer.element.innerText
+        );
+      }
     }
   }
 }

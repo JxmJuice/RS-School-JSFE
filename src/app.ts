@@ -2,6 +2,7 @@ import { BaseComponent } from "./components/base-component";
 import { Game } from "./components/game/game";
 import { Header } from "./components/header/header";
 import { Lobby } from "./components/lobby/lobby";
+import { Timer } from "./components/timer/timer";
 
 export class App extends BaseComponent {
   //game: Game;
@@ -18,13 +19,16 @@ export class App extends BaseComponent {
     document.body.appendChild(this.header.element);
     this.element.appendChild(this.lobby.element);
     document.body.appendChild(this.element);
-    document
-      .getElementById("friend")
-      ?.addEventListener("click", this.startGame);
+    console.log(document.querySelector("#friend"));
+    document.getElementById("friend")?.addEventListener("click", () => {
+      this.startGame();
+    });
   }
 
   startGame() {
     this.element.innerHTML = "";
+    (document.querySelector(".page-name") as HTMLSpanElement).innerText =
+      "vs Friend";
     new Game();
   }
 }

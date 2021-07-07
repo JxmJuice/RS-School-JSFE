@@ -1,0 +1,21 @@
+.move {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    height: 30px;
+    font: 1em sans-serif;
+    &_piece{
+      width: 12px;
+      height: 30px;
+    }
+    &_squares{
+      width: 70px;
+      height: 30px;
+    }
+    &_time {
+      width: 68px;
+      height: 30px;
+    }
+  }

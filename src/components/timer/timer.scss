@@ -1,11 +1,14 @@
 .timer {
-  width: 250px;
-  height: 60px;
-  background: #fff;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15vw;
+  height: 70%;
+  background: rgba($color: #ffffff, $alpha: 0.6);
+  border-radius: 5px;
 }
 .timer__inner {
-  font-size: 40px;
+  font-size: 36px;
   text-align: center;
   line-height: 54px;
   font-family: Roboto, sans-serif;

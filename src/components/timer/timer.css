@@ -1,0 +1,26 @@
+.timer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 15vw;
+  height: 70%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+}
+
+.timer__inner {
+  font-size: 36px;
+  text-align: center;
+  line-height: 54px;
+  font-family: Roboto, sans-serif;
+  font-weight: 900;
+  color: darkblue;
+  letter-spacing: 3px;
+}
+/*# sourceMappingURL=timer.css.map */
