@@ -41,12 +41,12 @@ export class Game {
   blackKSideCastlingEnabled: boolean;
   blackQSideCastlingEnabled: boolean;
 
-  constructor() {
-    this.player1 = new Player("Player 1");
+  constructor(player1Name: string, player2Name: string) {
+    this.player1 = new Player(player1Name, "white");
     document.querySelector("main")?.appendChild(this.player1.element);
     this.chessBoard = new ChessBoard();
     document.querySelector("main")?.appendChild(this.chessBoard.element);
-    this.player2 = new Player("Player 2");
+    this.player2 = new Player(player2Name, "black");
     document.querySelector("main")?.appendChild(this.player2.element);
     this.whitePieces = [];
     this.blackPieces = [];
@@ -93,11 +93,15 @@ export class Game {
 
   handleTurn() {
     if (this.isWhiteTurn == true) {
-      // this.chessBoard.element.classList.remove("turned");
+      this.chessBoard.element.classList.remove("turned");
+      this.player1.element.querySelector('.player_column__avatar')?.classList.add('player_turn');
+      this.player2.element.querySelector('.player_column__avatar')?.classList.remove('player_turn');
       this.validateWhiteTurn();
     }
     if (this.isWhiteTurn != true) {
-      // this.chessBoard.element.classList.add("turned");
+      this.player2.element.querySelector('.player_column__avatar')?.classList.add('player_turn');
+      this.player1.element.querySelector('.player_column__avatar')?.classList.remove('player_turn');
+      this.chessBoard.element.classList.add("turned");
       this.validateBlackTurn();
     }
   }
@@ -108,7 +112,7 @@ export class Game {
       if (this.isMate == false) {
         this.handleCheck();
       } else {
-        this.timer.stopTimer()
+        this.timer.stopTimer();
       }
     } else {
       this.blackPieces.forEach((el) => {
