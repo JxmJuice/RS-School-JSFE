@@ -7,7 +7,7 @@ import { storage } from "./components/storage/storage";
 import { Timer } from "./components/timer/timer";
 
 export class App extends BaseComponent {
-  //game: Game;
+  game: Game | null;
 
   lobby: Lobby;
 
@@ -15,33 +15,19 @@ export class App extends BaseComponent {
 
   constructor() {
     super("main", ["main"]);
+    this.game = null;
     this.lobby = new Lobby();
     this.header = new Header();
-    //this.game = new Game();
     document.body.appendChild(this.header.element);
     this.element.appendChild(this.lobby.element);
     document.body.appendChild(this.element);
-    console.log(document.querySelector("#friend"));
-    this.element
-      .querySelector("#player1_name")
-      ?.addEventListener("change", () => {
-        storage.player1Name = (
-          this.element.querySelector("#player1_name") as HTMLInputElement
-        ).value;
-        this.lobby.renderLobby();
-        this.startGame();
-      });
-    this.element
-      .querySelector("#player2_name")
-      ?.addEventListener("change", () => {
-        storage.player2Name = (
-          this.element.querySelector("#player2_name") as HTMLInputElement
-        ).value;
-        this.lobby.renderLobby();
-        this.startGame();
-      });
     document.getElementById("friend")?.addEventListener("click", () => {
       this.startGame();
+    });
+    document.querySelectorAll(".player_name__button").forEach((el) => {
+      el.addEventListener("click", () => {
+        this.handleName();
+      });
     });
   }
 
@@ -49,9 +35,11 @@ export class App extends BaseComponent {
     this.element.innerHTML = "";
     (document.querySelector(".page-name") as HTMLSpanElement).innerText =
       "vs Friend";
-    new Game(storage.player1Name, storage.player2Name);
+    this.game = new Game(storage.player1Name, storage.player2Name);
     this.handleResign();
     this.handleDraw();
+    this.mateToLobby();
+    this.staleMateToLobby();
   }
 
   handleResign() {
@@ -70,6 +58,11 @@ export class App extends BaseComponent {
           );
           document.getElementById("friend")?.addEventListener("click", () => {
             this.startGame();
+          });
+          document.querySelectorAll(".player_name__button").forEach((el) => {
+            el.addEventListener("click", () => {
+              this.handleName();
+            });
           });
           (document.querySelector("header") as HTMLElement).innerHTML =
             this.header.element.innerHTML;
@@ -90,6 +83,11 @@ export class App extends BaseComponent {
           );
           document.getElementById("friend")?.addEventListener("click", () => {
             this.startGame();
+          });
+          document.querySelectorAll(".player_name__button").forEach((el) => {
+            el.addEventListener("click", () => {
+              this.handleName();
+            });
           });
           (document.querySelector("header") as HTMLElement).innerHTML =
             this.header.element.innerHTML;
@@ -146,8 +144,129 @@ export class App extends BaseComponent {
       document.getElementById("friend")?.addEventListener("click", () => {
         this.startGame();
       });
+      document.querySelectorAll(".player_name__button").forEach((el) => {
+        el.addEventListener("click", () => {
+          this.handleName();
+        });
+      });
       (document.querySelector("header") as HTMLElement).innerHTML =
         this.header.element.innerHTML;
+    });
+  }
+
+  handleName() {
+    this.lobby.renderLobby();
+    document.querySelectorAll(".player_name__button").forEach((el) => {
+      el.addEventListener("click", () => {
+        this.handleName();
+      });
+    });
+    document.getElementById("friend")?.addEventListener("click", () => {
+      this.startGame();
+    });
+  }
+
+  mateToLobby() {
+    document.addEventListener("mouseup", () => {
+      setTimeout(() => {
+        if (this.game?.isMate == true && this.game.isWhiteTurn == true) {
+          const popUp = new EndgamePopUp("Black Won");
+          document.body.appendChild(popUp.element);
+          popUp.element
+            .querySelector(".to-lobby")
+            ?.addEventListener("click", () => {
+              popUp.removePopUp();
+              (document.querySelector("main") as HTMLElement).innerHTML = "";
+              this.lobby = new Lobby();
+              this.header = new Header();
+              (document.querySelector("main") as HTMLElement).appendChild(
+                this.lobby.element
+              );
+              document
+                .getElementById("friend")
+                ?.addEventListener("click", () => {
+                  this.startGame();
+                });
+              document
+                .querySelectorAll(".player_name__button")
+                .forEach((el) => {
+                  el.addEventListener("click", () => {
+                    this.handleName();
+                  });
+                });
+              (document.querySelector("header") as HTMLElement).innerHTML =
+                this.header.element.innerHTML;
+            });
+            this.game.isMate = false;
+        }
+        if (this.game?.isMate == true && this.game.isWhiteTurn != true) {
+          const popUp = new EndgamePopUp("White Won");
+          document.body.appendChild(popUp.element);
+          popUp.element
+            .querySelector(".to-lobby")
+            ?.addEventListener("click", () => {
+              popUp.removePopUp();
+              (document.querySelector("main") as HTMLElement).innerHTML = "";
+              this.lobby = new Lobby();
+              this.header = new Header();
+              (document.querySelector("main") as HTMLElement).appendChild(
+                this.lobby.element
+              );
+              document
+                .getElementById("friend")
+                ?.addEventListener("click", () => {
+                  this.startGame();
+                });
+              document
+                .querySelectorAll(".player_name__button")
+                .forEach((el) => {
+                  el.addEventListener("click", () => {
+                    this.handleName();
+                  });
+                });
+              (document.querySelector("header") as HTMLElement).innerHTML =
+                this.header.element.innerHTML;
+            });
+            this.game.isStaleMate = false;
+        }
+      }, 1000);
+    });
+  }
+
+  staleMateToLobby() {
+    document.addEventListener("mouseup", () => {
+      setTimeout(() => {
+        if (this.game?.isStaleMate == true) {
+          const popUp = new EndgamePopUp("Draw");
+          document.body.appendChild(popUp.element);
+          popUp.element
+            .querySelector(".to-lobby")
+            ?.addEventListener("click", () => {
+              popUp.removePopUp();
+              (document.querySelector("main") as HTMLElement).innerHTML = "";
+              this.lobby = new Lobby();
+              this.header = new Header();
+              (document.querySelector("main") as HTMLElement).appendChild(
+                this.lobby.element
+              );
+              document
+                .getElementById("friend")
+                ?.addEventListener("click", () => {
+                  this.startGame();
+                });
+              document
+                .querySelectorAll(".player_name__button")
+                .forEach((el) => {
+                  el.addEventListener("click", () => {
+                    this.handleName();
+                  });
+                });
+              (document.querySelector("header") as HTMLElement).innerHTML =
+                this.header.element.innerHTML;
+            });
+            this.game.isMate = false;
+        }
+      }, 1000);
     });
   }
 }

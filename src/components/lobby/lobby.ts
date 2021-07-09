@@ -9,9 +9,7 @@ export class Lobby extends BaseComponent {
   }
 
   renderLobby() {
-    console.log(1);
     let player1Avatar = storage.player1Name[0];
-    console.log(storage.player1Name.split(" ")[1]);
     if (
       storage.player1Name.split(" ")[1] != undefined &&
       storage.player1Name.split(" ")[1] != ""
@@ -31,7 +29,10 @@ export class Lobby extends BaseComponent {
       <div class="wrapper">
         <div class="player">
           <div class="player_avatar">${player1Avatar}</div>
-          <input type='text' class="player_name" id='player1_name' value='${storage.player1Name}'></input>
+          <div class="player_name">
+          <input type='text' class="player_name__input" id='player1_name' value='${storage.player1Name}'></input>
+          <button class="player_name__button">Save</button>
+          </div>
         </div>
         <div class="game-buttons">
           <button class="main_button" disabled>Play Online</button>
@@ -41,7 +42,10 @@ export class Lobby extends BaseComponent {
         </div>
         <div class="player">
           <div class="player_avatar">${player2Avatar}</div>
-          <input type='text' class="player_name" id='player2_name' value='${storage.player2Name}'></input>
+          <div class="player_name">
+          <input type='text' class="player_name__input" id='player2_name' value='${storage.player2Name}'></input>
+          <button class="player_name__button">Save</button>
+          </div>
         </div>
       </div>`;
     this.element

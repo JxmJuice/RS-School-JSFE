@@ -2,6 +2,7 @@ import { Bishop } from "../bishop/bishop";
 import { ChessBoard } from "../chessboard/chessboard";
 import { Piece } from "../chessPiece/chessPiece";
 import { xToLetter } from "../constants";
+import { EndgamePopUp } from "../endgamePopUp/endgamePopUp";
 import { King } from "../king/king";
 import { Knight } from "../knight/knight";
 import { Pawn } from "../pawn/pawn";
@@ -94,13 +95,21 @@ export class Game {
   handleTurn() {
     if (this.isWhiteTurn == true) {
       this.chessBoard.element.classList.remove("turned");
-      this.player1.element.querySelector('.player_column__avatar')?.classList.add('player_turn');
-      this.player2.element.querySelector('.player_column__avatar')?.classList.remove('player_turn');
+      this.player1.element
+        .querySelector(".player_column__avatar")
+        ?.classList.add("player_turn");
+      this.player2.element
+        .querySelector(".player_column__avatar")
+        ?.classList.remove("player_turn");
       this.validateWhiteTurn();
     }
     if (this.isWhiteTurn != true) {
-      this.player2.element.querySelector('.player_column__avatar')?.classList.add('player_turn');
-      this.player1.element.querySelector('.player_column__avatar')?.classList.remove('player_turn');
+      this.player2.element
+        .querySelector(".player_column__avatar")
+        ?.classList.add("player_turn");
+      this.player1.element
+        .querySelector(".player_column__avatar")
+        ?.classList.remove("player_turn");
       this.chessBoard.element.classList.add("turned");
       this.validateBlackTurn();
     }
@@ -139,6 +148,11 @@ export class Game {
     if (this.isCheck == true) {
       this.handleMate();
       this.handleCheck();
+      if (this.isMate == false) {
+        this.handleCheck();
+      } else {
+        this.timer.stopTimer();
+      }
     } else {
       this.whitePieces.forEach((el) => {
         el.element.onmousedown = null;
