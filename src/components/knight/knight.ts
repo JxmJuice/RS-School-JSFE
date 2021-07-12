@@ -4,8 +4,11 @@ import { xToLetter } from "../constants";
 export class Knight extends Piece {
   currentSquare: HTMLElement | null;
 
+  name: string;
+
   constructor(color: string, square: string) {
     super("knight", color);
+    this.name = 'knight';
     if (this.pieceColor == "white") {
       this.element.classList.add("knight_white");
     }

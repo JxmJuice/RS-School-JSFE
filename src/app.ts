@@ -3,11 +3,14 @@ import { EndgamePopUp } from "./components/endgamePopUp/endgamePopUp";
 import { Game } from "./components/game/game";
 import { Header } from "./components/header/header";
 import { Lobby } from "./components/lobby/lobby";
+import { OnlineGame } from "./components/online-game/online-game";
 import { storage } from "./components/storage/storage";
 import { Timer } from "./components/timer/timer";
 
 export class App extends BaseComponent {
   game: Game | null;
+
+  onlineGame: OnlineGame | null;
 
   lobby: Lobby;
 
@@ -16,6 +19,7 @@ export class App extends BaseComponent {
   constructor() {
     super("main", ["main"]);
     this.game = null;
+    this.onlineGame = null;
     this.lobby = new Lobby();
     this.header = new Header();
     document.body.appendChild(this.header.element);
@@ -23,6 +27,9 @@ export class App extends BaseComponent {
     document.body.appendChild(this.element);
     document.getElementById("friend")?.addEventListener("click", () => {
       this.startGame();
+    });
+    document.getElementById("online")?.addEventListener("click", () => {
+      this.startOnlineGame();
     });
     document.querySelectorAll(".player_name__button").forEach((el) => {
       el.addEventListener("click", () => {
@@ -36,6 +43,17 @@ export class App extends BaseComponent {
     (document.querySelector(".page-name") as HTMLSpanElement).innerText =
       "vs Friend";
     this.game = new Game(storage.player1Name, storage.player2Name);
+    this.handleResign();
+    this.handleDraw();
+    this.mateToLobby();
+    this.staleMateToLobby();
+  }
+
+  startOnlineGame() {
+    this.element.innerHTML = "";
+    (document.querySelector(".page-name") as HTMLSpanElement).innerText =
+      "Online";
+    this.onlineGame = new OnlineGame(storage.player1Name, storage.player2Name);
     this.handleResign();
     this.handleDraw();
     this.mateToLobby();

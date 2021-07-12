@@ -2,6 +2,7 @@ import { App } from "./app";
 import { Bishop } from "./components/bishop/bishop";
 import { ChessBoard } from "./components/chessboard/chessboard";
 import { Game } from "./components/game/game";
+import { Header } from "./components/header/header";
 import { Knight } from "./components/knight/knight";
 import { OnlineGame } from "./components/online-game/online-game";
 import { Queen } from "./components/queen/queen";
@@ -10,9 +11,9 @@ import "./styles.scss";
 
 //new Game()
 
-//new App()
+new App()
 
-new OnlineGame("Jxm", 'Brr');
+
 
 // const board = new ChessBoard();
 

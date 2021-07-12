@@ -1,0 +1,82 @@
+.pregamePopUp {
+    width: 300px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 5px;
+    background-color: rgba($color: #ffffff, $alpha: 0.5);
+}
+
+.loader_body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    overflow: hidden;
+}
+
+$color: #926def, #8c6ced, #876beb, #6565dd, #5f64db;
+$circle-size: 20px;
+$circle-margin: 7px; 
+
+.circle {
+  width: $circle-size;
+  height: $circle-size;
+  border-radius: 50%;
+  margin: $circle-margin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:before {
+    content: "";
+    width: $circle-size;
+    height: $circle-size;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: scale 2s infinite 
+      cubic-bezier(0, 0, 0.49, 1.02);
+  }
+}
+
+@for $i from 1 through 5 {
+  .circle-#{$i} {
+    background-color: nth($color, $i);
+    &:before {
+      background-color: nth($color, $i);
+      animation-delay: 200ms * $i;
+    }
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50%, 75% {
+    transform: scale(2.5);
+  }
+  78%, 100% {
+    opacity: 0;
+  }
+}
+
+.to-lobby-online{
+    font: 20px Roboto, sans-serif;
+    width: 120px;
+    height: 40px;
+    background-color: #b0c4de;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.loader_text{
+    width: 250px;
+    height: 50px;
+    font: 35px sans-serif;
+    font-weight: 500;
+    color: rgb(17, 17, 19);
+    text-align: center;
+}

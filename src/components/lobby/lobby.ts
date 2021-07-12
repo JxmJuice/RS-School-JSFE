@@ -35,7 +35,7 @@ export class Lobby extends BaseComponent {
           </div>
         </div>
         <div class="game-buttons">
-          <button class="main_button" disabled>Play Online</button>
+          <button class="main_button" id='online'>Play Online</button>
           <button class="main_button" id='friend'>Play With Friend</button>
           <button class="main_button" disabled>Play With Computer</button>
           <button class="main_button" disabled>Replays</button>

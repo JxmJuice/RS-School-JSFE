@@ -4,8 +4,11 @@ import { xToLetter } from "../constants";
 export class Rook extends Piece {
   currentSquare: HTMLElement | null;
 
+  name: string;
+
   constructor(color: string, square: string) {
     super("rook", color);
+    this.name = "rook";
     if (this.pieceColor == "white") {
       this.element.classList.add("rook_white");
     }
@@ -111,20 +114,24 @@ export class Rook extends Piece {
       for (let i = +x + 1; i < 9; i++) {
         const letter = xToLetter(i + "");
         document.getElementById(`${letter}${y}`)?.classList.add("attacked");
-        if (document.getElementById(`${letter}${y}`)?.dataset.piece != "" &&
-        !document
-          .getElementById(`${letter}${y}`)
-          ?.firstElementChild?.classList.contains(`king_${enemyColor}`)) {
+        if (
+          document.getElementById(`${letter}${y}`)?.dataset.piece != "" &&
+          !document
+            .getElementById(`${letter}${y}`)
+            ?.firstElementChild?.classList.contains(`king_${enemyColor}`)
+        ) {
           break;
         }
       }
       for (let i = +x - 1; i > 0; i--) {
         const letter = xToLetter(i + "");
         document.getElementById(`${letter}${y}`)?.classList.add("attacked");
-        if (document.getElementById(`${letter}${y}`)?.dataset.piece != "" &&
-        !document
-          .getElementById(`${letter}${y}`)
-          ?.firstElementChild?.classList.contains(`king_${enemyColor}`)) {
+        if (
+          document.getElementById(`${letter}${y}`)?.dataset.piece != "" &&
+          !document
+            .getElementById(`${letter}${y}`)
+            ?.firstElementChild?.classList.contains(`king_${enemyColor}`)
+        ) {
           break;
         }
       }
@@ -133,20 +140,24 @@ export class Rook extends Piece {
       for (let i = +y + 1; i < 9; i++) {
         const letter = xToLetter(x + "");
         document.getElementById(`${letter}${i}`)?.classList.add("attacked");
-        if (document.getElementById(`${letter}${i}`)?.dataset.piece != "" &&
-        !document
-          .getElementById(`${letter}${i}`)
-          ?.firstElementChild?.classList.contains(`king_${enemyColor}`)) {
+        if (
+          document.getElementById(`${letter}${i}`)?.dataset.piece != "" &&
+          !document
+            .getElementById(`${letter}${i}`)
+            ?.firstElementChild?.classList.contains(`king_${enemyColor}`)
+        ) {
           break;
         }
       }
       for (let i = +y - 1; i < 9; i--) {
         const letter = xToLetter(x + "");
         document.getElementById(`${letter}${i}`)?.classList.add("attacked");
-        if (document.getElementById(`${letter}${i}`)?.dataset.piece != "" &&
-        !document
-          .getElementById(`${letter}${i}`)
-          ?.firstElementChild?.classList.contains(`king_${enemyColor}`)) {
+        if (
+          document.getElementById(`${letter}${i}`)?.dataset.piece != "" &&
+          !document
+            .getElementById(`${letter}${i}`)
+            ?.firstElementChild?.classList.contains(`king_${enemyColor}`)
+        ) {
           break;
         }
       }
