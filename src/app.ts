@@ -39,7 +39,7 @@ export class App extends BaseComponent {
   }
 
   startGame() {
-    this.element.innerHTML = "";
+    document.querySelector(".lobby")?.classList.add("hidden");
     (document.querySelector(".page-name") as HTMLSpanElement).innerText =
       "vs Friend";
     this.game = new Game(storage.player1Name, storage.player2Name);
@@ -50,7 +50,7 @@ export class App extends BaseComponent {
   }
 
   startOnlineGame() {
-    this.element.innerHTML = "";
+    document.querySelector(".lobby")?.classList.add("hidden");
     (document.querySelector(".page-name") as HTMLSpanElement).innerText =
       "Online";
     this.onlineGame = new OnlineGame(storage.player1Name, storage.player2Name);
@@ -68,20 +68,11 @@ export class App extends BaseComponent {
         .querySelector(".to-lobby")
         ?.addEventListener("click", () => {
           popUp.removePopUp();
-          (document.querySelector("main") as HTMLElement).innerHTML = "";
-          this.lobby = new Lobby();
+          document.querySelector(".player_column")?.remove();
+          document.querySelector(".player_column")?.remove();
+          document.querySelector(".chessboard")?.remove();
+          document.querySelector(".lobby")?.classList.remove("hidden");
           this.header = new Header();
-          (document.querySelector("main") as HTMLElement).appendChild(
-            this.lobby.element
-          );
-          document.getElementById("friend")?.addEventListener("click", () => {
-            this.startGame();
-          });
-          document.querySelectorAll(".player_name__button").forEach((el) => {
-            el.addEventListener("click", () => {
-              this.handleName();
-            });
-          });
           (document.querySelector("header") as HTMLElement).innerHTML =
             this.header.element.innerHTML;
         });
@@ -93,20 +84,11 @@ export class App extends BaseComponent {
         .querySelector(".to-lobby")
         ?.addEventListener("click", () => {
           popUp.removePopUp();
-          (document.querySelector("main") as HTMLElement).innerHTML = "";
-          this.lobby = new Lobby();
           this.header = new Header();
-          (document.querySelector("main") as HTMLElement).appendChild(
-            this.lobby.element
-          );
-          document.getElementById("friend")?.addEventListener("click", () => {
-            this.startGame();
-          });
-          document.querySelectorAll(".player_name__button").forEach((el) => {
-            el.addEventListener("click", () => {
-              this.handleName();
-            });
-          });
+          document.querySelector(".player_column")?.remove();
+          document.querySelector(".player_column")?.remove();
+          document.querySelector(".chessboard")?.remove();
+          document.querySelector(".lobby")?.classList.remove("hidden");
           (document.querySelector("header") as HTMLElement).innerHTML =
             this.header.element.innerHTML;
         });
@@ -153,20 +135,11 @@ export class App extends BaseComponent {
     document.body.appendChild(popUp.element);
     popUp.element.querySelector(".to-lobby")?.addEventListener("click", () => {
       popUp.removePopUp();
-      (document.querySelector("main") as HTMLElement).innerHTML = "";
-      this.lobby = new Lobby();
+      document.querySelector(".player_column")?.remove();
+      document.querySelector(".player_column")?.remove();
+      document.querySelector(".chessboard")?.remove();
+      document.querySelector(".lobby")?.classList.remove("hidden");
       this.header = new Header();
-      (document.querySelector("main") as HTMLElement).appendChild(
-        this.lobby.element
-      );
-      document.getElementById("friend")?.addEventListener("click", () => {
-        this.startGame();
-      });
-      document.querySelectorAll(".player_name__button").forEach((el) => {
-        el.addEventListener("click", () => {
-          this.handleName();
-        });
-      });
       (document.querySelector("header") as HTMLElement).innerHTML =
         this.header.element.innerHTML;
     });
@@ -194,28 +167,15 @@ export class App extends BaseComponent {
             .querySelector(".to-lobby")
             ?.addEventListener("click", () => {
               popUp.removePopUp();
-              (document.querySelector("main") as HTMLElement).innerHTML = "";
-              this.lobby = new Lobby();
+              document.querySelector(".player_column")?.remove();
+              document.querySelector(".player_column")?.remove();
+              document.querySelector(".chessboard")?.remove();
+              document.querySelector(".lobby")?.classList.remove("hidden");
               this.header = new Header();
-              (document.querySelector("main") as HTMLElement).appendChild(
-                this.lobby.element
-              );
-              document
-                .getElementById("friend")
-                ?.addEventListener("click", () => {
-                  this.startGame();
-                });
-              document
-                .querySelectorAll(".player_name__button")
-                .forEach((el) => {
-                  el.addEventListener("click", () => {
-                    this.handleName();
-                  });
-                });
               (document.querySelector("header") as HTMLElement).innerHTML =
                 this.header.element.innerHTML;
             });
-            this.game.isMate = false;
+          this.game.isMate = false;
         }
         if (this.game?.isMate == true && this.game.isWhiteTurn != true) {
           const popUp = new EndgamePopUp("White Won");
@@ -224,28 +184,15 @@ export class App extends BaseComponent {
             .querySelector(".to-lobby")
             ?.addEventListener("click", () => {
               popUp.removePopUp();
-              (document.querySelector("main") as HTMLElement).innerHTML = "";
-              this.lobby = new Lobby();
+              document.querySelector(".player_column")?.remove();
+              document.querySelector(".player_column")?.remove();
+              document.querySelector(".chessboard")?.remove();
+              document.querySelector(".lobby")?.classList.remove("hidden");
               this.header = new Header();
-              (document.querySelector("main") as HTMLElement).appendChild(
-                this.lobby.element
-              );
-              document
-                .getElementById("friend")
-                ?.addEventListener("click", () => {
-                  this.startGame();
-                });
-              document
-                .querySelectorAll(".player_name__button")
-                .forEach((el) => {
-                  el.addEventListener("click", () => {
-                    this.handleName();
-                  });
-                });
               (document.querySelector("header") as HTMLElement).innerHTML =
                 this.header.element.innerHTML;
             });
-            this.game.isStaleMate = false;
+          this.game.isStaleMate = false;
         }
       }, 1000);
     });
@@ -261,28 +208,15 @@ export class App extends BaseComponent {
             .querySelector(".to-lobby")
             ?.addEventListener("click", () => {
               popUp.removePopUp();
-              (document.querySelector("main") as HTMLElement).innerHTML = "";
-              this.lobby = new Lobby();
+              document.querySelector(".player_column")?.remove();
+              document.querySelector(".player_column")?.remove();
+              document.querySelector(".chessboard")?.remove();
+              document.querySelector(".lobby")?.classList.remove("hidden");
               this.header = new Header();
-              (document.querySelector("main") as HTMLElement).appendChild(
-                this.lobby.element
-              );
-              document
-                .getElementById("friend")
-                ?.addEventListener("click", () => {
-                  this.startGame();
-                });
-              document
-                .querySelectorAll(".player_name__button")
-                .forEach((el) => {
-                  el.addEventListener("click", () => {
-                    this.handleName();
-                  });
-                });
               (document.querySelector("header") as HTMLElement).innerHTML =
                 this.header.element.innerHTML;
             });
-            this.game.isMate = false;
+          this.game.isStaleMate = false;
         }
       }, 1000);
     });

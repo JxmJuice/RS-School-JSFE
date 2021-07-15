@@ -1,9 +1,11 @@
 import { OnlineMove } from "../../models/move-model/move-model";
+import { PopUp } from "../../shared/popUp/popUp";
 import { Bishop } from "../bishop/bishop";
 import { ChessBoard } from "../chessboard/chessboard";
 import { Piece } from "../chessPiece/chessPiece";
 import { xToLetter } from "../constants";
 import { EndgamePopUp } from "../endgamePopUp/endgamePopUp";
+import { Header } from "../header/header";
 import { King } from "../king/king";
 import { Knight } from "../knight/knight";
 import { Pawn } from "../pawn/pawn";
@@ -55,7 +57,7 @@ export class OnlineGame {
     this.yourPieces = [];
     this.enemyPieces = [];
     this.handleIncomingMove();
-    this.player1 = new Player(player1Name, this.yourColor);
+    this.player1 = new Player(player1Name, "white");
     document.querySelector("main")?.appendChild(this.player1.element);
     this.chessBoard = new ChessBoard();
     document.querySelector("main")?.appendChild(this.chessBoard.element);
@@ -75,6 +77,46 @@ export class OnlineGame {
     this.isStaleMate = false;
     this.KSideCastlingEnabled = true;
     this.QSideCastlingEnabled = true;
+
+    this.handleResign();
+    this.handleDrawOffer();
+  }
+
+  handleDrawOffer() {
+    const drawButton = document.querySelector(
+      "#draw_white"
+    ) as HTMLButtonElement;
+    drawButton.onclick = () => {
+      drawButton.classList.add("draw_offered");
+      this.socket.send("draw offered");
+    };
+    setTimeout(() => {
+      drawButton.onclick = null;
+      drawButton.classList.remove("draw_offered");
+    });
+  }
+
+  handleResign() {
+    document
+      .querySelector(".player_button__resign")
+      ?.addEventListener("click", () => {
+        const popUp = new EndgamePopUp("You Resigned");
+        document.body.appendChild(popUp.element);
+        this.socket.send("resigned");
+        this.socket.close();
+        popUp.element
+          .querySelector(".to-lobby")
+          ?.addEventListener("click", () => {
+            popUp.removePopUp();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".chessboard")?.remove();
+            document.querySelector(".lobby")?.classList.remove("hidden");
+            (document.querySelector("header") as HTMLElement).innerHTML =
+              new Header().element.innerHTML;
+            popUp.removePopUp();
+          });
+      });
   }
 
   handleIncomingMove() {
@@ -83,22 +125,103 @@ export class OnlineGame {
     this.socket.onmessage = function (event) {
       let message = event.data;
       console.log(message);
+      if (message == "connected") {
+        console.log(message);
+        return;
+      }
       if (message == "white") {
         game.timer.startTimer();
         game.initializePieces("white", "black");
+        document.querySelector(".pop-up")?.remove();
         game.handleTurn();
         return;
       }
       if (message == "black") {
         game.timer.startTimer();
         game.initializePieces("black", "white");
+        document.querySelector(".pop-up")?.remove();
         game.handleTurn();
         return;
       }
       if (message == "loading") {
         let popUp = new PregamePopUp();
         document.body.appendChild(popUp.element);
+        popUp.element
+          .querySelector(".to-lobby-online")
+          ?.addEventListener("click", () => {
+            ws.close();
+            (document.querySelector("header") as HTMLElement).innerHTML =
+              new Header().element.innerHTML;
+            popUp.removePopUp();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".chessboard")?.remove();
+            document.querySelector(".lobby")?.classList.remove("hidden");
+          });
         return;
+      }
+      if (message == "resigned") {
+        const popUp = new EndgamePopUp("Opponent Resigned");
+        document.body.appendChild(popUp.element);
+        ws.close();
+        popUp.element
+          .querySelector(".to-lobby")
+          ?.addEventListener("click", () => {
+            popUp.removePopUp();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".chessboard")?.remove();
+            document.querySelector(".lobby")?.classList.remove("hidden");
+            (document.querySelector("header") as HTMLElement).innerHTML =
+              new Header().element.innerHTML;
+            popUp.removePopUp();
+          });
+        return;
+      }
+      if (message == "draw offered") {
+        const drawButton = document.querySelector(
+          "#draw_white"
+        ) as HTMLButtonElement;
+        drawButton.classList.add("draw_accept");
+        drawButton.onclick = () => {
+          const popUp = new EndgamePopUp("Draw");
+          document.body.appendChild(popUp.element);
+          ws.send("draw agreed");
+          ws.close();
+          popUp.element
+            .querySelector(".to-lobby")
+            ?.addEventListener("click", () => {
+              popUp.removePopUp();
+              document.querySelector(".player_column")?.remove();
+              document.querySelector(".player_column")?.remove();
+              document.querySelector(".chessboard")?.remove();
+              document.querySelector(".lobby")?.classList.remove("hidden");
+              (document.querySelector("header") as HTMLElement).innerHTML =
+                new Header().element.innerHTML;
+              popUp.removePopUp();
+            });
+        };
+        setTimeout(() => {
+          drawButton.onclick = null;
+          drawButton.classList.remove("draw_accept");
+        }, 10000);
+      }
+      if (message == "draw agreed") {
+        const popUp = new EndgamePopUp("Draw");
+        document.body.appendChild(popUp.element);
+        ws.close();
+        popUp.element
+          .querySelector(".to-lobby")
+          ?.addEventListener("click", () => {
+            popUp.removePopUp();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".chessboard")?.remove();
+            document.querySelector(".lobby")?.classList.remove("hidden");
+            (document.querySelector("header") as HTMLElement).innerHTML =
+              new Header().element.innerHTML;
+            popUp.removePopUp();
+          });
       }
       if (message == "disconnected") {
         let messageElem = document.createElement("div");
