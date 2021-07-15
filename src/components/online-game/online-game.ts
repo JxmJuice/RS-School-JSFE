@@ -9,6 +9,7 @@ import { Header } from "../header/header";
 import { King } from "../king/king";
 import { Knight } from "../knight/knight";
 import { Pawn } from "../pawn/pawn";
+import { OnlinePlayer } from "../player-online/player-online";
 import { Player } from "../player/player";
 import { PregamePopUp } from "../pregamePopUp/pregamePopUp";
 import { PromotionPopUp } from "../promotion-popUp/promotion-popUp";
@@ -27,9 +28,9 @@ export class OnlineGame {
 
   enemyPieces: Array<Rook | Knight | Bishop | King | Queen | Pawn>;
 
-  player1: Player;
+  player1: OnlinePlayer;
 
-  player2: Player;
+  player2: OnlinePlayer;
 
   lastMovedPiece: Rook | Pawn | Bishop | Knight | King | Queen | null;
 
@@ -50,18 +51,18 @@ export class OnlineGame {
   KSideCastlingEnabled: boolean;
   QSideCastlingEnabled: boolean;
 
-  constructor(player1Name: string, player2Name: string) {
+  constructor(player1Name: string) {
     this.socket = new WebSocket("ws://localhost:8999");
     this.yourColor = "";
     this.enemyColor = "";
     this.yourPieces = [];
     this.enemyPieces = [];
     this.handleIncomingMove();
-    this.player1 = new Player(player1Name, "white");
+    this.player1 = new OnlinePlayer(player1Name);
     document.querySelector("main")?.appendChild(this.player1.element);
     this.chessBoard = new ChessBoard();
     document.querySelector("main")?.appendChild(this.chessBoard.element);
-    this.player2 = new Player(player2Name, this.enemyColor);
+    this.player2 = new OnlinePlayer("", true);
     document.querySelector("main")?.appendChild(this.player2.element);
 
     this.timer = new Timer(
@@ -84,8 +85,9 @@ export class OnlineGame {
 
   handleDrawOffer() {
     const drawButton = document.querySelector(
-      "#draw_white"
+      "#draw_button"
     ) as HTMLButtonElement;
+    console.log(drawButton);
     drawButton.onclick = () => {
       drawButton.classList.add("draw_offered");
       this.socket.send("draw offered");
@@ -93,7 +95,7 @@ export class OnlineGame {
     setTimeout(() => {
       drawButton.onclick = null;
       drawButton.classList.remove("draw_offered");
-    });
+    }, 10000);
   }
 
   handleResign() {
@@ -180,7 +182,7 @@ export class OnlineGame {
       }
       if (message == "draw offered") {
         const drawButton = document.querySelector(
-          "#draw_white"
+          "#draw_button"
         ) as HTMLButtonElement;
         drawButton.classList.add("draw_accept");
         drawButton.onclick = () => {
@@ -230,6 +232,7 @@ export class OnlineGame {
         document.body.appendChild(popUp.element);
         return;
       }
+
       const move = JSON.parse(message) as OnlineMove;
       const initialSquare = document.querySelector(
         `#${move.initialSquare}`
@@ -263,7 +266,8 @@ export class OnlineGame {
       finalSquare.dataset.piece = this.enemyColor;
     } else if (initialPiece == "pawn") {
       if (finalPiece == "queen") {
-        this.enemyPieces.push(new Queen(this.enemyColor, finalSquare.id));
+        const queen = new Queen(this.enemyColor, finalSquare.id);
+        this.enemyPieces.push(queen);
       }
       if (finalPiece == "rook") {
         this.enemyPieces.push(new Rook(this.enemyColor, finalSquare.id));
@@ -275,6 +279,28 @@ export class OnlineGame {
         this.enemyPieces.push(new Bishop(this.enemyColor, finalSquare.id));
       }
     }
+    document.querySelectorAll(".checked").forEach((el) => {
+      el.classList.remove("checked");
+    });
+    this.handleEnemyCheck();
+  }
+
+  handleEnemyCheck() {
+    this.enemyPieces.forEach((piece) => {
+      piece.checkLegalMoves();
+      if (
+        this.yourPieces[15].element.parentElement?.classList.contains(
+          "attacked"
+        )
+      ) {
+        piece.element.parentElement?.classList.add("checked");
+        this.yourPieces[15].element.parentElement.classList.add("checked");
+        document
+          .querySelectorAll(".attacked")
+          .forEach((el) => el.classList.remove("attacked"));
+      }
+      this.isCheck = true;
+    });
   }
 
   initializePieces(yourColor: string, enemyColor: string) {
@@ -690,6 +716,16 @@ export class OnlineGame {
           this.isCheck = false;
           this.createCheck();
           this.isYourTurn = false;
+          this.socket.send(
+            JSON.stringify(
+              new OnlineMove(
+                (initialPlace as HTMLElement).id,
+                piece.name,
+                (piece.currentSquare as HTMLElement).id,
+                piece.name
+              )
+            )
+          );
           this.handleTurn();
           return;
         }

@@ -53,7 +53,7 @@ export class App extends BaseComponent {
     document.querySelector(".lobby")?.classList.add("hidden");
     (document.querySelector(".page-name") as HTMLSpanElement).innerText =
       "Online";
-    this.onlineGame = new OnlineGame(storage.player1Name, storage.player2Name);
+    this.onlineGame = new OnlineGame(storage.player1Name);
     this.handleResign();
     this.handleDraw();
     this.mateToLobby();
