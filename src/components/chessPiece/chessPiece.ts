@@ -6,16 +6,19 @@ export class Piece extends BaseComponent {
 
   isAbleToMove: boolean;
 
+  startPosition: HTMLElement|null;
+
   constructor(pieceType: string, color: string) {
     super("div", ["chess-piece", `chess-piece_${color}`, pieceType]);
     this.pieceColor = color;
+    this.startPosition = null;
     this.isAbleToMove = false;
   }
 
   handleMove(event: MouseEvent) {
     const thisPiece = this;
     const piece = this.element;
-    const startPosition = piece.parentElement;
+    this.startPosition = piece.parentElement;
 
     let shiftX = event.clientX - piece.getBoundingClientRect().left;
     let shiftY = event.clientY - piece.getBoundingClientRect().top;
@@ -45,7 +48,7 @@ export class Piece extends BaseComponent {
         piece.style.zIndex = "";
         piece.style.left = "";
         piece.style.top = "";
-        startPosition?.appendChild(piece);
+        thisPiece.startPosition?.appendChild(piece);
         return;
       }
 
@@ -78,12 +81,12 @@ export class Piece extends BaseComponent {
           }
           document.removeEventListener("mousemove", onMouseMove);
           piece.onmouseup = null;
-        } else if (startPosition != document.body) {
+        } else if (thisPiece.startPosition != document.body) {
           piece.style.position = "";
           piece.style.zIndex = "";
           piece.style.left = "";
           piece.style.top = "";
-          startPosition?.appendChild(piece);
+          thisPiece.startPosition?.appendChild(piece);
         }
       },
       { once: true }

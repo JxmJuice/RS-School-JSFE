@@ -901,9 +901,11 @@ export class Game {
         x &&
         y &&
         piece.element.parentElement?.dataset.x &&
+        this.lastMovedPiece?.startPosition?.dataset.y == "7" &&
         (+x == +piece.element.parentElement.dataset.x - 1 ||
           +x == +piece.element.parentElement.dataset.x + 1) &&
         y == piece.element.parentElement.dataset.y &&
+        y == "5" &&
         this.lastMovedPiece?.element.classList.contains("pawn_black")
       ) {
         document
@@ -920,6 +922,7 @@ export class Game {
         x &&
         y &&
         piece.element.parentElement?.dataset.x &&
+        this.lastMovedPiece?.startPosition?.dataset.y == "2" &&
         (+x == +piece.element.parentElement.dataset.x - 1 ||
           +x == +piece.element.parentElement.dataset.x + 1) &&
         y == piece.element.parentElement.dataset.y &&

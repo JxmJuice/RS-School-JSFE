@@ -34,6 +34,8 @@ export class OnlineGame {
 
   lastMovedPiece: Rook | Pawn | Bishop | Knight | King | Queen | null;
 
+  lastMovedEnemyPiece: HTMLElement | null;
+
   timer: Timer;
 
   chessBoard: ChessBoard;
@@ -70,6 +72,7 @@ export class OnlineGame {
     );
 
     this.lastMovedPiece = null;
+    this.lastMovedEnemyPiece = null;
 
     this.isEnPassant = false;
     this.isYourTurn = true;
@@ -244,26 +247,36 @@ export class OnlineGame {
         `#${move.finalSquare}`
       ) as HTMLElement;
       finalSquare.innerHTML = ``;
+      game.isYourTurn = true;
+      game.lastMovedEnemyPiece = piece;
       game.handleEnemyMove(
         move.initialPiece,
         move.finalPiece,
+        move.initialSquare,
         finalSquare,
         piece
       );
-      game.isYourTurn = true;
-      game.handleTurn();
     };
   }
 
   handleEnemyMove(
     initialPiece: string,
     finalPiece: string,
+    initialSquare: string,
     finalSquare: HTMLElement,
     piece: HTMLElement
   ) {
     if (initialPiece == finalPiece) {
       finalSquare.appendChild(piece);
       finalSquare.dataset.piece = this.enemyColor;
+      if (
+        finalPiece == "pawn" &&
+        this.lastMovedEnemyPiece?.classList.contains("pawn") &&
+        +document.getElementById(initialSquare)?.dataset.y ==
+          (+this.lastMovedPiece?.element.parentElement?.dataset.y - 1)
+      ) {
+        this.lastMovedPiece?.element.remove();
+      }
     } else if (initialPiece == "pawn") {
       if (finalPiece == "queen") {
         const queen = new Queen(this.enemyColor, finalSquare.id);
@@ -283,6 +296,35 @@ export class OnlineGame {
       el.classList.remove("checked");
     });
     this.handleEnemyCheck();
+    this.handleEnemyCastling(finalPiece, initialSquare, finalSquare.id);
+    this.handleTurn();
+  }
+
+  handleEnemyCastling(
+    finalPiece: string,
+    initialSquare: string,
+    finalSquare: string
+  ) {
+    if (finalPiece == "king" && initialSquare == "e1" && finalSquare == "g1") {
+      document.querySelector("#h1")?.firstElementChild?.remove();
+      (document.querySelector("#h1") as HTMLElement).dataset.piece = "";
+      this.enemyPieces[0] = new Rook(this.enemyColor, "f1");
+    }
+    if (finalPiece == "king" && initialSquare == "e1" && finalSquare == "d1") {
+      document.querySelector("#a1")?.firstElementChild?.remove();
+      (document.querySelector("#a1") as HTMLElement).dataset.piece = "";
+      this.enemyPieces[0] = new Rook(this.enemyColor, "d1");
+    }
+    if (finalPiece == "king" && initialSquare == "e8" && finalSquare == "g8") {
+      document.querySelector("#h8")?.firstElementChild?.remove();
+      (document.querySelector("#h8") as HTMLElement).dataset.piece = "";
+      this.enemyPieces[0] = new Rook(this.enemyColor, "f8");
+    }
+    if (finalPiece == "king" && initialSquare == "e8" && finalSquare == "c8") {
+      document.querySelector("#a8")?.firstElementChild?.remove();
+      (document.querySelector("#a8") as HTMLElement).dataset.piece = "";
+      this.enemyPieces[0] = new Rook(this.enemyColor, "d8");
+    }
   }
 
   handleEnemyCheck() {
@@ -298,8 +340,8 @@ export class OnlineGame {
         document
           .querySelectorAll(".attacked")
           .forEach((el) => el.classList.remove("attacked"));
+        this.isCheck = true;
       }
-      this.isCheck = true;
     });
   }
 
@@ -377,13 +419,16 @@ export class OnlineGame {
   validateYourTurn() {
     if (this.isCheck == true) {
       this.handleMate();
+      console.log("mate");
       if (this.isMate == false) {
         this.handleCheck();
+        console.log("check");
       } else {
         this.timer.stopTimer();
       }
     } else {
       this.handleStaleMate();
+      console.log("move");
       document
         .querySelectorAll(".valid")
         .forEach((el) => el.classList.remove("valid"));
@@ -735,6 +780,7 @@ export class OnlineGame {
   }
 
   handleKingSideCastling(piece: King) {
+    console.log("castling");
     if (this.isYourTurn == true && this.yourColor == "white") {
       const f1 = document.querySelector("#f1");
       const g1 = document.querySelector("#g1");
@@ -924,8 +970,8 @@ export class OnlineGame {
 
   handleEnPassant(piece: Pawn) {
     if (this.isYourTurn == true && this.yourColor == "white") {
-      const x = this.lastMovedPiece?.element.parentElement?.dataset.x;
-      const y = this.lastMovedPiece?.element.parentElement?.dataset.y;
+      const x = this.lastMovedEnemyPiece?.parentElement?.dataset.x;
+      const y = this.lastMovedEnemyPiece?.parentElement?.dataset.y;
       if (
         x &&
         y &&
@@ -933,7 +979,8 @@ export class OnlineGame {
         (+x == +piece.element.parentElement.dataset.x - 1 ||
           +x == +piece.element.parentElement.dataset.x + 1) &&
         y == piece.element.parentElement.dataset.y &&
-        this.lastMovedPiece?.element.classList.contains("pawn_black")
+        y == "5" &&
+        this.lastMovedEnemyPiece?.classList.contains("pawn_black")
       ) {
         document
           .querySelector(`#${xToLetter(x)}${+y + 1}`)
@@ -943,8 +990,8 @@ export class OnlineGame {
     }
 
     if (this.isYourTurn == true && this.yourColor == "black") {
-      const x = this.lastMovedPiece?.element.parentElement?.dataset.x;
-      const y = this.lastMovedPiece?.element.parentElement?.dataset.y;
+      const x = this.lastMovedEnemyPiece?.parentElement?.dataset.x;
+      const y = this.lastMovedEnemyPiece?.parentElement?.dataset.y;
       if (
         x &&
         y &&
@@ -952,7 +999,7 @@ export class OnlineGame {
         (+x == +piece.element.parentElement.dataset.x - 1 ||
           +x == +piece.element.parentElement.dataset.x + 1) &&
         y == piece.element.parentElement.dataset.y &&
-        this.lastMovedPiece?.element.classList.contains("pawn_white")
+        this.lastMovedEnemyPiece?.classList.contains("pawn_white")
       ) {
         document
           .querySelector(`#${xToLetter(x)}${+y - 1}`)
