@@ -1,3 +1,4 @@
+import { EnemyPiece } from "../../models/enemy-piece-model/enemy-piece-model";
 import { OnlineMove } from "../../models/move-model/move-model";
 import { PopUp } from "../../shared/popUp/popUp";
 import { Bishop } from "../bishop/bishop";
@@ -34,7 +35,7 @@ export class OnlineGame {
 
   lastMovedPiece: Rook | Pawn | Bishop | Knight | King | Queen | null;
 
-  lastMovedEnemyPiece: HTMLElement | null;
+  lastMovedEnemyPiece: EnemyPiece | null;
 
   timer: Timer;
 
@@ -90,7 +91,6 @@ export class OnlineGame {
     const drawButton = document.querySelector(
       "#draw_button"
     ) as HTMLButtonElement;
-    console.log(drawButton);
     drawButton.onclick = () => {
       drawButton.classList.add("draw_offered");
       this.socket.send("draw offered");
@@ -129,7 +129,6 @@ export class OnlineGame {
     const ws = this.socket;
     this.socket.onmessage = function (event) {
       let message = event.data;
-      console.log(message);
       if (message == "connected") {
         console.log(message);
         return;
@@ -162,6 +161,42 @@ export class OnlineGame {
             document.querySelector(".player_column")?.remove();
             document.querySelector(".chessboard")?.remove();
             document.querySelector(".lobby")?.classList.remove("hidden");
+          });
+        return;
+      }
+      if (message == "mate") {
+        const popUp = new EndgamePopUp("You Won");
+        document.body.appendChild(popUp.element);
+        game.socket.close();
+        popUp.element
+          .querySelector(".to-lobby")
+          ?.addEventListener("click", () => {
+            popUp.removePopUp();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".chessboard")?.remove();
+            document.querySelector(".lobby")?.classList.remove("hidden");
+            (document.querySelector("header") as HTMLElement).innerHTML =
+              new Header().element.innerHTML;
+            popUp.removePopUp();
+          });
+        return;
+      }
+      if (message == "stalemate") {
+        const popUp = new EndgamePopUp("Draw");
+        document.body.appendChild(popUp.element);
+        game.socket.close();
+        popUp.element
+          .querySelector(".to-lobby")
+          ?.addEventListener("click", () => {
+            popUp.removePopUp();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".chessboard")?.remove();
+            document.querySelector(".lobby")?.classList.remove("hidden");
+            (document.querySelector("header") as HTMLElement).innerHTML =
+              new Header().element.innerHTML;
+            popUp.removePopUp();
           });
         return;
       }
@@ -248,7 +283,7 @@ export class OnlineGame {
       ) as HTMLElement;
       finalSquare.innerHTML = ``;
       game.isYourTurn = true;
-      game.lastMovedEnemyPiece = piece;
+      game.lastMovedEnemyPiece = new EnemyPiece(piece, move.initialSquare);
       game.handleEnemyMove(
         move.initialPiece,
         move.finalPiece,
@@ -270,11 +305,33 @@ export class OnlineGame {
       finalSquare.appendChild(piece);
       finalSquare.dataset.piece = this.enemyColor;
       if (
-        finalPiece == "pawn" &&
-        this.lastMovedEnemyPiece?.classList.contains("pawn") &&
-        +document.getElementById(initialSquare)?.dataset.y ==
-          (+this.lastMovedPiece?.element.parentElement?.dataset.y - 1)
+        this.yourColor == "white" &&
+        this.lastMovedPiece?.element.classList.contains("pawn") &&
+        this.lastMovedEnemyPiece?.enemyPiece.classList.contains("pawn") &&
+        this.lastMovedPiece.startPosition?.dataset.y == "2" &&
+        this.lastMovedPiece.currentSquare?.dataset.y == "4" &&
+        xToLetter(this.lastMovedPiece?.startPosition?.dataset.x as string) ==
+          finalSquare.id.split("")[0] &&
+        finalSquare.id.split("")[1] == "3"
       ) {
+        (
+          this.lastMovedPiece.element.parentElement as HTMLElement
+        ).dataset.piece = "";
+        this.lastMovedPiece?.element.remove();
+      }
+      if (
+        this.yourColor == "black" &&
+        this.lastMovedPiece?.element.classList.contains("pawn") &&
+        this.lastMovedEnemyPiece?.enemyPiece.classList.contains("pawn") &&
+        this.lastMovedPiece.startPosition?.dataset.y == "7" &&
+        this.lastMovedPiece.currentSquare?.dataset.y == "5" &&
+        xToLetter(this.lastMovedPiece?.startPosition?.dataset.x as string) ==
+          finalSquare.id.split("")[0] &&
+        finalSquare.id.split("")[1] == "6"
+      ) {
+        (
+          this.lastMovedPiece.element.parentElement as HTMLElement
+        ).dataset.piece = "";
         this.lastMovedPiece?.element.remove();
       }
     } else if (initialPiece == "pawn") {
@@ -310,7 +367,7 @@ export class OnlineGame {
       (document.querySelector("#h1") as HTMLElement).dataset.piece = "";
       this.enemyPieces[0] = new Rook(this.enemyColor, "f1");
     }
-    if (finalPiece == "king" && initialSquare == "e1" && finalSquare == "d1") {
+    if (finalPiece == "king" && initialSquare == "e1" && finalSquare == "c1") {
       document.querySelector("#a1")?.firstElementChild?.remove();
       (document.querySelector("#a1") as HTMLElement).dataset.piece = "";
       this.enemyPieces[0] = new Rook(this.enemyColor, "d1");
@@ -419,16 +476,13 @@ export class OnlineGame {
   validateYourTurn() {
     if (this.isCheck == true) {
       this.handleMate();
-      console.log("mate");
       if (this.isMate == false) {
         this.handleCheck();
-        console.log("check");
       } else {
         this.timer.stopTimer();
       }
     } else {
       this.handleStaleMate();
-      console.log("move");
       document
         .querySelectorAll(".valid")
         .forEach((el) => el.classList.remove("valid"));
@@ -608,7 +662,7 @@ export class OnlineGame {
         }
       }
       this.handleTurn();
-    }, 5);
+    }, 10);
   }
 
   createCheck() {
@@ -919,6 +973,22 @@ export class OnlineGame {
       this.yourPieces[15].validateMove();
       if (document.querySelectorAll(".valid").length == 0) {
         console.log("mate");
+        this.socket.send("mate");
+        const popUp = new EndgamePopUp("You Lost");
+        document.body.appendChild(popUp.element);
+        this.socket.close();
+        popUp.element
+          .querySelector(".to-lobby")
+          ?.addEventListener("click", () => {
+            popUp.removePopUp();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".chessboard")?.remove();
+            document.querySelector(".lobby")?.classList.remove("hidden");
+            (document.querySelector("header") as HTMLElement).innerHTML =
+              new Header().element.innerHTML;
+            popUp.removePopUp();
+          });
         this.isMate = true;
       }
     }
@@ -963,6 +1033,22 @@ export class OnlineGame {
       this.yourPieces[15].validateMove();
       if (document.querySelectorAll(".valid").length == 0) {
         console.log("stalemate");
+        this.socket.send("stalemate");
+        const popUp = new EndgamePopUp("Draw");
+        document.body.appendChild(popUp.element);
+        this.socket.close();
+        popUp.element
+          .querySelector(".to-lobby")
+          ?.addEventListener("click", () => {
+            popUp.removePopUp();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".player_column")?.remove();
+            document.querySelector(".chessboard")?.remove();
+            document.querySelector(".lobby")?.classList.remove("hidden");
+            (document.querySelector("header") as HTMLElement).innerHTML =
+              new Header().element.innerHTML;
+            popUp.removePopUp();
+          });
         this.isStaleMate = true;
       }
     }
@@ -970,8 +1056,8 @@ export class OnlineGame {
 
   handleEnPassant(piece: Pawn) {
     if (this.isYourTurn == true && this.yourColor == "white") {
-      const x = this.lastMovedEnemyPiece?.parentElement?.dataset.x;
-      const y = this.lastMovedEnemyPiece?.parentElement?.dataset.y;
+      const x = this.lastMovedEnemyPiece?.enemyPiece.parentElement?.dataset.x;
+      const y = this.lastMovedEnemyPiece?.enemyPiece.parentElement?.dataset.y;
       if (
         x &&
         y &&
@@ -979,8 +1065,9 @@ export class OnlineGame {
         (+x == +piece.element.parentElement.dataset.x - 1 ||
           +x == +piece.element.parentElement.dataset.x + 1) &&
         y == piece.element.parentElement.dataset.y &&
+        this.lastMovedEnemyPiece?.initialSquare.split("")[1] == "7" &&
         y == "5" &&
-        this.lastMovedEnemyPiece?.classList.contains("pawn_black")
+        this.lastMovedEnemyPiece?.enemyPiece.classList.contains("pawn_black")
       ) {
         document
           .querySelector(`#${xToLetter(x)}${+y + 1}`)
@@ -990,8 +1077,8 @@ export class OnlineGame {
     }
 
     if (this.isYourTurn == true && this.yourColor == "black") {
-      const x = this.lastMovedEnemyPiece?.parentElement?.dataset.x;
-      const y = this.lastMovedEnemyPiece?.parentElement?.dataset.y;
+      const x = this.lastMovedEnemyPiece?.enemyPiece.parentElement?.dataset.x;
+      const y = this.lastMovedEnemyPiece?.enemyPiece.parentElement?.dataset.y;
       if (
         x &&
         y &&
@@ -999,7 +1086,9 @@ export class OnlineGame {
         (+x == +piece.element.parentElement.dataset.x - 1 ||
           +x == +piece.element.parentElement.dataset.x + 1) &&
         y == piece.element.parentElement.dataset.y &&
-        this.lastMovedEnemyPiece?.classList.contains("pawn_white")
+        this.lastMovedEnemyPiece?.initialSquare.split("")[1] == "2" &&
+        y == "4" &&
+        this.lastMovedEnemyPiece?.enemyPiece.classList.contains("pawn_white")
       ) {
         document
           .querySelector(`#${xToLetter(x)}${+y - 1}`)

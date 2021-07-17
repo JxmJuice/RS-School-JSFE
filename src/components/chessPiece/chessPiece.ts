@@ -81,7 +81,8 @@ export class Piece extends BaseComponent {
           }
           document.removeEventListener("mousemove", onMouseMove);
           piece.onmouseup = null;
-        } else if (thisPiece.startPosition != document.body) {
+        }
+        else if (thisPiece.startPosition != document.body) {
           piece.style.position = "";
           piece.style.zIndex = "";
           piece.style.left = "";
@@ -97,21 +98,21 @@ export class Piece extends BaseComponent {
     };
   }
 
-  handleClick(initialPlace: HTMLElement | null) {
-    const piece = this.element;
-    console.log(piece);
-    document.querySelectorAll(".valid").forEach((el) =>
-      el.addEventListener(
-        "click",
-        () => {
-          el.appendChild(piece);
-          if (initialPlace) initialPlace.firstElementChild?.remove();
-          document
-            .querySelectorAll(".valid")
-            .forEach((el) => el.classList.remove("valid"));
-        },
-        { once: true }
-      )
-    );
-  }
+  // handleClick(initialPlace: HTMLElement | null) {
+  //   const piece = this.element;
+  //   console.log(piece);
+  //   document.querySelectorAll(".valid").forEach((el) =>
+  //     el.addEventListener(
+  //       "click",
+  //       () => {
+  //         el.appendChild(piece);
+  //         if (initialPlace) initialPlace.firstElementChild?.remove();
+  //         document
+  //           .querySelectorAll(".valid")
+  //           .forEach((el) => el.classList.remove("valid"));
+  //       },
+  //       { once: true }
+  //     )
+  //   );
+  // }
 }
