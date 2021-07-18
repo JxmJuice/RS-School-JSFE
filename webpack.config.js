@@ -15,14 +15,14 @@ const devServer = (isDev) => !isDev ? {} : {
 };
 
 
-module.exports = ({development})=>( { //деструкторизация
+module.exports = ({development})=>( { 
   mode: development ? 'development' : 'production',
   devtool: development ? 'inline-source-map' : false, 
-  entry: './src/index.ts',
+  entry: './src/server.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    assetModuleFilename: 'assets/[hash][ext]', //хеширование изменяемых файлов
+    assetModuleFilename: 'assets/[hash][ext]', 
   },
   module: {
     rules: [
@@ -41,7 +41,7 @@ module.exports = ({development})=>( { //деструкторизация
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'], //чем загружать
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.s[ac]ss$/i,
@@ -55,8 +55,8 @@ module.exports = ({development})=>( { //деструкторизация
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'match-match Game',
-      // template: './src/index.html',
+      title: 'chess-server',
+      
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }), 
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),

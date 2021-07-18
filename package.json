@@ -2,7 +2,8 @@
   "name": "chess-server",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack serve --env development"
+    "dev": "webpack serve --env development",
+    "run server": "node ./dist/server/server.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
