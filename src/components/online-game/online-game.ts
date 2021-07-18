@@ -25,6 +25,8 @@ export class OnlineGame {
 
   yourColor: string;
 
+  yourName: string;
+
   enemyColor: string;
 
   enemyPieces: Array<Rook | Knight | Bishop | King | Queen | Pawn>;
@@ -56,6 +58,7 @@ export class OnlineGame {
 
   constructor(player1Name: string) {
     this.socket = new WebSocket("ws://localhost:8999");
+    this.yourName = player1Name;
     this.yourColor = "";
     this.enemyColor = "";
     this.yourPieces = [];
@@ -130,6 +133,7 @@ export class OnlineGame {
     this.socket.onmessage = function (event) {
       let message = event.data;
       if (message == "connected") {
+        game.socket.send(`name: ${game.yourName}`);
         console.log(message);
         return;
       }
@@ -162,6 +166,28 @@ export class OnlineGame {
             document.querySelector(".chessboard")?.remove();
             document.querySelector(".lobby")?.classList.remove("hidden");
           });
+        return;
+      }
+      if (message.split(" ")[0] == "name:") {
+        if (message.split(" ")[1] != "") {
+          var playerAvatar = message.split(" ")[1][0];
+          if (message.split(" ")[2][0] != undefined) {
+            playerAvatar += message.split(" ")[2][0];
+          }
+        }
+        let playerName = message.split(" ");
+        playerName.splice(0, 1);
+        playerName = playerName.join(" ");
+        (
+          game.player2.element.querySelector(
+            ".player_column__avatar"
+          ) as HTMLElement
+        ).innerText = playerAvatar;
+        (
+          game.player2.element.querySelector(
+            ".player_column__name"
+          ) as HTMLElement
+        ).innerText = playerName;
         return;
       }
       if (message == "mate") {
@@ -354,6 +380,7 @@ export class OnlineGame {
     });
     this.handleEnemyCheck();
     this.handleEnemyCastling(finalPiece, initialSquare, finalSquare.id);
+    this.renderEnemyMove(initialPiece, initialSquare, finalSquare.id);
     this.handleTurn();
   }
 
@@ -1033,22 +1060,6 @@ export class OnlineGame {
       this.yourPieces[15].validateMove();
       if (document.querySelectorAll(".valid").length == 0) {
         console.log("stalemate");
-        this.socket.send("stalemate");
-        const popUp = new EndgamePopUp("Draw");
-        document.body.appendChild(popUp.element);
-        this.socket.close();
-        popUp.element
-          .querySelector(".to-lobby")
-          ?.addEventListener("click", () => {
-            popUp.removePopUp();
-            document.querySelector(".player_column")?.remove();
-            document.querySelector(".player_column")?.remove();
-            document.querySelector(".chessboard")?.remove();
-            document.querySelector(".lobby")?.classList.remove("hidden");
-            (document.querySelector("header") as HTMLElement).innerHTML =
-              new Header().element.innerHTML;
-            popUp.removePopUp();
-          });
         this.isStaleMate = true;
       }
     }
@@ -1267,6 +1278,57 @@ export class OnlineGame {
     }
   }
 
+  renderEnemyMove(piece: string, initialSquare: string, finalSquare: string) {
+    if (piece == "rook") {
+      this.player2.createMove(
+        "R",
+        initialSquare,
+        finalSquare,
+        this.timer.element.innerText
+      );
+    }
+    if (piece == "queen") {
+      this.player2.createMove(
+        "Q",
+        initialSquare,
+        finalSquare,
+        this.timer.element.innerText
+      );
+    }
+    if (piece == "pawn") {
+      this.player2.createMove(
+        "",
+        initialSquare,
+        finalSquare,
+        this.timer.element.innerText
+      );
+    }
+    if (piece == "king") {
+      this.player2.createMove(
+        "K",
+        initialSquare,
+        finalSquare,
+        this.timer.element.innerText
+      );
+    }
+    if (piece == "knight") {
+      this.player2.createMove(
+        "N",
+        initialSquare,
+        finalSquare,
+        this.timer.element.innerText
+      );
+    }
+    if (piece == "bishop") {
+      this.player2.createMove(
+        "B",
+        initialSquare,
+        finalSquare,
+        this.timer.element.innerText
+      );
+    }
+  }
+
   renderMove(
     piece: Rook | Pawn | Bishop | Knight | King | Queen,
     initialPlace: HTMLElement
@@ -1314,55 +1376,6 @@ export class OnlineGame {
       }
       if (piece.element.classList.contains("bishop")) {
         this.player1.createMove(
-          "B",
-          initialPlace.id,
-          (piece.currentSquare as HTMLElement).id,
-          this.timer.element.innerText
-        );
-      }
-    } else {
-      if (piece.element.classList.contains("rook")) {
-        this.player2.createMove(
-          "R",
-          initialPlace.id,
-          (piece.currentSquare as HTMLElement).id,
-          this.timer.element.innerText
-        );
-      }
-      if (piece.element.classList.contains("queen")) {
-        this.player2.createMove(
-          "Q",
-          initialPlace.id,
-          (piece.currentSquare as HTMLElement).id,
-          this.timer.element.innerText
-        );
-      }
-      if (piece.element.classList.contains("pawn")) {
-        this.player2.createMove(
-          "",
-          initialPlace.id,
-          (piece.currentSquare as HTMLElement).id,
-          this.timer.element.innerText
-        );
-      }
-      if (piece.element.classList.contains("king")) {
-        this.player2.createMove(
-          "K",
-          initialPlace.id,
-          (piece.currentSquare as HTMLElement).id,
-          this.timer.element.innerText
-        );
-      }
-      if (piece.element.classList.contains("knight")) {
-        this.player2.createMove(
-          "N",
-          initialPlace.id,
-          (piece.currentSquare as HTMLElement).id,
-          this.timer.element.innerText
-        );
-      }
-      if (piece.element.classList.contains("bishop")) {
-        this.player2.createMove(
           "B",
           initialPlace.id,
           (piece.currentSquare as HTMLElement).id,

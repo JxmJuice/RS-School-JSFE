@@ -15,11 +15,12 @@ export class OnlinePlayer extends BaseComponent {
         <div class="player_column__avatar"></div>
         <div class="player_column__name"></div>
         <div class="player_column__buttons">
-        <button class="player_button__resign" disabled></button>
-        <button class="player_button__draw" disabled>&half;</button>  
+        <button class="player_button__resign disabled" disabled></button>
+        <button class="player_button__draw disabled" disabled>&half;</button>  
         </div>
         <div class="player_column__moves"></div>
         `;
+        return;
     }
     let playerAvatar;
     if (playerName != "") {

@@ -94,7 +94,7 @@ export class Game {
 
   handleTurn() {
     if (this.isWhiteTurn == true) {
-      this.chessBoard.element.classList.remove("turned");
+      // this.chessBoard.element.classList.remove("turned");
       this.player1.element
         .querySelector(".player_column__avatar")
         ?.classList.add("player_turn");
@@ -110,7 +110,7 @@ export class Game {
       this.player1.element
         .querySelector(".player_column__avatar")
         ?.classList.remove("player_turn");
-      this.chessBoard.element.classList.add("turned");
+      // this.chessBoard.element.classList.add("turned");
       this.validateBlackTurn();
     }
   }

@@ -54,10 +54,10 @@ export class App extends BaseComponent {
     (document.querySelector(".page-name") as HTMLSpanElement).innerText =
       "Online";
     this.onlineGame = new OnlineGame(storage.player1Name);
-    this.handleResign();
-    this.handleDraw();
-    this.mateToLobby();
-    this.staleMateToLobby();
+    // this.handleResign();
+    // this.handleDraw();
+    // this.mateToLobby();
+    // this.staleMateToLobby();
   }
 
   handleResign() {
@@ -154,6 +154,9 @@ export class App extends BaseComponent {
     });
     document.getElementById("friend")?.addEventListener("click", () => {
       this.startGame();
+    });
+    document.getElementById("online")?.addEventListener("click", () => {
+      this.startOnlineGame();
     });
   }
 
