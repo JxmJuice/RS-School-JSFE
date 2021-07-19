@@ -2,27 +2,25 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-
-const devServer = (isDev) => !isDev ? {} : {
+const devServer = (isDev) => (!isDev ? {} : {
   devServer: {
     open: true,
-    //hot: true,
+    // hot: true,
     port: 8080,
     contentBase: path.join(__dirname, 'public'),
   },
-};
+});
 
-
-module.exports = ({development})=>( { 
+module.exports = ({ development }) => ({
   mode: development ? 'development' : 'production',
-  devtool: development ? 'inline-source-map' : false, 
+  devtool: development ? 'inline-source-map' : false,
   entry: './src/server.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    assetModuleFilename: 'assets/[hash][ext]', 
+    assetModuleFilename: 'assets/[hash][ext]',
   },
   module: {
     rules: [
@@ -45,10 +43,10 @@ module.exports = ({development})=>( {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-      }
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
     ],
-    
+
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -56,17 +54,17 @@ module.exports = ({development})=>( {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'chess-server',
-      
+
     }),
-    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }), 
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-    //копирование файлов не требуемых хеширования (без последующего изменения)
-    //!без содержимого папки plublic билд не соберется
-/*     new CopyPlugin({ 
+    // копирование файлов не требуемых хеширования (без последующего изменения)
+    //! без содержимого папки plublic билд не соберется
+    /*     new CopyPlugin({
       patterns: [
         { from: 'public' },
       ],
     }), */
   ],
-  ...devServer(development)
+  ...devServer(development),
 });
