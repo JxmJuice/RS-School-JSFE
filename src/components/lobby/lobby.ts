@@ -1,30 +1,30 @@
-import { BaseComponent } from "../base-component";
-import { storage } from "../storage/storage";
-import "./lobby.scss";
+import { BaseComponent } from '../base-component';
+import { storage } from '../storage/storage';
+import './lobby.scss';
 
 export class Lobby extends BaseComponent {
   constructor() {
-    super("div", ["lobby"]);
+    super('div', ['lobby']);
     this.renderLobby();
   }
 
   renderLobby() {
     let player1Avatar = storage.player1Name[0];
     if (
-      storage.player1Name.split(" ")[1] != undefined &&
-      storage.player1Name.split(" ")[1] != ""
+      storage.player1Name.split(' ')[1] !== undefined
+      && storage.player1Name.split(' ')[1] !== ''
     ) {
-      player1Avatar += storage.player1Name.split(" ")[1][0];
+      player1Avatar += storage.player1Name.split(' ')[1][0];
     }
     let player2Avatar = storage.player2Name[0];
     if (
-      storage.player2Name.split(" ")[1] != undefined &&
-      storage.player2Name.split(" ")[1] != ""
+      storage.player2Name.split(' ')[1] !== undefined
+      && storage.player2Name.split(' ')[1] !== ''
     ) {
-      player2Avatar += storage.player2Name.split(" ")[1][0];
+      player2Avatar += storage.player2Name.split(' ')[1][0];
     }
-    if (player1Avatar == undefined) player1Avatar = "";
-    if (player2Avatar == undefined) player2Avatar = "";
+    if (player1Avatar === undefined) player1Avatar = '';
+    if (player2Avatar === undefined) player2Avatar = '';
     this.element.innerHTML = `
       <div class="wrapper">
         <div class="player">
@@ -49,17 +49,17 @@ export class Lobby extends BaseComponent {
         </div>
       </div>`;
     this.element
-      .querySelector("#player1_name")
-      ?.addEventListener("input", () => {
+      .querySelector('#player1_name')
+      ?.addEventListener('input', () => {
         storage.player1Name = (
-          this.element.querySelector("#player1_name") as HTMLInputElement
+          this.element.querySelector('#player1_name') as HTMLInputElement
         ).value;
       });
     this.element
-      .querySelector("#player2_name")
-      ?.addEventListener("input", () => {
+      .querySelector('#player2_name')
+      ?.addEventListener('input', () => {
         storage.player2Name = (
-          this.element.querySelector("#player2_name") as HTMLInputElement
+          this.element.querySelector('#player2_name') as HTMLInputElement
         ).value;
       });
   }

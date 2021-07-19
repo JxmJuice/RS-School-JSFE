@@ -1,10 +1,10 @@
-import { PopUp } from "../../shared/popUp/popUp";
-import "./pregamePopUp.scss";
+import { PopUp } from '../../shared/popUp/popUp';
+import './pregamePopUp.scss';
 
 export class PregamePopUp extends PopUp {
   constructor() {
     super();
-    this.element.firstElementChild?.classList.add("pregamePopUp");
+    this.element.firstElementChild?.classList.add('pregamePopUp');
     this.renderPopUp();
   }
 

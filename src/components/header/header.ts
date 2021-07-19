@@ -1,9 +1,9 @@
-import { BaseComponent } from "../base-component";
-import './header.scss'
+import { BaseComponent } from '../base-component';
+import './header.scss';
 
 export class Header extends BaseComponent {
   constructor() {
-    super("header", ["header"]);
+    super('header', ['header']);
     this.renderHeader();
   }
 

@@ -1,5 +1,5 @@
-import { Piece } from "../chessPiece/chessPiece";
-import { xToLetter } from "../constants";
+import { Piece } from '../chessPiece/chessPiece';
+import { xToLetter } from '../constants';
 
 export class King extends Piece {
   currentSquare: HTMLElement | null;
@@ -7,13 +7,13 @@ export class King extends Piece {
   name: string;
 
   constructor(color: string, square: string) {
-    super("king", color);
+    super('king', color);
     this.name = 'king';
-    if (this.pieceColor == "white") {
-      this.element.classList.add("king_white");
+    if (this.pieceColor === 'white') {
+      this.element.classList.add('king_white');
     }
-    if (this.pieceColor == "black") {
-      this.element.classList.add("king_black");
+    if (this.pieceColor === 'black') {
+      this.element.classList.add('king_black');
     }
     this.currentSquare = document.getElementById(square);
     this.currentSquare?.appendChild(this.element);
@@ -28,92 +28,92 @@ export class King extends Piece {
     const y = square?.dataset.y;
     if (x && y) {
       if (
-        document.getElementById(`${xToLetter(+x + 1 + "")}${+y + 1}`)?.dataset
-          .piece != this.pieceColor &&
-        !document
-          .getElementById(`${xToLetter(+x + 1 + "")}${+y + 1}`)
-          ?.classList.contains("attacked")
+        document.getElementById(`${xToLetter(`${+x + 1}`)}${+y + 1}`)?.dataset
+          .piece !== this.pieceColor
+        && !document
+          .getElementById(`${xToLetter(`${+x + 1}`)}${+y + 1}`)
+          ?.classList.contains('attacked')
       ) {
         document
-          .getElementById(`${xToLetter(+x + 1 + "")}${+y + 1}`)
-          ?.classList.add("valid");
+          .getElementById(`${xToLetter(`${+x + 1}`)}${+y + 1}`)
+          ?.classList.add('valid');
       }
       if (
-        document.getElementById(`${xToLetter(+x + 1 + "")}${+y - 1}`)?.dataset
-          .piece != this.pieceColor &&
-        !document
-          .getElementById(`${xToLetter(+x + 1 + "")}${+y - 1}`)
-          ?.classList.contains("attacked")
+        document.getElementById(`${xToLetter(`${+x + 1}`)}${+y - 1}`)?.dataset
+          .piece !== this.pieceColor
+        && !document
+          .getElementById(`${xToLetter(`${+x + 1}`)}${+y - 1}`)
+          ?.classList.contains('attacked')
       ) {
         document
-          .getElementById(`${xToLetter(+x + 1 + "")}${+y - 1}`)
-          ?.classList.add("valid");
+          .getElementById(`${xToLetter(`${+x + 1}`)}${+y - 1}`)
+          ?.classList.add('valid');
       }
       if (
-        document.getElementById(`${xToLetter(+x + 1 + "")}${+y}`)?.dataset
-          .piece != this.pieceColor &&
-        !document
-          .getElementById(`${xToLetter(+x + 1 + "")}${y}`)
-          ?.classList.contains("attacked")
+        document.getElementById(`${xToLetter(`${+x + 1}`)}${+y}`)?.dataset
+          .piece !== this.pieceColor
+        && !document
+          .getElementById(`${xToLetter(`${+x + 1}`)}${y}`)
+          ?.classList.contains('attacked')
       ) {
         document
-          .getElementById(`${xToLetter(+x + 1 + "")}${+y}`)
-          ?.classList.add("valid");
+          .getElementById(`${xToLetter(`${+x + 1}`)}${+y}`)
+          ?.classList.add('valid');
       }
       if (
-        document.getElementById(`${xToLetter(x)}${+y + 1}`)?.dataset.piece !=
-          this.pieceColor &&
-        !document
+        document.getElementById(`${xToLetter(x)}${+y + 1}`)?.dataset.piece
+          !== this.pieceColor
+        && !document
           .getElementById(`${xToLetter(x)}${+y + 1}`)
-          ?.classList.contains("attacked")
+          ?.classList.contains('attacked')
       ) {
         document
           .getElementById(`${xToLetter(x)}${+y + 1}`)
-          ?.classList.add("valid");
+          ?.classList.add('valid');
       }
       if (
-        document.getElementById(`${xToLetter(x)}${+y - 1}`)?.dataset.piece !=
-          this.pieceColor &&
-        !document
+        document.getElementById(`${xToLetter(x)}${+y - 1}`)?.dataset.piece
+          !== this.pieceColor
+        && !document
           .getElementById(`${xToLetter(x)}${+y - 1}`)
-          ?.classList.contains("attacked")
+          ?.classList.contains('attacked')
       ) {
         document
           .getElementById(`${xToLetter(x)}${+y - 1}`)
-          ?.classList.add("valid");
+          ?.classList.add('valid');
       }
       if (
-        document.getElementById(`${xToLetter(+x - 1 + "")}${+y + 1}`)?.dataset
-          .piece != this.pieceColor &&
-        !document
-          .getElementById(`${xToLetter(+x - 1 + "")}${+y + 1}`)
-          ?.classList.contains("attacked")
+        document.getElementById(`${xToLetter(`${+x - 1}`)}${+y + 1}`)?.dataset
+          .piece !== this.pieceColor
+        && !document
+          .getElementById(`${xToLetter(`${+x - 1}`)}${+y + 1}`)
+          ?.classList.contains('attacked')
       ) {
         document
-          .getElementById(`${xToLetter(+x - 1 + "")}${+y + 1}`)
-          ?.classList.add("valid");
+          .getElementById(`${xToLetter(`${+x - 1}`)}${+y + 1}`)
+          ?.classList.add('valid');
       }
       if (
-        document.getElementById(`${xToLetter(+x - 1 + "")}${y}`)?.dataset
-          .piece != this.pieceColor &&
-        !document
-          .getElementById(`${xToLetter(+x - 1 + "")}${y}`)
-          ?.classList.contains("attacked")
+        document.getElementById(`${xToLetter(`${+x - 1}`)}${y}`)?.dataset
+          .piece !== this.pieceColor
+        && !document
+          .getElementById(`${xToLetter(`${+x - 1}`)}${y}`)
+          ?.classList.contains('attacked')
       ) {
         document
-          .getElementById(`${xToLetter(+x - 1 + "")}${y}`)
-          ?.classList.add("valid");
+          .getElementById(`${xToLetter(`${+x - 1}`)}${y}`)
+          ?.classList.add('valid');
       }
       if (
-        document.getElementById(`${xToLetter(+x - 1 + "")}${+y - 1}`)?.dataset
-          .piece != this.pieceColor &&
-        !document
-          .getElementById(`${xToLetter(+x - 1 + "")}${+y - 1}`)
-          ?.classList.contains("attacked")
+        document.getElementById(`${xToLetter(`${+x - 1}`)}${+y - 1}`)?.dataset
+          .piece !== this.pieceColor
+        && !document
+          .getElementById(`${xToLetter(`${+x - 1}`)}${+y - 1}`)
+          ?.classList.contains('attacked')
       ) {
         document
-          .getElementById(`${xToLetter(+x - 1 + "")}${+y - 1}`)
-          ?.classList.add("valid");
+          .getElementById(`${xToLetter(`${+x - 1}`)}${+y - 1}`)
+          ?.classList.add('valid');
       }
     }
   }
@@ -124,36 +124,36 @@ export class King extends Piece {
     const y = square?.dataset.y;
     if (x && y) {
       document
-        .getElementById(`${xToLetter(+x + 1 + "")}${+y + 1}`)
-        ?.classList.add("attacked");
+        .getElementById(`${xToLetter(`${+x + 1}`)}${+y + 1}`)
+        ?.classList.add('attacked');
 
       document
-        .getElementById(`${xToLetter(+x + 1 + "")}${+y - 1}`)
-        ?.classList.add("attacked");
+        .getElementById(`${xToLetter(`${+x + 1}`)}${+y - 1}`)
+        ?.classList.add('attacked');
 
       document
-        .getElementById(`${xToLetter(+x + 1 + "")}${+y}`)
-        ?.classList.add("attacked");
+        .getElementById(`${xToLetter(`${+x + 1}`)}${+y}`)
+        ?.classList.add('attacked');
 
       document
         .getElementById(`${xToLetter(x)}${+y + 1}`)
-        ?.classList.add("attacked");
+        ?.classList.add('attacked');
 
       document
         .getElementById(`${xToLetter(x)}${+y - 1}`)
-        ?.classList.add("attacked");
+        ?.classList.add('attacked');
 
       document
-        .getElementById(`${xToLetter(+x - 1 + "")}${+y + 1}`)
-        ?.classList.add("attacked");
+        .getElementById(`${xToLetter(`${+x - 1}`)}${+y + 1}`)
+        ?.classList.add('attacked');
 
       document
-        .getElementById(`${xToLetter(+x - 1 + "")}${y}`)
-        ?.classList.add("attacked");
+        .getElementById(`${xToLetter(`${+x - 1}`)}${y}`)
+        ?.classList.add('attacked');
 
       document
-        .getElementById(`${xToLetter(+x - 1 + "")}${+y - 1}`)
-        ?.classList.add("attacked");
+        .getElementById(`${xToLetter(`${+x - 1}`)}${+y - 1}`)
+        ?.classList.add('attacked');
     }
   }
 }

@@ -1,5 +1,5 @@
-import { BaseComponent } from "../base-component";
-import "./chessPiece.scss";
+import { BaseComponent } from '../base-component';
+import './chessPiece.scss';
 
 export class Piece extends BaseComponent {
   pieceColor: string;
@@ -9,7 +9,7 @@ export class Piece extends BaseComponent {
   startPosition: HTMLElement|null;
 
   constructor(pieceType: string, color: string) {
-    super("div", ["chess-piece", `chess-piece_${color}`, pieceType]);
+    super('div', ['chess-piece', `chess-piece_${color}`, pieceType]);
     this.pieceColor = color;
     this.startPosition = null;
     this.isAbleToMove = false;
@@ -20,19 +20,19 @@ export class Piece extends BaseComponent {
     const piece = this.element;
     this.startPosition = piece.parentElement;
 
-    let shiftX = event.clientX - piece.getBoundingClientRect().left;
-    let shiftY = event.clientY - piece.getBoundingClientRect().top;
+    const shiftX = event.clientX - piece.getBoundingClientRect().left;
+    const shiftY = event.clientY - piece.getBoundingClientRect().top;
 
-    piece.style.position = "absolute";
-    piece.style.zIndex = "1000";
+    piece.style.position = 'absolute';
+    piece.style.zIndex = '1000';
     document.body.append(piece);
 
-    moveAt(event.pageX, event.pageY);
-
     function moveAt(pageX: number, pageY: number) {
-      piece.style.left = pageX - shiftX + "px";
-      piece.style.top = pageY - shiftY + "px";
+      piece.style.left = `${pageX - shiftX}px`;
+      piece.style.top = `${pageY - shiftY}px`;
     }
+
+    moveAt(event.pageX, event.pageY);
 
     let currentDroppable: HTMLElement;
 
@@ -40,60 +40,59 @@ export class Piece extends BaseComponent {
       moveAt(event.pageX, event.pageY);
 
       piece.hidden = true;
-      let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+      const elemBelow = document.elementFromPoint(event.clientX, event.clientY);
       piece.hidden = false;
 
       if (!elemBelow) {
-        piece.style.position = "";
-        piece.style.zIndex = "";
-        piece.style.left = "";
-        piece.style.top = "";
+        piece.style.position = '';
+        piece.style.zIndex = '';
+        piece.style.left = '';
+        piece.style.top = '';
         thisPiece.startPosition?.appendChild(piece);
         return;
       }
 
-      let droppableBelow = elemBelow.closest(".valid") as HTMLElement;
+      const droppableBelow = elemBelow.closest('.valid') as HTMLElement;
 
-      if (currentDroppable != droppableBelow) {
+      if (currentDroppable !== droppableBelow) {
         if (currentDroppable) {
-          currentDroppable.classList.remove("highlight");
+          currentDroppable.classList.remove('highlight');
         }
         currentDroppable = droppableBelow;
         if (currentDroppable) {
-          currentDroppable.classList.add("highlight");
+          currentDroppable.classList.add('highlight');
         }
       }
     }
-    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener('mousemove', onMouseMove);
 
     piece.addEventListener(
-      "mouseup",
-      function () {
+      'mouseup',
+      () => {
         if (currentDroppable) {
-          if (currentDroppable.classList.contains("valid")) {
-            piece.style.position = "";
-            piece.style.zIndex = "";
-            piece.style.left = "";
-            piece.style.top = "";
-            currentDroppable.innerHTML = "";
+          if (currentDroppable.classList.contains('valid')) {
+            piece.style.position = '';
+            piece.style.zIndex = '';
+            piece.style.left = '';
+            piece.style.top = '';
+            currentDroppable.innerHTML = '';
             currentDroppable.appendChild(piece);
-            currentDroppable.classList.remove("highlight");
+            currentDroppable.classList.remove('highlight');
           }
-          document.removeEventListener("mousemove", onMouseMove);
+          document.removeEventListener('mousemove', onMouseMove);
           piece.onmouseup = null;
-        }
-        else if (thisPiece.startPosition != document.body) {
-          piece.style.position = "";
-          piece.style.zIndex = "";
-          piece.style.left = "";
-          piece.style.top = "";
+        } else if (thisPiece.startPosition !== document.body) {
+          piece.style.position = '';
+          piece.style.zIndex = '';
+          piece.style.left = '';
+          piece.style.top = '';
           thisPiece.startPosition?.appendChild(piece);
         }
       },
-      { once: true }
+      { once: true },
     );
 
-    document.ondragstart = function () {
+    document.ondragstart = function disableDrag() {
       return false;
     };
   }

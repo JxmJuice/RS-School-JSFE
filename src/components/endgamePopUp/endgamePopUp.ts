@@ -1,11 +1,10 @@
-import { PopUp } from "../../shared/popUp/popUp";
-import { Lobby } from "../lobby/lobby";
-import './endgamePopUp.scss'
+import { PopUp } from '../../shared/popUp/popUp';
+import './endgamePopUp.scss';
 
 export class EndgamePopUp extends PopUp {
   constructor(result: string) {
     super();
-    this.element.firstElementChild?.classList.add("endgamePopUp");
+    this.element.firstElementChild?.classList.add('endgamePopUp');
     this.renderPopUp(result);
   }
 
