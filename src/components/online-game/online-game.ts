@@ -55,7 +55,7 @@ export class OnlineGame {
   QSideCastlingEnabled: boolean;
 
   constructor(player1Name: string) {
-    this.socket = new WebSocket('ws://jxm-chess-server.herokuapp.com/:8999');
+    this.socket = new WebSocket('wss://jxm-chess-server.herokuapp.com/:8999');
     this.yourName = player1Name;
     this.yourColor = '';
     this.enemyColor = '';
