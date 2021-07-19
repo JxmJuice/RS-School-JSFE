@@ -1,0 +1,30 @@
+html {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  --header-color: #4390d8;
+  --footer-color: #4390d8;
+  --main-color: ;
+  --main-block-color: #39a8e9;
+  --main-font-color: #f1eeee;
+}
+
+.page-name {
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 49px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0,
+    black 1px -1px 0;
+  color: #ffffff;
+}
+

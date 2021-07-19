@@ -11,7 +11,7 @@ export class Header extends BaseComponent {
     this.element.innerHTML = `
         <div class="header_wrapper">
         <div class="header_logo">
-          <img src="./../images/logo.svg" class="header_logo__image" />
+          <img src="./images/logo.svg" class="header_logo__image" />
           <div class="header_logo__text">Chess</div>
         </div>
       <span class="page-name">Lobby</span>
