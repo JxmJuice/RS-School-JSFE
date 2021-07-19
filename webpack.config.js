@@ -58,8 +58,6 @@ module.exports = ({ development }) => ({
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-    // копирование файлов не требуемых хеширования (без последующего изменения)
-    //! без содержимого папки plublic билд не соберется
     /*     new CopyPlugin({
       patterns: [
         { from: 'public' },
