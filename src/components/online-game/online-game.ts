@@ -95,11 +95,11 @@ export class OnlineGame {
     drawButton.onclick = () => {
       drawButton.classList.add('draw_offered');
       this.socket.send('draw offered');
+      setTimeout(() => {
+        drawButton.onclick = null;
+        drawButton.classList.remove('draw_offered');
+      }, 10000);
     };
-    setTimeout(() => {
-      drawButton.onclick = null;
-      drawButton.classList.remove('draw_offered');
-    }, 10000);
   }
 
   handleResign() {
@@ -263,6 +263,10 @@ export class OnlineGame {
           drawButton.onclick = () => {
             drawButton.classList.add('draw_offered');
             game.socket.send('draw offered');
+            setTimeout(() => {
+              drawButton.onclick = null;
+              drawButton.classList.remove('draw_offered');
+            }, 10000);
           };
           drawButton.classList.remove('draw_accept');
         }, 10000);
