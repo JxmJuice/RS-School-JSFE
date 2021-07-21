@@ -9,10 +9,14 @@ export class Player extends BaseComponent {
   }
 
   renderPlayer(playerName: string, color: string) {
-    let playerAvatar = playerName.split(' ')[0][0];
-    if (playerName.split(' ')[1][0] !== undefined) {
+    let playerAvatar = playerName[0];
+    if (
+      playerName.split(' ')[1] !== undefined
+      && playerName.split(' ')[1] !== ''
+    ) {
       playerAvatar += playerName.split(' ')[1][0];
     }
+    if (playerAvatar === undefined) playerAvatar = '';
     this.element.innerHTML = `
         <div class="player_column__avatar">${playerAvatar}</div>
         <div class="player_column__name">${playerName}</div>

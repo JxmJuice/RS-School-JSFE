@@ -187,7 +187,7 @@ export class App extends BaseComponent {
               this.header = new Header();
               (document.querySelector('header') as HTMLElement).innerHTML = this.header.element.innerHTML;
             });
-          this.game.isStaleMate = false;
+          this.game.isMate = false;
         }
       }, 1000);
     });

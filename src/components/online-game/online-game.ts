@@ -167,7 +167,7 @@ export class OnlineGame {
       if (message.split(' ')[0] === 'name:') {
         if (message.split(' ')[1] !== '') {
           playerAvatar = message.split(' ')[1][0];
-          if (message.split(' ')[2][0] !== undefined) {
+          if (message.split(' ')[2] !== undefined) {
             playerAvatar += message.split(' ')[2][0];
           }
         }

@@ -23,11 +23,12 @@ export class OnlinePlayer extends BaseComponent {
     }
     let playerAvatar;
     if (playerName !== '') {
-      playerAvatar = playerName.split(' ')[0][0];
-      if (playerName.split(' ')[1][0] !== undefined) {
+      playerAvatar = playerName[0];
+      if (playerName.split(' ')[1] !== undefined) {
         playerAvatar += playerName.split(' ')[1][0];
       }
-    } else {
+    } 
+    if (playerAvatar === undefined) {
       playerAvatar = 'P2';
     }
     this.element.innerHTML = `
