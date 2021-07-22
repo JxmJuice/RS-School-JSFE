@@ -179,6 +179,7 @@ export class Game {
     piece: Rook | Pawn | Bishop | Knight | King | Queen,
     event: Event | undefined,
   ) {
+    document.querySelectorAll('.valid').forEach(el=>el.classList.remove('valid'));
     if (piece.element.classList.contains('king_white')) {
       this.blackPieces.forEach((el) => el.checkLegalMoves());
       piece.validateMove();

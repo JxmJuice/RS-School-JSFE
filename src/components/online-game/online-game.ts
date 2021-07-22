@@ -540,6 +540,7 @@ export class OnlineGame {
     piece: Rook | Pawn | Bishop | Knight | King | Queen,
     event: Event | undefined,
   ) {
+    document.querySelectorAll('.valid').forEach(el=>el.classList.remove('valid'));
     if (piece.element.classList.contains('king')) {
       this.enemyPieces.forEach((el) => el.checkLegalMoves());
       piece.validateMove();
